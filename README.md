@@ -24,7 +24,7 @@
       - **Precompile standard library**
       - **Download debugging symbols**
       - **Download debug binaries (requires VS 2015 or later)** are toggled on.<br>  
-  
+   
    Then, ensure that the folder path in the **Customize install location** is<br>  
 ```bat
 C:\Program Files (x86)\Python38-32
