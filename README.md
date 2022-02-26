@@ -12,8 +12,9 @@
       - **Documentation**
       - **pip**
       - **td/tk and IDLE**
-      - **Python test suite** are toggled on.
+      - **Python test suite**
   
+      are toggled on.  
       Then click **Next**.  
    5. Next you'll see the **Advanced options** dialog.  
    <img src="https://github.com/nstevens1040/NLP/blob/main/images/4.png" height="300px" width="auto"><br>  
