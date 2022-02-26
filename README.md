@@ -43,8 +43,8 @@ While **virtualenv** isn't absolutely critical to use the nltk libraries, it is 
   
 Further reading on virtualenv
    - [virtualenv.pypa.io](https://virtualenv.pypa.io/en/latest/)
-   - [docs.python-guide.org](https://docs.python-guide.org/dev/virtualenvs/#lower-level-virtualenv)  
-  
+   - [docs.python-guide.org](https://docs.python-guide.org/dev/virtualenvs/#lower-level-virtualenv)
+
    1. Strike WinKey <img height=16px width=auto src="https://raw.githubusercontent.com/nstevens1040/images/main/winkey.svg"/> and type **powershell**. The top of your **Start Menu** should look like this<br><img height="80px" src="https://raw.githubusercontent.com/nstevens1040/NLP/main/images/sm_ps.png"><br>Right click **Windows PowerShell** and then click **Run As Administrator**.<br>  
    2. Choose an empty folder (or create a new one). The folder I chose is ```C:\.TEMP\NLP```. Once you've seleted a folder, find your PowerShell window and type <br>```cd C:\FOLDER\OF\YOUR\CHOOSING```
    In my case, it was <br>```cd C:\.TEMP\NLP```<br>  
