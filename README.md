@@ -24,7 +24,7 @@
       - **Add Python to environment variables**
       - **Precompile standard library**
       - **Download debugging symbols**
-      - **Download debug binaries (requires VS 2015 or later)**
+      - **Download debug binaries (requires VS 2015 or later)**  
       are toggled on. Then, make sure that the folder path in the **Customize install location** is<br>```C:\Program Files (x86)\Python38-32```
    Then click **Install**.  
    6. Once the installer completes, you will see the dialog depicted below.  
