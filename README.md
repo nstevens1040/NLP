@@ -39,7 +39,7 @@ Now that you have Python installed, you may now prepare the virtual environment 
   
 The virtual environment is a way to create an isolated python environment so that you can operate independently of your system-wide instance of Python.  
   
-While **virtualenv** isn't absolutely critical to use the nltk libraries, it is recommended as a best practice pre-requisite on their [Installing NLTK](https://www.nltk.org/install.html) page.  
+While **virtualenv** isn't absolutely critical to use the nltk libraries, it is recommended as a best practice pre-requisite on nltk.org's [Installing NLTK](https://www.nltk.org/install.html) page.  
   
 Further reading on virtualenv
    - [virtualenv.pypa.io](https://virtualenv.pypa.io/en/latest/)
