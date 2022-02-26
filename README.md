@@ -44,7 +44,6 @@ While **virtualenv** isn't absolutely critical to use the nltk libraries, it is 
 Further reading on virtualenv
    - [virtualenv](https://virtualenv.pypa.io/en/latest/)
    - [Lower level: virtualenv](https://docs.python-guide.org/dev/virtualenvs/#lower-level-virtualenv)
-
   
    1. Strike WinKey <img height=16px width=auto src="https://raw.githubusercontent.com/nstevens1040/images/main/winkey.svg"/> and type **powershell**. The top of your **Start Menu** should look like this  
    <img height="80px" src="https://raw.githubusercontent.com/nstevens1040/NLP/main/images/sm_ps.png"><br>  
