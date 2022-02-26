@@ -46,11 +46,11 @@ Further reading on virtualenv
    - [Lower level: virtualenv](https://docs.python-guide.org/dev/virtualenvs/#lower-level-virtualenv)
 
   
-   1. Strike WinKey <img height=16px width=auto src="https://raw.githubusercontent.com/nstevens1040/images/main/winkey.svg"/> and type **powershell**. The top of your **Start Menu** should look like this<br><img height="80px" src="https://raw.githubusercontent.com/nstevens1040/NLP/main/images/sm_ps.png"><br>Right click **Windows PowerShell** and then click **Run As Administrator**.<br>  
+   1. Strike WinKey <img height=16px width=auto src="https://raw.githubusercontent.com/nstevens1040/images/main/winkey.svg"/> and type **powershell**. The top of your **Start Menu** should look like this<br><img height="80px" src="https://raw.githubusercontent.com/nstevens1040/NLP/main/images/sm_ps.png"><br>Right click **Windows PowerShell** and then click **Run As Administrator**.  
    2. Choose an empty folder (or create a new one). The folder I chose is ```C:\.TEMP\NLP```. Once you've seleted a folder, find your PowerShell window and type <br>```cd C:\FOLDER\OF\YOUR\CHOOSING```<br>In my case, it was <br>```cd C:\.TEMP\NLP```  
-   3. Before you install **virtualenv**, make sure you upgrade **pip** first by running<br>```python -m pip install --upgrade pip```<br>  
-   4. Install virtualenv by running<br>```pip install virtualenv```<br>  
-   5. Once installed, configure your virtual environment by running<br>```virtualenv.exe venv```<br>This will create a subfolder called **venv** and it's where your virtual Python environment will live.<br>  
+   3. Before you install **virtualenv**, make sure you upgrade **pip** first by running<br>```python -m pip install --upgrade pip```  
+   4. Install virtualenv by running<br>```pip install virtualenv```  
+   5. Once installed, configure your virtual environment by running<br>```virtualenv.exe venv```<br>This will create a subfolder called **venv** and it's where your virtual Python environment will live.  
    6. Enter your virtual environment by running<br>```.\venv\Scripts\activate.ps1```<br>```PS C:\``` should now be prepended with **(venv)** so that it looks like ``(venv) PS C:\``. <br>You are now operating within your Python virtual environment.  
   
 Here is a GIF that illustrates the steps outlined above.  
