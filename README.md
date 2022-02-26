@@ -24,10 +24,10 @@
       - **Precompile standard library**
       - **Download debugging symbols**
       - **Download debug binaries (requires VS 2015 or later)** are toggled on.<br>  
-   Then, ensure that the folder path in the **Customize install location** is  
-   ```bat
-   C:\Program Files (x86)\Python38-32
-   ```    
+Then, ensure that the folder path in the **Customize install location** is  
+```bat
+C:\Program Files (x86)\Python38-32
+```  
    Then click **Install**.  
    6. Once the installer completes, you will see the dialog depicted below.  
    <img src="https://github.com/nstevens1040/NLP/blob/main/images/5.png" height="300px" width="auto"><br>  
