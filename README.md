@@ -2,7 +2,7 @@
 ### Python 3.8.3 32-bit installation  
    1. First, download the [Python 3.8.3 32-bit installer](https://www.python.org/ftp/python/3.8.3/python-3.8.3.exe).
    2. Launch the installer file. It should be named **python-3.8.3.exe**
-   3. Once launched, you will see the dialog depicted below.<br>![](https://raw.githubusercontent.com/nstevens1040/NLP/main/images/1.png)<br>Make sure that the checkbox next to **Add Python 3.8 to PATH** is toggled on <br>Then click **Customize installation**.
+   3. Once launched, you will see the dialog depicted below.<br>![](https://raw.githubusercontent.com/nstevens1040/NLP/main/images/1.png)<br>Make sure that the checkbox next to **Add Python 3.8 to PATH** is toggled on.<br>Then click **Customize installation**.
    4. Next you'll see the **Optional features** dialog depicted below.<br>![](https://raw.githubusercontent.com/nstevens1040/NLP/main/images/2.png)<br>Ensure that checkboxes next to
       - **Documentation**
       - **pip**
