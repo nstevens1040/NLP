@@ -1,8 +1,9 @@
 # NLTK Environment Setup Procedure  
-This guide covers the following steps to set up your NLTK environment
+This guide covers the following steps to set up your NLTK environment in Microsoft Windows
    1. [Installing Python](https://github.com/nstevens1040/NLP#python-383-32-bit-installation)
    2. [Configuring a Virtual Environment](https://github.com/nstevens1040/NLP#python-virtual-environment-setup)
-   3. 
+   3. [Setting your NLTK_DATA Environment Variable](https://github.com/nstevens1040/NLP#nltk_data-environment-variable)
+   4. [Installing NLTK](https://github.com/nstevens1040/NLP#installing-dependencies-nltk-and-nltk-data)  
 ## Python 3.8.3 32-bit installation  
    1. First, download the [Python 3.8.3 32-bit installer](https://www.python.org/ftp/python/3.8.3/python-3.8.3.exe).
    2. Launch the installer file. It should be named **python-3.8.3.exe**
