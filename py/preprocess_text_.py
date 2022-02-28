@@ -24,7 +24,7 @@ with open(START) as fs:
     START_TXT = fs.read()
 
 # BEGIN: FIRST, PUNCTUATION (E.G., COMMAS, PERIODS) WAS DISCARDED
-EXPAND = expand_contractions(START_TXT)
+EXPAND = contraction.expand_contractions(START_TXT)
 NOCRLF = re.sub(NEWLREG, ' ',EXPAND)
 NOPUNC = "".join(re.findall(PUNCREG,NOCRLF))
 while re.search(TWOSPAC,NOPUNC) is not None:
