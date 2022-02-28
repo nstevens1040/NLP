@@ -2,6 +2,7 @@
 @author: https://github.com/dipanjanS
 Copied from: https://github.com/dipanjanS/practical-machine-learning-with-python/blob/master/bonus%20content/nlp%20proven%20approach/
 """
+import re
 class contraction():
     CONTRACTION_MAP = {
         "ain't": "is not",
