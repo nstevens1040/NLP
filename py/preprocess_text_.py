@@ -13,7 +13,8 @@ def export_tuple_csv(list_tuples,csv_filepath):
             WROTE=writer.writerow(tup)
 
 cls()
-
+if not os.path.isdir("../OUTPUT/"):
+    os.mkdir("../OUTPUT/")
 # STORE REGEX PATTERNS AND READ TXT FILE
 NEWLREG=r"[\r|\n|\r\n]+"
 PUNCREG=r"[A-Za-z0-9\s]+"
