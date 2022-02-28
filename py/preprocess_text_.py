@@ -19,7 +19,7 @@ NEWLREG=r"[\r|\n|\r\n]+"
 PUNCREG=r"[A-Za-z0-9\s]+"
 TWOSPAC=r"  "
 # SAMPLE DATA TAKEN FROM https://www.rev.com/transcript-editor/shared/2aaBT20ycRq4t7oNpRPrALF7cEwwiCjj9R9g9sfc6kZ5NNB9n-f6Y2Z4Gyck8fW2JXqE3WJAU1PtJ0Q2rTDCc6PdYN0?loadFrom=PastedDeeplink&ts=1.61
-START="C:/.TEMP/NLP-MISC/Matthew McConaughey University of Houston Speech.txt"
+START="../data/Matthew McConaughey University of Houston Speech.txt"
 with open(START) as fs:
     START_TXT = fs.read()
 
@@ -35,7 +35,7 @@ CLEANED=NOPUNC.lower()
 
 # BEGIN: save your work
 # cleaned transcript (contractions expanded, crlf removed, punctuation removed, double spaces removed, all lowercase) saved to MM_NOCRLF_NOPUNCT_NOCONTRACT_PY.txt
-OUTF="C:/.TEMP/NLP-MISC/MM_NOCRLF_NOPUNCT_NOCONTRACT_PY.txt"
+OUTF="../OUTPUT/MM_NOCRLF_NOPUNCT_NOCONTRACT_PY.txt"
 with open(OUTF,'w') as fs:
     INTOUT = fs.write(CLEANED)
 # END: save your work
@@ -49,7 +49,7 @@ POS_TAGGED=nltk.pos_tag(TOKENIZED)
 # Data in POS_TAGGED is saved to POS_TAGGED_LOWER.csv
 # column 1 is the original word
 # column 2 is the original word's 'part-of-speech' tag
-export_tuple_csv(POS_TAGGED,"C:/.TEMP/NLP-MISC/POS_TAGGED_LOWER.csv")
+export_tuple_csv(POS_TAGGED,"../OUTPUT/POS_TAGGED_LOWER.csv")
 # END: save your work
 
 # BEGIN: WORDS WERE THEN CONVERTED TO THE ROOTS FROM WHICH THEY ARE INFLECTED, OR LEMMATIZED, USING THE NLTK WORDNET LEMMATIZER.
@@ -70,6 +70,6 @@ for tup in POS_TAGGED:
 
 # BEGIN: save your work
 # DATA in WITH_LEMMA is saved to LEMMA_POS_TAGGED_LOWER.csv
-export_tuple_csv(WITH_LEMMA,"C:/.TEMP/NLP-MISC/LEMMA_POS_TAGGED_LOWER.csv")
+export_tuple_csv(WITH_LEMMA,"../OUTPUT/LEMMA_POS_TAGGED_LOWER.csv")
 # END: save your work
 
