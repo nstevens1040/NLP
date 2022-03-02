@@ -41,7 +41,7 @@ Further reading on virtualenv
    1. Strike WinKey ![](https://raw.githubusercontent.com/nstevens1040/NLP/main/images/winkey.svg), and type **powershell**. The top of your **Start Menu** should look like this.<br>![](https://raw.githubusercontent.com/nstevens1040/NLP/main/images/sm_ps.png)<br>Right click **Windows PowerShell** and then click **Run As Administrator**.
    2. Choose an empty folder (or create a new one). The folder I chose is ```C:\.TEMP\NLP```. Once you've seleted a folder, find your PowerShell window and type <br>```cd C:\FOLDER\OF\YOUR\CHOOSING```<br>In my case, it was <br>```cd C:\.TEMP\NLP```
    3. Before you install **virtualenv**, make sure you upgrade **pip** first by running<br>
-```bat
+```ps1
 python -m pip install --upgrade pip
 ```  
    4. Install virtualenv by running<br>```pip install virtualenv```
