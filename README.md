@@ -81,7 +81,7 @@ Here is another GIF that illustrates these steps
    - For latent sematic analysis: pip install **[gensim](https://pypi.org/project/gensim/)**
    - Download **[TASA](https://drive.google.com/u/0/uc?id=1PjSy9qyy7Sh3T9higCPqtgnG0_ffiuBC&export=download)** corpus
    - Use Python to convert TASA corpus from an **R data file** to a **csv file**
-   - Load CSV TASA corpus via (gensim.corpora.csvcorpus.CsvCorpus(**fname**, **labels**))[https://radimrehurek.com/gensim/corpora/csvcorpus.html#gensim.corpora.csvcorpus.CsvCorpus]
+   - Load CSV TASA corpus via (gensim.corpora.csvcorpus.CsvCorpus`(**fname**, **labels**`))[https://radimrehurek.com/gensim/corpora/csvcorpus.html#gensim.corpora.csvcorpus.CsvCorpus]
    - Convert a series of lemmatized words into a series of semantic vectors via LSA
  
  
