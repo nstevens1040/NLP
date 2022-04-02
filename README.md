@@ -75,7 +75,9 @@ Here is another GIF that illustrates these steps
 <img height="500px" width="auto" src="https://github.com/nstevens1040/NLP/raw/main/images/render1645856319237.gif">  
 
 ## //To do:  
-   - Install Java
+   - Install **[Chocolatey](https://chocolatey.org/)**
+   - Install **[Git](https://git-scm.com/)**
+   - Install **[Java](https://www.oracle.com/java/)**
    - Implement **[Stanford CoreNLP POS Tagger](https://downloads.cs.stanford.edu/nlp/software/stanford-tagger-4.2.0.zip)** with NLTK (*specifically the english-bidirectional-distsim tagger*)
    - Demonstrate the use of **preprocess_transcript.py** (*in this repo*) to tokenize, lemmatize, and POS tag transcript data
    - For latent sematic analysis: pip install **[gensim](https://pypi.org/project/gensim/)**
