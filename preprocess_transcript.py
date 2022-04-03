@@ -34,21 +34,15 @@ if not os.path.isdir(FOLDER):
     with zipfile.ZipFile(ZIP,'r') as z:
         z.extractall(FOLDER)
 
-#else:
-#    shutil.rmtree(FOLDER)
-#    os.mkdir(FOLDER)
-
-
-    
-
-CORENLPZIP="https://downloads.cs.stanford.edu/nlp/software/stanford-corenlp-latest.zip"
-java_path = "C:/Program Files/Java/jre1.8.0_321/bin/java.exe"
-os.environ["JAVAHOME"] = java_path
-os.environ["CLASSPATH"] = FOLDER + "\\stanford-postagger-full-2020-11-17\\"
-os.environ["STANFORD_MODELS"] = FOLDER + "\\stanford-postagger-full-2020-11-17\\models\\english-bidirectional-distsim.tagger"
-jar=FOLDER + "\\stanford-postagger-full-2020-11-17\\stanford-postagger-4.2.0.jar"
-model=FOLDER + "\\stanford-postagger-full-2020-11-17\\models\\english-bidirectional-distsim.tagger"
+#CORENLPZIP="https://downloads.cs.stanford.edu/nlp/software/stanford-corenlp-latest.zip"
 # download https://downloads.cs.stanford.edu/nlp/software/stanford-tagger-4.2.0.zip
+FOLDER = FOLDER + "\\stanford-postagger-full-2020-11-17\\"
+java_path = "java.exe"
+os.environ["JAVAHOME"] = "java.exe"
+os.environ["CLASSPATH"] = FOLDER
+os.environ["STANFORD_MODELS"] = FOLDER + "\\models\\english-bidirectional-distsim.tagger"
+jar=FOLDER + "\\stanford-postagger-4.2.0.jar"
+model=FOLDER + "\\models\\english-bidirectional-distsim.tagger"
 
 st = StanfordPOSTagger("english-bidirectional-distsim.tagger")
 st.java_options = ""
