@@ -24,9 +24,12 @@ if platform.system() == 'Windows':
 else:
     os.system("stty cols 200")
 
-r = requests.get('https://downloads.cs.stanford.edu/nlp/software/stanford-tagger-4.2.0.zip', allow_redirects=True)
-with zipfile.ZipFile('./stanford-tagger-4.2.0.zip', 'r') as zip_ref:
-    zip_ref.extractall('./stanford-tagger-4.2.0/')
+FOLDER = os.path.realpath(os.curdir) + "\\stanford-tagger-4.2.0\\"
+if not os.path.isdir(FOLDER):
+    os.mkdir(FOLDER)
+
+with zipfile.ZipFile(ZIP,'r') as z:
+    z.extractall(FOLDER)
 
 CORENLPZIP="https://downloads.cs.stanford.edu/nlp/software/stanford-corenlp-latest.zip"
 java_path = "C:/Program Files/Java/jre1.8.0_321/bin/java.exe"
