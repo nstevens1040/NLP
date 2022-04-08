@@ -18,7 +18,6 @@
                 background-color: #EAEAEA;
                 color: #232323;
             }
-
             body {
                 font-weight: 400;
                 font-family: 'Droid Sans', sans-serif;
@@ -36,73 +35,58 @@
                 background-position: bottom right;
                 box-shadow: 0px 5px 10px #CACACA;
             }
-
             h1, h2, h3 {
                 font-family: 'Droid Serif', serif;
                 margin: 0;
             }
-
             p {
                 line-height: 1.5em;
                 margin: 0;
                 margin-bottom: 1.3em;
             }
-
             a {
                 color: #119C11;
                 text-decoration: none;
             }
-
             a:hover {
                 text-decoration: underline;
             }
-
             a:visited {
                 color: #5DA35D;
             }
-
             ::selection {
                 color: #EFEFEF;
                 background: #119C11;
             }
-
             ::-moz-selection {
                 color: #EFEFEF;
                 background: #119C11;
             }
-
             h1 a, h1 a:visited {
                 color: #232323;
             }
-
             header {
                 text-align: center;
                 margin: 1rem;
             }
-
             header h1 {
                 font-size: 3.5em;
             }
-
             header h2 {
                 font-size: 1.1em;
             }
-
             header {
                 margin-bottom: 1.5em;
             }
-
             h1 {
                 font-size: 1.4em;
                 margin-bottom: 0.5rem;
             }
-
             h2 {
                 font-size: 1.1em;
                 margin-bottom: 0.5rem;
                 margin-top: 1.5rem;
             }
-
             hr {
                 margin-top: 0;
                 margin-bottom: 1.5em;
@@ -112,22 +96,18 @@
                 border: none;
                 border-bottom: 1px dotted #666666;
             }
-
             .postTime {
                 margin-top: 3em;
                 font-size: 0.6em;
             }
-
             footer {
                 display: block;
                 margin-top: 15em;
                 font-size: 0.6em;
             }
-
             abbr {
                 border-bottom: 1px dotted #666666;
             }
-
             /* ul {
                 line-height: 1.5em;
                 list-style: none;
@@ -148,31 +128,25 @@
             .unlist li:before {
                 content: '\2794';
                 margin-right: 0.4rem;
-                
             }
             /* ul li:before {
                 content: '\2794';
                 margin-right: 0.4rem;
             } */
-
             li {
                 margin-top: 0.4rem;
             }
-
             @media all and (max-width: 600px) {
                 header h1 {
                     font-size: 2em;
                 }
-
                 header h2 {
                     font-size: 1em;
                 }
-
                 section.info h1 {
                     font-size: 1.4em;
                 }
             }
-
             blockquote {
                 font-family: 'Droid Serif', serif;
                 font-style: italic;
@@ -181,7 +155,6 @@
                 border-left: 3px solid #DDDDDD;
                 padding-left: 1em;
             }
-
             img {
                 display: block;
                 margin-left: auto;
@@ -192,7 +165,6 @@
                 max-width: 400px;
                 border: 1px solid #777777;
             }
-
             ul {
                 margin-bottom: 10px;
             }
@@ -200,9 +172,10 @@
         <!-- code dark -->
         <style type="text/css">
             code {
+                user-select: all;
                 font-family: 'Droid Sans Mono', monospace;
                 background-color: #232323;
-                color: #D78787;
+                color: rgb(208,208,208);
                 display: inline;
                 /* display: block; */
                 padding: 1em;
@@ -210,10 +183,10 @@
                 font-size: 0.8em;
                 /* white-space: wrap; */
                 white-space: nowrap;
-                overflow: scroll;
+                overflow: auto;
                 margin-bottom: 1.5em;
+                height: 25.6px;
             }
-
             p code, li code {
                 /* display: inline;
                 color: #222222;
@@ -225,39 +198,30 @@
                 /* background-color: #EAEAEA; */
                 border-radius: 3px;
             }
-
             .phps-t-open-tag {
                 color: #D78787;
             }
-
             .phps-t-if, .phps-t-exit, .phps-t-while, .phps-t-isset, .phps-t-exclaim, .phps-t-foreach, .phps-t-return, .phps-t-double-arrow, .phps-t-as, .phps-t-else, .phps-t-list, .phps-t-array {
                 color: #87AFD7;
             }
-
             .phps-t-variable {
                 color: #AFAFD7;
             }
-
             .phps-t-string {
                 color: #D7AFD7;
             }
-
             .phps-t-lnumber {
                 color: #D7AF87;
             }
-
             .phps-t-encapsed-and-whitespace, .phps-t-constant-encapsed-string {
                 color: #FFFFAF;
             }
-
             .phps-t-echo, .phps-t-function, .phps-t-use {
                 color: #AFD787;
             }
-
             .phps-t-inline-html {
                 color: #D0D0D0;
             }
-
             .phps-t-comment, .phps-t-doc-comment {
                 color: #808080
             }
@@ -280,38 +244,37 @@
                 background-position: bottom right;
                 box-shadow: 0px 5px 10px #CACACA;
             }
-
             code {
-                font-weight: 400;
                 font-family: 'Droid Sans Mono', monospace;
                 background-color: #232323;
-                /* color: #D78787; */
+                color: rgb(208,208,208);
                 display: inline;
+                /* display: block; */
                 padding: 1em;
                 border-radius: 0.5em;
                 font-size: 0.8em;
+                /* white-space: wrap; */
+                white-space: nowrap;
                 overflow: auto;
                 margin-bottom: 1.5em;
                 margin-top: 1.5em;
+                height: 25.6px;
             }
-
             span {
                 font-weight: 400;
                 font-family: 'Droid Sans Mono', monospace;
                 font-size: 0.8em;
                 color: #D0D0D0;
             }
-
             table, td {
                 border-collapse: collapse;
                 border: 1px solid grey;
             }
-
             td {
                 padding: 5px;
             }
-
             .copy {
+                user-select: none;
                 -webkit-text-size-adjust: 100%;
                 -webkit-font-smoothing: antialiased;
                 text-rendering: optimizeLegibility;
@@ -320,7 +283,8 @@
                 /* background: 0 0; */
                 background-color: black;
                 box-sizing: border-box;
-                outline: 0;
+                /* outline: 0; */
+                outline: white solid 1px;
                 cursor: pointer;
                 font-size: 13px;
                 padding: 0 .5em;
@@ -332,21 +296,22 @@
                 right: .2em;
                 border-radius: 0.5em;
             }
-
             .copied {
                 position: absolute;
                 top: .3em;
                 right: .2em;
                 opacity: 0.001;
-                transform: translate3d(-50%, 0, 0);
+                /* transform: translate3d(-50%, 0, 0); */
+                transform: translate3d(0, 0, 0);
                 -webkit-backface-visibility: hidden;
                 backface-visibility: hidden;
                 white-space: nowrap;
                 animation: copy-float 0.5s ease-in-out;
             }
-
             .tool {
                 position: relative;
+                height: 27.6px;
+                margin-bottom: 24px;
             }
             h3 {
                 /* text-align: center; */
@@ -358,12 +323,10 @@
                 20% {
                     opacity: 0.999;
                 }
-
                 100% {
-                    transform: translate3d(-50%, -17px, 0);
+                    transform: translate3d(0, -50px, 0);
                 }
             }
-
             /* .tool {
                 display: inline;
                 position: absolute;
@@ -391,7 +354,6 @@
                     background-position: bottom right;
                     box-shadow: 0px 5px 10px #CACACA;
                 }
-
                 .anchor svg {
                     height: 20px;
                     width: 20px;
@@ -479,7 +441,6 @@
             <section>
                 <h3 id="python-383-32-bit-installation">
                     Python 3.8.3 32-bit installation
-                        
                     <a href="#python-383-32-bit-installation">
                         <span class="anchor" onmouseover="onMouseOver(this);" onmouseleave="onMouseLeave(this);" data-clipboard-text="#python-383-32-bit-installation" style="position: relative;">
                             <span style="position: absolute; top: 70%; left: 0.75rem; transform: translateY(-50%); right: -2rem;">
@@ -492,9 +453,7 @@
                 </h3>
                 <ol>
                     <li>
-                        First, download the <a href="https://www.python.org/ftp/python/3.8.3/python-3.8.3.exe">Python 3.8.3 32-bit installer</a>
-                        .
-                        
+                        First, download the <a href="https://www.python.org/ftp/python/3.8.3/python-3.8.3.exe">Python 3.8.3 32-bit installer.</a>
                     </li>
                     <li>
                         Launch the installer file. It should be named <strong>python-3.8.3.exe</strong>
@@ -517,57 +476,41 @@
                             <br>Ensure that checkboxes next to
                         </p>
                         <ul style="padding-left: 0; text-indent: -18px; margin-left: 24px;">
-                            <li style="font-weight: bold;">&#10132; Documentation</li>
-                            <li style="font-weight: bold;">&#10132; pip</li>
-                            <li style="font-weight: bold;">&#10132; td/tk and IDLE</li>
-                            <li style="font-weight: bold;">&#10132; Python test suite</li>
+                            <li style="font-weight: bold;">&#10132;Documentation</li>
+                            <li style="font-weight: bold;">&#10132;pip</li>
+                            <li style="font-weight: bold;">&#10132;td/tk and IDLE</li>
+                            <li style="font-weight: bold;">&#10132;Python test suite</li>
                         </ul>
-                        <!-- <ul class="unlist">
-                            <li>
-                                <strong>Documentation</strong>
-                            </li>
-                            <li>
-                                <strong>pip</strong>
-                            </li>
-                            <li>
-                                <strong>td/tk and IDLE</strong>
-                            </li>
-                            <li>
-                                <strong>Python test suite</strong>
-                            </li>
-                        </ul> -->
                         <p>
                             are toggled on. Then click <strong>Next.</strong>
                         </p>
                     </li>
                     <li>
                         <p>
-                            Next you'll see the <strong>Advanced options</strong>
-                            dialog.<br>
+                            Next you'll see the <strong>Advanced options</strong> dialog.<br>
                             <img style="display: inline;" src="https://raw.githubusercontent.com/nstevens1040/NLP/main/images/4.png" alt="">
                             <br>Ensure that checkboxes next to 
-                            
-                        </p>
-                        <ul style="padding-left: 0; text-indent: -18px; margin-left: 24px;">
-                            <li style="font-weight: bold;">&#10132; Install for all users</li>
-                            <li style="font-weight: bold;">&#10132; Associate files with Python (requires the py launcher)</li>
-                            <li style="font-weight: bold;">&#10132; Create shortcuts for installed applications</li>
-                            <li style="font-weight: bold;">&#10132; Add Python to environment variables</li>
-                            <li style="font-weight: bold;">&#10132; Precompile standard library</li>
-                            <li style="font-weight: bold;">&#10132; Download debugging symbols</li>
-                            <li style="font-weight: bold;">&#10132; Download debug binaries (requires VS 2015 or later)</li>
-                        </ul>
-                        <p>
-                            are toggled on.<br><br>
-                            Then, make sure that the folder path in the <strong>Customize install location</strong>
-                            is
+                            <ul style="padding-left: 0; text-indent: -18px; margin-left: 24px;">
+                                <li style="font-weight: bold;">&#10132;Install for all users</li>
+                                <li style="font-weight: bold;">&#10132;Associate files with Python (requires the py launcher)</li>
+                                <li style="font-weight: bold;">&#10132;Create shortcuts for installed applications</li>
+                                <li style="font-weight: bold;">&#10132;Add Python to environment variables</li>
+                                <li style="font-weight: bold;">&#10132;Precompile standard library</li>
+                                <li style="font-weight: bold;">&#10132;Download debugging symbols</li>
+                                <li style="font-weight: bold;">&#10132;Download debug binaries (requires VS 2015 or later)</li>
+                            </ul>
+                            <p>
+                                are toggled on.<br>
+                                <br>
+                                Then, make sure that the folder path in the <strong>Customize install location</strong>
+                                is
                             <div class="tool">
                                 <code style="display: block;">
                                     <span class="phps-t-inline-html">C:\Program Files (x86)\Python38-32</span>
                                     <a onclick="onCopyClick(this);" class="copy">Copy</a>
                                 </code>
                             </div>
-                            Then click <strong>Install</strong>.
+                            Then click <strong>Install.</strong>
                         </p>
                     </li>
                     <li>
@@ -576,8 +519,10 @@
                             <img style="display: inline;" src="https://raw.githubusercontent.com/nstevens1040/NLP/main/images/5.png" alt="">
                             <br>
                             Click <strong>Close.</strong>
-                            <br><br>
-                            At this point, you have completed the installation of Python 3.8.3 (32-bit).<br><br>It may be smart to reboot your computer to ensure that all binaries are available via environment variables.
+                            <br>
+                            <br>
+                            At this point, you have completed the installation of Python 3.8.3 (32-bit).<br>
+                            <br>It may be smart to reboot your computer to ensure that all binaries are available via environment variables.
                         </p>
                     </li>
                 </ol>
@@ -601,19 +546,22 @@
                         <svg xmlns="http://www.w3.org/2000/svg" height="16px" viewBox="0 0 448 512">
                             <!--! Font Awesome Pro 6.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
                             <path d="M0 93.7l183.6-25.3v177.4H0V93.7zm0 324.6l183.6 25.3V268.4H0v149.9zm203.8 28L448 480V268.4H203.8v177.9zm0-380.6v180.1H448V32L203.8 65.7z" fill="#000000"/>
-                        </svg>, and type <strong>powershell</strong>. The top of your <strong>Start Menu</strong> should look like this.<br>
+                        </svg>
+                        , and type <strong>powershell</strong>
+                        . The top of your <strong>Start Menu</strong>
+                        should look like this.<br>
                         <img style="display: inline; max-width: 400px;" src="https://raw.githubusercontent.com/nstevens1040/NLP/main/images/sm_ps.png" alt="">
                         <br>
                         Right click <strong>Windows PowerShell</strong>
-                        and then click <strong>Run As Administrator</strong>. 
+                        and then click <strong>Run As Administrator.</strong>
                     </li>
                     <li>
-                        Copy the script below, paste it into PowerShell, and strike <strong>Enter</strong>to install Chocolatey.  
-                        <div class="tool">
-                            <code style="display: block;">
+                        Copy the script below, paste it into PowerShell, and strike <strong>Enter</strong>
+                        to install Chocolatey.
+                        <div class="tool" style="height: 90px;"><!--110.4px-->
+                            <code style="display: block; height: 80px; line-height: 20px;"><!--height: 102.4px;-->
                                 <span class="phps-t-inline-html">
-                                    Set-ExecutionPolicy Bypass -Scope Process -Force;<br>
-                                    [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072;<br>iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'));
+                                    Set-ExecutionPolicy Bypass -Scope Process -Force;<br>[System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072;<br>iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'));
                                 </span>
                                 <a onclick="onCopyClick(this);" class="copy">Copy</a>
                             </code>
@@ -622,10 +570,8 @@
                         <strong>Good!</strong>
                         Here is a link to <a href="https://chocolatey.org/install#individual-method">Chocolatey's installation documentation page</a>
                         where you'll find that this is the standard procedure that they offer as a means to installing their software.
-                                    
                     </li>
-                    <li>Once you have started the script you will see a fair amount of output messages in your PowerShell console. With the exception of telling you when the installation has completed, these output messages can be safely ignored. Installing Chocolatey will require no further interaction.
-                                    </li>
+                    <li>Once you have started the script you will see a fair amount of output messages in your PowerShell console. With the exception of telling you when the installation has completed, these output messages can be safely ignored. Installing Chocolatey will require no further interaction.</li>
                 </ol>
                 This is what the Chocolatey installation looks like<br>
                 <!--width="100%" height="auto" -->
@@ -652,18 +598,17 @@
                             <!--! Font Awesome Pro 6.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
                             <path d="M0 93.7l183.6-25.3v177.4H0V93.7zm0 324.6l183.6 25.3V268.4H0v149.9zm203.8 28L448 480V268.4H203.8v177.9zm0-380.6v180.1H448V32L203.8 65.7z" fill="#000000"/>
                         </svg>
-                        , and type <strong>powershell</strong>. The top of your <strong>Start Menu</strong>
+                        , and type <strong>powershell</strong>
+                        . The top of your <strong>Start Menu</strong>
                         should look like this.<br>
                         <img style="display: inline; max-width: 400px;" src="https://raw.githubusercontent.com/nstevens1040/NLP/main/images/sm_ps.png" alt="">
                         <br>
                         Right click <strong>Windows PowerShell</strong>
                         and then click <strong>Run As Administrator.</strong>
-                                    
                     </li>
                     <li>
                         Use <strong>Chocolatey</strong>
                         to install Java by running the command below.
-                                        
                         <div class="tool">
                             <code style="display: block;">
                                 <span class="phps-t-inline-html">choco install jre8 -y</span>
@@ -677,7 +622,6 @@
             <section>
                 <h3 id="git-for-windows-64-bit-installation">
                     Git for Windows 64-bit installation
-                                    
                     <a href="#git-for-windows-64-bit-installation">
                         <span class="anchor" onmouseover="onMouseOver(this);" onmouseleave="onMouseLeave(this);" data-clipboard-text="#git-for-windows-64-bit-installation" style="position: relative;">
                             <span style="position: absolute; top: 70%; left: 0.75rem; transform: translateY(-50%); right: -2rem;">
@@ -695,13 +639,13 @@
                             <!--! Font Awesome Pro 6.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
                             <path d="M0 93.7l183.6-25.3v177.4H0V93.7zm0 324.6l183.6 25.3V268.4H0v149.9zm203.8 28L448 480V268.4H203.8v177.9zm0-380.6v180.1H448V32L203.8 65.7z" fill="#000000"/>
                         </svg>
-                        , and type <strong>powershell.</strong> The top of your <strong>Start Menu</strong>
+                        , and type <strong>powershell.</strong>
+                        The top of your <strong>Start Menu</strong>
                         should look like this.<br>
                         <img style="display: inline; max-width: 400px;" src="https://raw.githubusercontent.com/nstevens1040/NLP/main/images/sm_ps.png" alt="">
                         <br>
                         Right click <strong>Windows PowerShell</strong>
                         and then click <strong>Run As Administrator.</strong>
-                                    
                     </li>
                     <li>
                         Use <strong>Chocolatey</strong>
@@ -734,8 +678,7 @@
                 <p>
                     While <strong>virtualenv</strong>
                     is not absolutely critical to use the nltk libraries, it is recommended as a best practice pre-requisite on nltk.org's <a href="https://www.nltk.org/install.html">Installing NLTK</a>
-                    page.  
-                                
+                    page.
                 </p>
                 <p>Further reading on virtualenv</p>
                 <ul class="unlist">
@@ -753,13 +696,13 @@
                             <!--! Font Awesome Pro 6.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
                             <path d="M0 93.7l183.6-25.3v177.4H0V93.7zm0 324.6l183.6 25.3V268.4H0v149.9zm203.8 28L448 480V268.4H203.8v177.9zm0-380.6v180.1H448V32L203.8 65.7z" fill="#000000"/>
                         </svg>
-                        , and type <strong>powershell.</strong> The top of your <strong>Start Menu</strong>
+                        , and type <strong>powershell.</strong>
+                        The top of your <strong>Start Menu</strong>
                         should look like this.<br>
                         <img style="display: inline; max-width: 400px;" src="https://raw.githubusercontent.com/nstevens1040/NLP/main/images/sm_ps.png" alt="">
                         <br>
                         Right click <strong>Windows PowerShell</strong>
                         and then click <strong>Run As Administrator.</strong>
-                                    
                     </li>
                     <li>
                         Choose an empty folder (or create a new one). The folder I chose is
@@ -767,20 +710,18 @@
                             <span class="phps-t-inline-html">C:\.TEMP\NLP</span>
                         </code>
                         .Once you've seleted a folder, find your PowerShell window and type
-                                        
                         <div class="tool">
                             <code style="display: block;">
                                 <span class="phps-t-inline-html">cd C:\FOLDER\OF\YOUR\CHOOSING
-                                                </span>
+                                                            </span>
                                 <a onclick="onCopyClick(this);" class="copy">Copy</a>
                             </code>
                         </div>
                         In my case, it was
-                                        
                         <div class="tool">
                             <code style="display: block;">
                                 <span class="phps-t-inline-html">cd C:\.TEMP\NLP
-                                                </span>
+                                                            </span>
                                 <a onclick="onCopyClick(this);" class="copy">Copy</a>
                             </code>
                         </div>
@@ -789,14 +730,12 @@
                         Before you install <strong>virtualenv</strong>
                         , make sure you upgrade <strong>pip</strong>
                         first by running
-                                        
                         <div class="tool">
                             <code style="display: block;">
                                 <span class="phps-t-inline-html">
                                     python <span class="pl-k">-</span>
                                     m pip install <span class="pl-k">--</span>
                                     upgrade pip
-                                                
                                 </span>
                                 <a onclick="onCopyClick(this);" class="copy">Copy</a>
                             </code>
@@ -804,43 +743,44 @@
                     </li>
                     <li>
                         Install virtualenv by running
-                                        
                         <div class="tool">
                             <code style="display: block;">
                                 <span class="phps-t-inline-html">pip install virtualenv
-                                                </span>
+                                                            </span>
                                 <a onclick="onCopyClick(this);" class="copy">Copy</a>
                             </code>
                         </div>
                     </li>
                     <li>
                         Once installed, configure your virtual environment by running
-                                        
                         <div class="tool">
                             <code style="display: block;">
                                 <span class="phps-t-inline-html">virtualenv.exe venv
-                                                </span>
+                                                            </span>
                                 <a onclick="onCopyClick(this);" class="copy">Copy</a>
                             </code>
                         </div>
                         This will create a subfolder called <strong>venv</strong>
                         and it's where your virtual Python environment will live.
-                                    
                     </li>
                     <li>
                         Enter your virtual environment by running
-                                        
                         <div class="tool">
                             <code style="display: block;">
                                 <span class="phps-t-inline-html">.\venv\Scripts\activate.ps1
-                                                </span>
+                                                            </span>
                                 <a onclick="onCopyClick(this);" class="copy">Copy</a>
                             </code>
                         </div>
-                        <code><span class="phps-t-inline-html">PS C:\</span></code>
+                        <code>
+                            <span class="phps-t-inline-html">PS C:\</span>
+                        </code>
                         should now be prepended with <strong>(venv)</strong>
-                        so that it looks like <code><span class="phps-t-inline-html">(venv) PS C:\</span></code>.<br>
-                        You are now operating within your Python virtual environment.
+                        so that it looks like 
+                        <code>
+                            <span class="phps-t-inline-html">(venv) PS C:\</span>
+                        </code>
+                        .<br>You are now operating within your Python virtual environment.
                     </li>
                 </ol>
                 To illustrate the steps described above.<br>
@@ -868,104 +808,103 @@
                                 <!--! Font Awesome Pro 6.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
                                 <path d="M0 93.7l183.6-25.3v177.4H0V93.7zm0 324.6l183.6 25.3V268.4H0v149.9zm203.8 28L448 480V268.4H203.8v177.9zm0-380.6v180.1H448V32L203.8 65.7z" fill="#000000"/>
                             </svg>
-                            , and type <strong>powershell.</strong> The top of your <strong style="color: #ffd866; color: #000000;">Start Menu</strong>
-                            should look like this.<br>
+                            , and type <strong>powershell.</strong> The top of your <strong style="color: #ffd866; color: #000000;">Start Menu</strong> should look like this.<br>
                             <img style="display: inline; max-width: 400px;" src="https://raw.githubusercontent.com/nstevens1040/NLP/main/images/sm_ps.png" alt="">
                             <br>
-                            Right click <strong>Windows PowerShell</strong>
-                            and then click <strong>Run As Administrator.</strong>
-                                        
+                            Right click <strong>Windows PowerShell</strong> and then click <strong>Run As Administrator.</strong>
                         </p>
                     </li>
                     <li>
-                        <p>In PowerShell, change directories to the folder you chose earlier. Type             
-                        <div class="tool">
-                            <code style="display: block;">
-                                <span class="phps-t-inline-html">cd C:\FOLDER\OF\YOUR\CHOOSING
-                                                    </span>
-                                <a onclick="onCopyClick(this);" class="copy">Copy</a>
-                            </code>
-                        </div>
-                        In my case, it was     
-                        <div class="tool">
-                            <code style="display: block;">
-                                <span class="phps-t-inline-html">cd C:\.TEMP\NLP
-                                                    </span>
-                                <a onclick="onCopyClick(this);" class="copy">Copy</a>
-                            </code>
-                        </div>
-                        </p>
-                    </li>
-                    <li>
-                        <p>
-                            Then create subfolder called <strong>NLTK_DATA.</strong> Type
+                        <p>In PowerShell, change directories to the folder you chose earlier. Type 
                             <div class="tool">
                                 <code style="display: block;">
-                                    <span class="phps-t-inline-html">mkdir NLTK_DATA
-                                                        </span>
+                                    <span class="phps-t-inline-html">cd C:\FOLDER\OF\YOUR\CHOOSING</span>
                                     <a onclick="onCopyClick(this);" class="copy">Copy</a>
                                 </code>
                             </div>
-                            Strike <strong>Enter.</strong>
-                            <br>This is the folder that you will set your NLTK_DATA environment variable to.
+                            In my case, it was 
+                            <div class="tool">
+                                <code style="display: block;">
+                                    <span class="phps-t-inline-html">cd C:\.TEMP\NLP</span>
+                                    <a onclick="onCopyClick(this);" class="copy">Copy</a>
+                                </code>
+                            </div>
                         </p>
                     </li>
-                    <li>
-                        <p>
-                            Strike WinKey 
-                            <svg xmlns="http://www.w3.org/2000/svg" height="16px" viewBox="0 0 448 512">
-                                <!--! Font Awesome Pro 6.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
-                                <path d="M0 93.7l183.6-25.3v177.4H0V93.7zm0 324.6l183.6 25.3V268.4H0v149.9zm203.8 28L448 480V268.4H203.8v177.9zm0-380.6v180.1H448V32L203.8 65.7z" fill="#000000"/>
-                            </svg>
-                            and type <strong>sysdm.cpl.</strong> When you see this (below) at the top of your <strong>Start Menu</strong> strike <strong>Enter.</strong><br>
-                            <img style="display: inline; max-width: 400px;" src="https://raw.githubusercontent.com/nstevens1040/NLP/main/images/sysdm.png" alt="">
-                            <br>
-                            This will launch the <strong>System Properties</strong> dialog.
-                        </p>
-                    </li>
-                    <li>
-                        <p>
-                            In the System Properties dialog, click on the <strong>Advanced</strong>
-                            tab, then click on the <strong>Environment Variables</strong>
-                            button at the bottom. This will launch the Environment Variables dialog.
-                                                
-                        </p>
-                    </li>
-                    <li>
-                        <p>
-                            In the Environment Variables dialog, click the <strong>New</strong>
-                            button near the top of the dialog. This will launch the <strong>New User Variable</strong>
-                            dialog.
-                        </p>
-                    </li>
-                    <li>
-                        <p>In the New User Variable dialog, fill out the form as follows. (Replace C:\.TEMP with whichever folder you chose while setting up your virtual environment)  </p>
-                        <table style="margin-bottom: 20.08px;">
-                            <tbody>
-                                <tr>
-                                    <td style="white-space: nowrap;">
-                                        <strong>Variable name</strong>
-                                    </td>
-                                    <td style="white-space: nowrap;">NLTK_DATA</td>
-                                </tr>
-                                <tr>
-                                    <td style="white-space: nowrap;">
-                                        <strong>Variable value</strong>
-                                    </td>
-                                    <td style="white-space: nowrap;">C:\.TEMP\NLP\NLTK_DATA</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <p>
-                        Then click <strong>OK.</strong> You'll be returned to the Environment Variables dialog.<br>
+                <li>
+                    <p>
+                        Then create subfolder called <strong>NLTK_DATA.</strong>
+                        Type
+                        <div class="tool">
+                            <code style="display: block;">
+                                <span class="phps-t-inline-html">mkdir NLTK_DATA</span>
+                                <a onclick="onCopyClick(this);" class="copy">Copy</a>
+                            </code>
+                        </div>
+                        Strike <strong>Enter.</strong>
+                        <br>This is the folder that you will set your NLTK_DATA environment variable to.
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        Strike WinKey 
+                        <svg xmlns="http://www.w3.org/2000/svg" height="16px" viewBox="0 0 448 512">
+                            <!--! Font Awesome Pro 6.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
+                            <path d="M0 93.7l183.6-25.3v177.4H0V93.7zm0 324.6l183.6 25.3V268.4H0v149.9zm203.8 28L448 480V268.4H203.8v177.9zm0-380.6v180.1H448V32L203.8 65.7z" fill="#000000"/>
+                        </svg>
+                        and type <strong>sysdm.cpl.</strong>
+                        When you see this (below) at the top of your <strong>Start Menu</strong>
+                        strike <strong>Enter.</strong>
+                        <br>
+                        <img style="display: inline; max-width: 400px;" src="https://raw.githubusercontent.com/nstevens1040/NLP/main/images/sysdm.png" alt="">
+                        <br>
+                        This will launch the <strong>System Properties</strong>
+                        dialog.
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        In the System Properties dialog, click on the <strong>Advanced</strong>
+                        tab, then click on the <strong>Environment Variables</strong>
+                        button at the bottom. This will launch the Environment Variables dialog.
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        In the Environment Variables dialog, click the <strong>New</strong>
+                        button near the top of the dialog. This will launch the <strong>New User Variable</strong>
+                        dialog.
+                    </p>
+                </li>
+                <li>
+                    <p>In the New User Variable dialog, fill out the form as follows. (Replace C:\.TEMP with whichever folder you chose while setting up your virtual environment)  </p>
+                    <table style="margin-bottom: 20.08px;">
+                        <tbody>
+                            <tr>
+                                <td style="white-space: nowrap;">
+                                    <strong>Variable name</strong>
+                                </td>
+                                <td style="white-space: nowrap;">NLTK_DATA</td>
+                            </tr>
+                            <tr>
+                                <td style="white-space: nowrap;">
+                                    <strong>Variable value</strong>
+                                </td>
+                                <td style="white-space: nowrap;">C:\.TEMP\NLP\NLTK_DATA</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p>
+                        Then click <strong>OK.</strong>
+                        You'll be returned to the Environment Variables dialog.<br>
                         <br>
                         Now click the <strong>New</strong> button near the bottom of the dialog. This will launch the <strong>New System Variable</strong> dialog. Fill out the form the same way you did for the user variable.<br>
                         <br>
                         Click <strong>OK</strong> to close the Environment Variables dialog.<br>
                         <br>
-                        Click <strong>OK</strong> to close the System Properties dialog.    
-                        </p>
-                    </li>
+                        Click <strong>OK</strong> to close the System Properties dialog.               
+                    </p>
+                </li>
                 </ol>
             </section>
             <section>
@@ -989,57 +928,57 @@
                             <!--! Font Awesome Pro 6.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
                             <path d="M0 93.7l183.6-25.3v177.4H0V93.7zm0 324.6l183.6 25.3V268.4H0v149.9zm203.8 28L448 480V268.4H203.8v177.9zm0-380.6v180.1H448V32L203.8 65.7z" fill="#000000"/>
                         </svg>
-                        , and type <strong>powershell.</strong> The top of your <strong>Start Menu</strong>
+                        , and type <strong>powershell.</strong>
+                        The top of your <strong>Start Menu</strong>
                         should look like this.<br>
                         <img style="display: inline; max-width: 400px;" src="https://raw.githubusercontent.com/nstevens1040/NLP/main/images/sm_ps.png" alt="">
                         <br>
                         Right click <strong>Windows PowerShell</strong>
                         and then click <strong>Run As Administrator.</strong>
-                                    
                     </li>
                     <li>
                         In PowerShell, change directories to the folder you chose earlier. Type
-                                        
                         <div class="tool">
                             <code style="display: block;">
                                 <span class="phps-t-inline-html">cd C:\FOLDER\OF\YOUR\CHOOSING
-                                                </span>
+                                                            </span>
                                 <a onclick="onCopyClick(this);" class="copy">Copy</a>
                             </code>
                         </div>
                         In my case, it was
-                                        
                         <div class="tool">
                             <code style="display: block;">
                                 <span class="phps-t-inline-html">cd C:\.TEMP\NLP
-                                                </span>
+                                                            </span>
                                 <a onclick="onCopyClick(this);" class="copy">Copy</a>
                             </code>
                         </div>
-                        Strike <strong>Enter</strong>
-                        .
-                                    
+                        Strike <strong>Enter.</strong>
                     </li>
                     <li>
                         Enter your virtual environment by running
-                                        
                         <div class="tool">
                             <code style="display: block;">
                                 <span class="phps-t-inline-html">.\venv\Scripts\activate.ps1
-                                                </span>
+                                                            </span>
                                 <a onclick="onCopyClick(this);" class="copy">Copy</a>
                             </code>
                         </div>
-                        <code><span class="phps-t-inline-html">PS C:\</span></code>
-                        should now be prepended with <strong>(venv)</strong> so that it looks like <code><span class="phps-t-inline-html">(venv) PS C:\</span></code>
+                        <code>
+                            <span class="phps-t-inline-html">PS C:\</span>
+                        </code>
+                        should now be prepended with <strong>(venv)</strong>
+                        so that it looks like 
+                        <code>
+                            <span class="phps-t-inline-html">(venv) PS C:\</span>
+                        </code>
                         . <br>You are now operating within your Python virtual environment.
-                                    
                     </li>
                     <li>
                         Once you've entered your virtual environment, install 
                         <strong>
-                            <a href="https://scipy.org/">scipy</a>.
-                        </strong>            
+                            <a href="https://scipy.org/">scipy</a>
+                        </strong>
                         <div class="tool">
                             <code style="display: block;">
                                 <span class="phps-t-inline-html">pip install scipy</span>
@@ -1055,7 +994,7 @@
                         <div class="tool">
                             <code style="display: block;">
                                 <span class="phps-t-inline-html">pip install nltk
-                                                </span>
+                                                            </span>
                                 <a onclick="onCopyClick(this);" class="copy">Copy</a>
                             </code>
                         </div>
@@ -1064,18 +1003,21 @@
                         Once nltk is installed, then you may choose to:
                         <ul class="unlist">
                             <li>
-                                Install only <strong>popular</strong> nltk data.   
+                                Install only <strong>popular</strong>
+                                nltk data.
                                 <div class="tool">
                                     <code style="display: block;">
                                         <span class="phps-t-inline-html">
-                                            python <span class="pl-k">-</span>m nltk.downloader popular
+                                            python <span class="pl-k">-</span>
+                                            m nltk.downloader popular
                                         </span>
                                         <a onclick="onCopyClick(this);" class="copy">Copy</a>
                                     </code>
                                 </div>
                             </li>
                             <li>
-                                Or you may choose to install <strong>all</strong> nltk data.
+                                Or you may choose to install <strong>all</strong>
+                                nltk data.
                                 <div class="tool">
                                     <code style="display: block;">
                                         <span class="phps-t-inline-html">
