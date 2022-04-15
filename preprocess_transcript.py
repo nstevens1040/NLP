@@ -14,7 +14,7 @@ from nltk.stem import WordNetLemmatizer
 from nltk.tag import StanfordPOSTagger
 from pathlib import Path
 import platform
-import requests
+#import requests
 import zipfile
 
 windows = False
