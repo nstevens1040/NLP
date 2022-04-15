@@ -1,3 +1,4 @@
+*The most up-to-date guide lives here* &rarr;[https://nlp.nanick.org/](https://nlp.nanick.org/)  
 # NLTK Environment Setup Procedure  
 This guide covers the following steps to set up your NLTK environment in Microsoft Windows
    1. [Installing Python](https://github.com/nstevens1040/NLP#python-383-32-bit-installation)
