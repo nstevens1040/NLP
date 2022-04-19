@@ -2,6 +2,7 @@ NLTK Environment Setup Procedure
 ================================
 
 *(The most up-to-date guide lives here &rarr; [https://nlp.nanick.org](https://nlp.nanick.org/))*  
+  
 This guide covers the following steps to set up your NLTK environment in Microsoft Windows
 
 - [NLTK Environment Setup Procedure](#nltk-environment-setup-procedure)
