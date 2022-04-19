@@ -3,6 +3,9 @@ NLTK Environment Setup Procedure
 
 *(The most up-to-date guide lives here &rarr; [https://nlp.nanick.org](https://nlp.nanick.org/))*  
   
+### System Requirements
+While testing the steps detailed below I found that the [Stanford POS tagger](https://nlp.stanford.edu/software/tagger.shtml) will throw **java.lang.OutOfMemoryError** if the system that it is running on has less than 6GB RAM  
+
 This guide covers the following steps to set up your NLTK environment in Microsoft Windows
 
 - [NLTK Environment Setup Procedure](#nltk-environment-setup-procedure)
