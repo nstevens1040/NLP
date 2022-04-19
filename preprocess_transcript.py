@@ -21,9 +21,9 @@ import urllib
 windows = False
 if platform.system() == 'Windows':
     windows = True
-#    os.system("powershell -noprofile -c \"if([console]::WindowWidth -le 200){ [console]::BufferWidth = 200 }\"")
-#else:
-#    os.system("stty cols 200")
+    os.system("powershell -noprofile -c \"if([console]::WindowWidth -le 200){ [console]::BufferWidth = 200 }\"")
+else:
+    os.system("stty cols 200")
 
 ZIP = os.path.realpath(os.curdir) + "\\stanford-tagger-4.2.0.zip"
 FOLDER = os.path.realpath(os.curdir) + "\\stanford-tagger-4.2.0\\"
