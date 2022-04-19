@@ -90,6 +90,7 @@
             a {
                 color: #119C11;
                 text-decoration: none;
+                font-weight: bold;
             }
             a:hover {
                 text-decoration: underline;
@@ -390,7 +391,8 @@
                 /* line-height: 12.16px; */
                 font-size: 1em;
                 font-family: Consolas;
-                color: #DCDCAA;
+                color: #FFFF00;
+                /* color: #DCDCAA; */
             }
             .param {
                 line-height: 1.30em;
@@ -411,7 +413,7 @@
                 /* line-height: 12.16px; */
                 font-size: 1em;
                 font-family: Consolas;
-                color: #D4D4D4;
+                color: #767676;
             }
             .bracket {
                 line-height: 1.30em;
@@ -503,10 +505,26 @@
                 margin: 5px 0px 5px 0px;
                 padding: 0;
             }
-            .pwshli::before {
+            .pwshitem::before {
                 content: "PS C:\\> ";
                 line-height: 1.30em;
-                /* line-height: 12.16px; */
+                /* line-height: 12.16px;*/
+                font-size: 1em;
+                font-family: Consolas;
+                color: #D4D4D4;
+            }
+            .pwshitem2::before {
+                content: "PS C:\\.TEMP\\NLP> ";
+                line-height: 1.30em;
+                /* line-height: 12.16px;*/
+                font-size: 1em;
+                font-family: Consolas;
+                color: #D4D4D4;
+            }
+            .pwshvenv::before {
+                content: "(venv) PS C:\\.TEMP\\NLP> ";
+                line-height: 1.30em;
+                /* line-height: 12.16px;*/
                 font-size: 1em;
                 font-family: Consolas;
                 color: #D4D4D4;
@@ -530,7 +548,8 @@
                 padding: 0 .5em;
                 font-family: proxima-nova,'helvetica neue',helvetica,arial,sans-serif;
                 text-decoration: none;
-                color: #119C11;
+                /* color: #119C11; */
+                color: chartreuse;
                 position: absolute;
                 top: 0.01em;
                 /* top: .3em; */
@@ -938,14 +957,14 @@
                         <div class="tool" style="height: 74.8px;"> <!-- style="line-height: 11.60px; height: 67px;" -->
                             <code class="code2">
                                 <ul class="pwshlist"> <!-- style="line-height: 11.60px;" -->
-                                    <li class="pwshli" style="margin: 0; padding: 0;">
-                                        <span class="command">Set-ExecutionPolicy </span><span class="param">Bypass -Scope </span><span class="arg">Process </span><span class="switch">-Force;</span>
+                                    <li class="pwshitem" style="margin: 0; padding: 0;">
+                                        <span class="command">Set-ExecutionPolicy </span><span class="param">Bypass </span><span class="switch">-Scope </span><span class="param">Process </span><span class="switch">-Force;</span>
                                     </li>
-                                    <li class="pwshli" style="margin: 0; padding: 0;">
-                                        <span class="bracket">[</span><span class="dotnettype">System.Net.ServicePointManager</span><span class="bracket">]::SecurityProtocol = [</span><span class="dotnettype">System.Net.ServicePointManager</span><span class="bracket">]::SecurityProtocol -bor </span><span class="int">3072</span><span class="bracket">;</span>
+                                    <li class="pwshitem" style="margin: 0; padding: 0;">
+                                        <span class="bracket">[</span><span class="dotnettype">System.Net.ServicePointManager</span><span class="bracket">]::SecurityProtocol = [</span><span class="dotnettype">System.Net.ServicePointManager</span><span class="bracket">]::SecurityProtocol </span><span class="switch">-bor </span><span class="int">3072</span><span class="bracket">;</span>
                                     </li>
-                                    <li class="pwshli" style="margin: 0; padding: 0;">
-                                        <span class="bracket">iex ((</span><span class="command">New-Object </span><span class="bracket">System.Net.WebClient).DownloadString(</span><span class="string">'https://community.chocolatey.org/install.ps1'</span><span class="bracket">));</span>
+                                    <li class="pwshitem" style="margin: 0; padding: 0;">
+                                        <span class="command">iex </span><span class="bracket">((</span><span class="command">New-Object </span><span class="bracket">System.Net.WebClient).DownloadString(</span><span class="string">'https://community.chocolatey.org/install.ps1'</span><span class="bracket">));</span>
                                     </li>
                                 </ul>
                                 <a onclick="onCopyClick(this);" class="copy">Copy</a>
@@ -978,11 +997,15 @@
                         Right click <strong>Windows PowerShell</strong> and select <strong>Run As Administrator.</strong>
                     </li>
                     <li>
-                        Use <strong>Chocolatey</strong>
-                        to install Java by running the command below.
+                        Use <strong>Chocolatey</strong> to install Java by running the command below.
                         <div class="tool">
-                            <code class="code1" style="display: block;">
-                                <span class="phps-t-inline-html">choco install jre8 -y</span>
+                            <code class="code3" style="display: block;">
+                                <ul class="pwshlist"> <!-- style="line-height: 11.60px;" -->
+                                    <li class=pwshitem style="margin: 0; padding: 0;">
+                                        <span class="command">choco </span><span class="param">install </span><span class="param">jre8 </span><span class="switch">-y</span>
+                                    </li>
+                                </ul>
+                                <!-- <span class="phps-t-inline-html">choco install jre8 -y</span> -->
                                 <a onclick="onCopyClick(this);" class="copy">Copy</a>
                             </code>
                         </div>
@@ -1013,11 +1036,15 @@
                         Right click <strong>Windows PowerShell</strong> and select <strong>Run As Administrator.</strong>
                     </li>
                     <li>
-                        Use <strong>Chocolatey</strong>
-                        to install Git by running the command below.
+                        Use <strong>Chocolatey</strong> to install Git by running the command below.
                         <div class="tool">
-                            <code class="code1" style="display: block;">
-                                <span class="phps-t-inline-html">choco install git -y</span>
+                            <code class="code3" style="display: block;">
+                                <ul class="pwshlist"> <!-- style="line-height: 11.60px;" -->
+                                    <li class=pwshitem style="margin: 0; padding: 0;">
+                                        <span class="command">choco </span><span class="param">install </span><span class="param">git </span><span class="switch">-y</span>
+                                    </li>
+                                </ul>
+                                <!-- <span class="phps-t-inline-html">choco install jre8 -y</span> -->
                                 <a onclick="onCopyClick(this);" class="copy">Copy</a>
                             </code>
                         </div>
@@ -1064,67 +1091,91 @@
                         <img style="display: inline;" src="https://raw.githubusercontent.com/nstevens1040/images/main/pwsh_sm.png" alt=""><br/>
                         Right click <strong>Windows PowerShell</strong> and select <strong>Run As Administrator.</strong>
                     </li>
-                    <li>
+                    <li id="firstfolder">
                         Choose an empty folder or create a new one. The folder I chose was
                         <code class="code3">
                             <span class="phps-t-inline-html">C:\.TEMP\NLP</span>
                         </code>.<br/></br/>
                         To create my new folder, I used
                         <div class="tool">
-                            <code class="code1" style="display: block;">
-                                <span class="phps-t-inline-html">mkdir C:\.TEMP\NLP</span>
+                            <code class="code3" style="display: block;">
+                                <ul class="pwshlist"> <!-- style="line-height: 11.60px;" -->
+                                    <li class=pwshitem style="margin: 0; padding: 0;">
+                                        <span class="command">mkdir </span><span class="param">C:\.TEMP\NLP</span>
+                                    </li>
+                                </ul>
+                                <!-- <span class="phps-t-inline-html">choco install jre8 -y</span> -->
                                 <a onclick="onCopyClick(this);" class="copy">Copy</a>
                             </code>
                         </div>
                         Change directories to your folder of choice. In my case, I used
                         <div class="tool">
-                            <code class="code1" style="display: block;">
-                                <span class="phps-t-inline-html">cd C:\.TEMP\NLP</span>
+                            <code class="code3" style="display: block;">
+                                <ul class="pwshlist"> <!-- style="line-height: 11.60px;" -->
+                                    <li class=pwshitem style="margin: 0; padding: 0;">
+                                        <span class="command">cd </span><span class="param">C:\.TEMP\NLP</span>
+                                    </li>
+                                </ul>
+                                <!-- <span class="phps-t-inline-html">choco install jre8 -y</span> -->
                                 <a onclick="onCopyClick(this);" class="copy">Copy</a>
                             </code>
                         </div>
                     </li>
                     <li>
-                        Before you install <strong>virtualenv</strong>
-                        , make sure you upgrade <strong>pip</strong>
-                        first by running
+                        Before you install <strong>virtualenv</strong>, make sure you upgrade <strong>pip</strong> first
                         <div class="tool">
-                            <code class="code1" style="display: block;">
-                                <span class="phps-t-inline-html">python <span class="pl-k">-</span>m pip install <span class="pl-k">--</span>upgrade pip</span>
-                                <a onclick="onCopyClick(this);" class="copy">Copy</a>
+                            <code class="code3" style="display: block;">
+                                <ul class="pwshlist"> <!-- style="line-height: 11.60px;" -->
+                                    <li class=pwshitem2 style="margin: 0; padding: 0;">
+                                        <span class="command">python </span><span class="switch">-m </span><span class="param">pip install </span><span class="switch">--upgrade </span><span class="param">pip</span>
+                                        <a onclick="onCopyClick(this);" class="copy">Copy</a>
+                                    </li>
+                                </ul>
                             </code>
                         </div>
                     </li>
                     <li>
-                        Install virtualenv by running
+                        Install virtualenv
                         <div class="tool">
-                            <code class="code1" style="display: block;">
-                                <span class="phps-t-inline-html">pip install virtualenv</span>
-                                <a onclick="onCopyClick(this);" class="copy">Copy</a>
+                            <code class="code3" style="display: block;">
+                                <ul class="pwshlist"> <!-- style="line-height: 11.60px;" -->
+                                    <li class=pwshitem2 style="margin: 0; padding: 0;">
+                                        <span class="command">pip </span><span class="param">install virtualenv</span>
+                                        <a onclick="onCopyClick(this);" class="copy">Copy</a>
+                                    </li>
+                                </ul>
                             </code>
                         </div>
                     </li>
                     <li>
-                        Once installed, configure your virtual environment by running
+                        Once installed, configure your virtual environment
                         <div class="tool">
-                            <code class="code1" style="display: block;">
-                                <span class="phps-t-inline-html">virtualenv.exe venv</span>
-                                <a onclick="onCopyClick(this);" class="copy">Copy</a>
+                            <code class="code3" style="display: block;">
+                                <ul class="pwshlist">
+                                    <li class=pwshitem2 style="margin: 0; padding: 0;">
+                                        <span class="command">virtualenv.exe </span><span class="param">venv</span>
+                                        <a onclick="onCopyClick(this);" class="copy">Copy</a>
+                                    </li>
+                                </ul>
                             </code>
                         </div>
                         This will create a subfolder called <strong>venv</strong>
                         and it's where your virtual Python environment will live.
                     </li>
                     <li>
-                        Enter your virtual environment by running
+                        Enter your virtual environment
                         <div class="tool">
-                            <code class="code1" style="display: block;">
-                                <span class="phps-t-inline-html">.\venv\Scripts\activate.ps1</span>
-                                <a onclick="onCopyClick(this);" class="copy">Copy</a>
+                            <code class="code3" style="display: block;">
+                                <ul class="pwshlist"> 
+                                    <li class=pwshitem2 style="margin: 0; padding: 0;">
+                                        <span class="command">.\venv\Scripts\activate.ps1</span>
+                                        <a onclick="onCopyClick(this);" class="copy">Copy</a>
+                                    </li>
+                                </ul>
                             </code>
                         </div>
-                        <code class="code3"><span class="phps-t-inline-html">PS C:\></span></code> should now be prepended with <strong>(venv)</strong> so that it looks like 
-                        <code class="code3"><span class="phps-t-inline-html">(venv) PS C:\></span></code>.<br>
+                        <code class="code3"><span class="param">PS C:\></span></code> will now be prepended with <strong>(venv)</strong> so that it looks like 
+                        <code class="code3"><span class="param">(venv) PS C:\></span></code>.<br>
                         You are now operating within your Python virtual environment.
                     </li>
                 </ol>
@@ -1152,26 +1203,31 @@
                         Strike <strong>Enter.</strong>
                     </li>
                     <li>
-                        <p>In PowerShell, change directories to the folder you chose earlier. In my case, it was 
-                            <div class="tool">
-                                <code class="code1" style="display: block;">
-                                    <span class="phps-t-inline-html">cd C:\.TEMP\NLP</span>
-                                    <a onclick="onCopyClick(this);" class="copy">Copy</a>
-                                </code>
-                            </div>
-                        </p>
-                    </li>
-                <li>
-                    <p>
-                        Create a subfolder called <strong>NLTK_DATA.</strong>
+                        In PowerShell, change directories to the folder you chose during <a href="#firstfolder">this</a> step. In my case
                         <div class="tool">
-                            <code class="code1" style="display: block;">
-                                <span class="phps-t-inline-html">mkdir NLTK_DATA</span>
+                            <code class="code3" style="display: block;">
+                                <ul class="pwshlist">
+                                    <li class=pwshitem style="margin: 0; padding: 0;">
+                                        <span class="command">cd </span><span class="param">C:\.TEMP\NLP</span>
+                                    </li>
+                                </ul>
                                 <a onclick="onCopyClick(this);" class="copy">Copy</a>
                             </code>
                         </div>
-                        This is the folder that you will set your NLTK_DATA environment variable to.
-                    </p>
+                    </li>
+                <li>
+                    Create a subfolder called <strong>NLTK_DATA.</strong>
+                    <div class="tool">
+                        <code class="code3" style="display: block;">
+                            <ul class="pwshlist">
+                                <li class=pwshitem2 style="margin: 0; padding: 0;">
+                                    <span class="command">mkdir </span><span class="param">NLTK_DATA</span>
+                                </li>
+                            </ul>
+                            <a onclick="onCopyClick(this);" class="copy">Copy</a>
+                        </code>
+                    </div>
+                    This is the folder that you will set your NLTK_DATA environment variable to.
                 </li>
                 <li>
                     <p>
@@ -1261,26 +1317,32 @@
                         Right click <strong>Windows PowerShell</strong> and select <strong>Run As Administrator.</strong>
                     </li>
                     <li>
-                        In PowerShell, change directories to the folder you chose earlier. In my case, it was
+                        In PowerShell, change directories to the folder you chose during <a href="#firstfolder">this</a> step. In my case
                         <div class="tool">
-                            <code class="code1" style="display: block;">
-                                <span class="phps-t-inline-html">cd C:\.TEMP\NLP</span>
+                            <code class="code3" style="display: block;">
+                                <ul class="pwshlist">
+                                    <li class=pwshitem style="margin: 0; padding: 0;">
+                                        <span class="command">cd </span><span class="param">C:\.TEMP\NLP</span>
+                                    </li>
+                                </ul>
                                 <a onclick="onCopyClick(this);" class="copy">Copy</a>
                             </code>
                         </div>
-                        Strike <strong>Enter.</strong>
                     </li>
                     <li>
                         Enter your virtual environment by running
                         <div class="tool">
-                            <code class="code1" style="display: block;">
-                                <span class="phps-t-inline-html">.\venv\Scripts\activate.ps1</span>
-                                <a onclick="onCopyClick(this);" class="copy">Copy</a>
+                            <code class="code3" style="display: block;">
+                                <ul class="pwshlist">
+                                    <li class=pwshitem2 style="margin: 0; padding: 0;">
+                                        <span class="command">.\venv\Scripts\activate.ps1</span>
+                                        <a onclick="onCopyClick(this);" class="copy">Copy</a>
+                                    </li>
+                                </ul>
                             </code>
                         </div>
-                        <code class="code3"><span class="phps-t-inline-html">PS C:\</span></code> should now be prepended with <strong>(venv)</strong> so that it looks like 
-                        <code class="code3"><span class="phps-t-inline-html">(venv) PS C:\</span></code>.<br>
-                        You are now operating within your Python virtual environment.
+                        <code class="code3"><span class="param">PS C:\></span></code> should now be prepended with <strong>(venv)</strong> so that it looks like 
+                        <code class="code3"><span class="param">(venv) PS C:\></span></code>.
                     </li>
                     <li>
                         Once you've entered your virtual environment, install 
@@ -1288,9 +1350,13 @@
                             <a href="https://scipy.org/">scipy</a>
                         </strong>
                         <div class="tool">
-                            <code class="code1" style="display: block;">
-                                <span class="phps-t-inline-html">pip install scipy</span>
-                                <a onclick="onCopyClick(this);" class="copy">Copy</a>
+                            <code class="code3" style="display: block;">
+                                <ul class="pwshlist">
+                                    <li class=pwshvenv style="margin: 0; padding: 0;">
+                                        <span class="command">pip </span><span class="param">install scipy</span>
+                                        <a onclick="onCopyClick(this);" class="copy">Copy</a>
+                                    </li>
+                                </ul>
                             </code>
                         </div>
                     </li>
@@ -1300,23 +1366,31 @@
                             <a href="https://nltk.org">nltk</a>
                         </strong>
                         <div class="tool">
-                            <code class="code1" style="display: block;">
-                                <span class="phps-t-inline-html">pip install nltk</span>
-                                <a onclick="onCopyClick(this);" class="copy">Copy</a>
+                            <code class="code3" style="display: block;">
+                                <ul class="pwshlist">
+                                    <li class=pwshvenv style="margin: 0; padding: 0;">
+                                        <span class="command">pip </span><span class="param">install nltk</span>
+                                        <a onclick="onCopyClick(this);" class="copy">Copy</a>
+                                    </li>
+                                </ul>
                             </code>
                         </div>
                     </li>
                     <li>
-                        Once nltk is installed, then you may install nltk data by running the following command.
+                        Once nltk is installed, then you may now download nltk data by running the following command.
                         <div class="tool">
-                            <code class="code1" style="display: block;">
-                                <span class="phps-t-inline-html">python <span class="pl-k">-</span>m nltk.downloader all</span>
-                                <a onclick="onCopyClick(this);" class="copy">Copy</a>
+                            <code class="code3" style="display: block;">
+                                <ul class="pwshlist">
+                                    <li class=pwshvenv style="margin: 0; padding: 0;">
+                                        <span class="command">python </span><span class="switch">-m </span><span class="param">nltk.downloader all</span>
+                                        <a onclick="onCopyClick(this);" class="copy">Copy</a>
+                                    </li>
+                                </ul>
                             </code>
                         </div>
-                        To illustrate<br>
+                        To illustrate<br/><br/>
+                        <i>(The example below only installs popular nltk data. Downloading all of the data takes much longer and produces much more output.)</i>
                         <video height="auto" width="100%" muted autoplay playsinline loop style="display: inline; border: none; border-image: none;" src="https://nlp-137cf635-6c92-49b5-b943-f5c8c75e686f.s3.us-east-2.amazonaws.com/render1649083450538.mp4"></video>
-                        <i>(Example only installs popular nltk data)</i>
                     </li>
                 </ol>
             </section>
