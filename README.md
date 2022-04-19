@@ -1,3 +1,4 @@
+*(The most up-to-date guide lives here &rarr; [https://nlp.nanick.org](https://nlp.nanick.org/))*  
 NLTK Environment Setup Procedure
 ================================
 
