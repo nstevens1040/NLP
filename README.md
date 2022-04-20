@@ -250,4 +250,19 @@ Now that you have your Python virtual environment ready and you've set the NLTK\
     _(The example below only installs popular nltk data. Downloading all of the data takes much longer and produces much more output.)_  
     ![](https://raw.githubusercontent.com/nstevens1040/images/main/render1649083450538.gif)  
 
-![](https://beserver.nanick.org/pixel.gif)
+![](https://beserver.nanick.org/pixel.gif)  
+  
+## //To do:  
+   - Install **[Chocolatey](https://chocolatey.org/)**
+   - Install **[Git](https://git-scm.com/)**
+   - Install **[Java](https://www.oracle.com/java/)**
+   - Implement **[Stanford CoreNLP POS Tagger](https://downloads.cs.stanford.edu/nlp/software/stanford-tagger-4.2.0.zip)** with NLTK (*specifically the english-bidirectional-distsim tagger*)
+   - Demonstrate the use of **preprocess_transcript.py** (*in this repo*) to tokenize, lemmatize, and POS tag transcript data
+   - For latent sematic analysis: pip install **[gensim](https://pypi.org/project/gensim/)**
+   - Download **[TASA](https://drive.google.com/u/0/uc?id=1PjSy9qyy7Sh3T9higCPqtgnG0_ffiuBC&export=download)** corpus
+   - Use Python to convert TASA corpus from an **R data file** to a **csv file**
+   - Load CSV TASA corpus via **[gensim.corpora.csvcorpus.CsvCorpus(fname, labels)](https://radimrehurek.com/gensim/corpora/csvcorpus.html#gensim.corpora.csvcorpus.CsvCorpus)**
+   - Convert a series of lemmatized words into a series of semantic vectors via LSA
+ 
+ 
+
