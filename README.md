@@ -170,7 +170,8 @@ Further reading on virtualenv
     You are now operating within your Python virtual environment.
 
 To illustrate the steps described above.  
-![](https://raw.githubusercontent.com/nstevens1040/images/main/render1649086376362.gif)  
+<!-- ![](https://raw.githubusercontent.com/nstevens1040/images/main/render1649086376362.gif) -->  
+![](https://raw.githubusercontent.com/nstevens1040/images/main/render1650598638583.gif)  
 ### The NLTK\_DATA Environment Variable[](#nltk_data-environment-variable)
 
 1.  Strike WinKey , and type **powershell.**  
