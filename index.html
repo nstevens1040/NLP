@@ -1201,20 +1201,38 @@
                         and it's where your virtual Python environment will live.
                     </li>
                     <li>
-                        Enter your virtual environment
-                        <div class="tool">
-                            <code class="code3" style="display: block;">
-                                <ul class="pwshlist"> 
-                                    <li class=pwshitem2 style="margin: 0; padding: 0;">
-                                        <span class="command">.\venv\Scripts\activate.ps1</span>
-                                    </li>
-                                </ul>
-                                <a onclick="onCopyClick(this);" class="copy">Copy</a>
-                            </code>
-                        </div>
-                        <code class="code3"><span class="param">PS C:\></span></code> will now be prepended with <strong>(venv)</strong> so that it looks like 
-                        <code class="code3"><span class="param">(venv) PS C:\></span></code>.<br>
-                        You are now operating within your Python virtual environment.
+                        <p>
+                            Enter your virtual environment
+                            <div class="tool">
+                                <code class="code3" style="display: block;">
+                                    <ul class="pwshlist"> 
+                                        <li class=pwshitem2 style="margin: 0; padding: 0;">
+                                            <span class="command">.\venv\Scripts\activate.ps1</span>
+                                        </li>
+                                    </ul>
+                                    <a onclick="onCopyClick(this);" class="copy">Copy</a>
+                                </code>
+                            </div>
+                            <code class="code3"><span class="param">PS C:\></span></code> will now be prepended with <strong>(venv)</strong> so that it looks like 
+                            <code class="code3"><span class="param">(venv) PS C:\></span></code>.<br/><br/>
+                            You are now operating within your Python virtual environment.
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            To exit your virtual environment, issue the command
+                            <div class="tool">
+                                <code class="code3" style="display: block;">
+                                    <ul class="pwshlist"> 
+                                        <li class=pwshvenv style="margin: 0; padding: 0;">
+                                            <span class="command">deactivate</span>
+                                        </li>
+                                    </ul>
+                                    <a onclick="onCopyClick(this);" class="copy">Copy</a>
+                                </code>
+                            </div>
+                            <code class="code3"><span class="param">(venv) PS C:\></span></code> will be returned to <code class="code3"><span class="param">PS C:\></span></code>.<br/>
+                        </p>
                     </li>
                 </ol>
                 To illustrate the steps described above.<br>
