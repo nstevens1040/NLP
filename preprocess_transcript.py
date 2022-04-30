@@ -18,6 +18,14 @@ import platform
 import zipfile
 import urllib
 
+def find_files(filename, search_path):
+    import os
+    result = []
+    for root, dir, files in os.walk(search_path):
+        if filename in files:
+            result.append(os.path.join(root, filename))
+    return result
+
 windows = False
 if platform.system() == 'Windows':
     windows = True
@@ -35,13 +43,15 @@ if not os.path.isdir(FOLDER):
     with zipfile.ZipFile(ZIP,'r') as z:
         z.extractall(FOLDER)
 
-#CORENLPZIP="https://downloads.cs.stanford.edu/nlp/software/stanford-corenlp-latest.zip"
+java_path = find_files("java.exe","C:\\Program Files\\Java\\")[0]
+# CORENLPZIP="https://downloads.cs.stanford.edu/nlp/software/stanford-corenlp-latest.zip"
 # download https://downloads.cs.stanford.edu/nlp/software/stanford-tagger-4.2.0.zip
 FOLDER = FOLDER + "\\stanford-postagger-full-2020-11-17\\"
-java_path = "C:\\Program Files\\Java\\jre1.8.0_321\\bin\\java.exe"
+# java_path = "C:\\Program Files\\Java\\jre1.8.0_321\\bin\\java.exe"
 # java_path = "java.exe"
 # os.environ["JAVAHOME"] = "java.exe"
-os.environ["JAVAHOME"] = "C:\\Program Files\\Java\\jre1.8.0_321\\bin\\java.exe"
+os.environ["JAVAHOME"] = java_path;
+# os.environ["JAVAHOME"] = "C:\\Program Files\\Java\\jre1.8.0_321\\bin\\java.exe"
 os.environ["CLASSPATH"] = FOLDER
 os.environ["STANFORD_MODELS"] = FOLDER + "\\models\\english-bidirectional-distsim.tagger"
 jar=FOLDER + "\\stanford-postagger-4.2.0.jar"
