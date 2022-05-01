@@ -211,7 +211,7 @@ def clean_transcript_from_file(save_file: bool = False, lemmatize: bool = False)
         FOLDER=os.path.dirname(transcript_file)
         FILENAME=os.path.basename(transcript_file)
         if lemmatize:
-            NEWFILE=FOLDER + "/cl_" + FILENAME
+            NEWFILE=FOLDER + "/cleaned_and_lemmatized_" + FILENAME
             MSGLEN.append(get_savefile_messagelength(LEMSTR,"    " + NEWFILE))
             if os.path.isfile(NEWFILE):
                 MSGLEN.append(get_fileexists_messagelength(NEWFILE))
@@ -230,7 +230,7 @@ def clean_transcript_from_file(save_file: bool = False, lemmatize: bool = False)
                 for i in MSG:
                     PRINTRA.append(i)
         else:
-            NEWFILE=FOLDER + "/c_" + FILENAME
+            NEWFILE=FOLDER + "/cleaned_" + FILENAME
             MSGLEN.append(get_savefile_messagelength(NLEMSTR,"    " + NEWFILE))
             if os.path.isfile(NEWFILE):
                 MSGLEN.append(get_fileexists_messagelength(NEWFILE))
@@ -294,7 +294,7 @@ def tag_and_tokenize(save_csv: bool = False,lemmatize: bool = False):
         FOLDER=os.path.dirname(transcript_file)
         FILENAME=Path(transcript_file).stem
         if lemmatize:
-            CSVFILE=FOLDER + "/ttl_" + FILENAME + ".csv"
+            CSVFILE=FOLDER + "/tagged_tokenized_and_lemmatized_" + FILENAME + ".csv"
             MSGLEN.append(get_savefile_messagelength(LEMSTR,"    " + CSVFILE))
             if os.path.isfile(CSVFILE):
                 MSGLEN.append(get_fileexists_messagelength(CSVFILE))
@@ -313,7 +313,7 @@ def tag_and_tokenize(save_csv: bool = False,lemmatize: bool = False):
                 for i in MSG:
                     PRINTRA.append(i)
         else:
-            CSVFILE=FOLDER + "/tt_" + FILENAME + ".csv"
+            CSVFILE=FOLDER + "/tagged_and_tokenized_" + FILENAME + ".csv"
             MSGLEN.append(get_savefile_messagelength(NLEMSTR,"    " + CSVFILE))
             if os.path.isfile(CSVFILE):
                 MSGLEN.append(get_fileexists_messagelength(CSVFILE))
