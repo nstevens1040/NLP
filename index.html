@@ -373,11 +373,14 @@
                 /* font-size: 0.8em; */
                 color: #D0D0D0;
             }
-            table, td {
+            table, td, th {
                 border-collapse: collapse;
                 border: 1px solid grey;
             }
-            td {
+            .filedata {
+                min-width: 260px;
+            }
+            td,th {
                 padding: 5px;
             }
             /* body {
@@ -401,6 +404,7 @@
                 font-family: Consolas;
                 color: #D4D4D4;
             }
+
             .arg {
                 line-height: 1.30em;
                 /* line-height: 12.16px; */
@@ -505,6 +509,43 @@
                 font-size: 1em;
                 font-family: "Calibri",sans-serif;
             }
+            .transcript {
+                user-select: all;
+                white-space: nowrap;
+                overflow: auto;
+                padding: 1px 3px 1px 3px;
+                border-radius: 0.5em;
+                display: block;
+                background-color: #1E1E1E;
+                line-height: 1.30em;
+                font-size: 1em;
+                font-family: Consolas;
+                color: #D4D4D4;
+                counter-reset: line-numbering;
+            }
+            .transcriptline {
+                display: block;
+                font-size: 1em;
+                font-family: Consolas;
+                color: #D4D4D4;
+                line-height: 1.30em;
+            }
+            .transcriptline::before {
+                font-size: 1em;
+                font-family: Consolas;
+                color: #D4D4D4;
+                content: counter(line-numbering);
+                counter-increment: line-numbering;
+                padding-right: .8em; /* space after numbers */
+                margin-right: 5px;
+                width: 1.5em;
+                text-align: right;
+                opacity: 0.5;
+                line-height: 1.30em;
+            }
+            pre {
+                margin: 0;
+            }
             .pwshlist {
                 line-height: 1.30em;
                 /* line-height: 12.16px; */
@@ -520,6 +561,14 @@
                 font-family: Consolas;
                 color: #D4D4D4;
             }
+            .pwshitem::after {
+                content: "\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0";
+                line-height: 1.30em;
+                /* line-height: 12.16px;*/
+                font-size: 1em;
+                font-family: Consolas;
+                color: #D4D4D4;
+            }
             .pwshitem2::before {
                 content: "PS C:\\.TEMP\\NLP> ";
                 line-height: 1.30em;
@@ -528,8 +577,72 @@
                 font-family: Consolas;
                 color: #D4D4D4;
             }
+            .pwshitem2::after {
+                content: "\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0";
+                line-height: 1.30em;
+                /* line-height: 12.16px;*/
+                font-size: 1em;
+                font-family: Consolas;
+                color: #D4D4D4;
+            }
+            .pwshitem3::before {
+                content: "PS C:\\.TEMP\\NLP\\venv> ";
+                line-height: 1.30em;
+                /* line-height: 12.16px;*/
+                font-size: 1em;
+                font-family: Consolas;
+                color: #D4D4D4;
+            }
+            .pwshitem3::after {
+                content: "\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0";
+                line-height: 1.30em;
+                /* line-height: 12.16px;*/
+                font-size: 1em;
+                font-family: Consolas;
+                color: #D4D4D4;
+            }
             .pwshvenv::before {
                 content: "(venv) PS C:\\.TEMP\\NLP> ";
+                line-height: 1.30em;
+                /* line-height: 12.16px;*/
+                font-size: 1em;
+                font-family: Consolas;
+                color: #D4D4D4;
+            }
+            .pwshvenv::after {
+                content: "\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0";
+                line-height: 1.30em;
+                /* line-height: 12.16px;*/
+                font-size: 1em;
+                font-family: Consolas;
+                color: #D4D4D4;
+            }
+            .pwshvenv2::before {
+                content: "(venv) PS C:\\.TEMP\\NLP\\venv> ";
+                line-height: 1.30em;
+                /* line-height: 12.16px;*/
+                font-size: 1em;
+                font-family: Consolas;
+                color: #D4D4D4;
+            }
+            .pwshvenv2::after {
+                content: "\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0";
+                line-height: 1.30em;
+                /* line-height: 12.16px;*/
+                font-size: 1em;
+                font-family: Consolas;
+                color: #D4D4D4;
+            }
+            .pwshvenv3::before {
+                content: "(venv) PS C:\\.TEMP\\NLP\\venv\\NLP> ";
+                line-height: 1.30em;
+                /* line-height: 12.16px;*/
+                font-size: 1em;
+                font-family: Consolas;
+                color: #D4D4D4;
+            }
+            .pwshvenv3::after {
+                content: "\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0";
                 line-height: 1.30em;
                 /* line-height: 12.16px;*/
                 font-size: 1em;
@@ -851,6 +964,9 @@
                     </li>
                     <li>
                         <a href="#installing-dependencies-nltk-and-nltk-data">Installing NLTK</a>
+                    </li>
+                    <li>
+                        <a href="#preprocessing-transcript-data">Preprocessing Transcript Data</a>
                     </li>
                     <li>
                         <a href="#installing-gensim">Installing Gensim</a>
@@ -1222,7 +1338,7 @@
                             </code>
                         </div>
                     </li>
-                    <li>
+                    <li id="createvenv">
                         Once installed, configure your virtual environment
                         <div class="tool">
                             <code class="code3" style="display: block;">
@@ -1495,10 +1611,1214 @@
                 </ol>
             </section>
             <section>
+                <h3 id="preprocessing-transcript-data">
+                    Preprocessing Transcript Data
+                    <a href="#preprocessing-transcript-data">
+                        <span class="anchor" onmouseover="onMouseOver(this);" onmouseleave="onMouseLeave(this);" data-clipboard-text="#preprocessing-transcript-data" style="position: relative;">
+                            <span style="position: absolute; top: 70%; left: 0.75rem; transform: translateY(-50%); right: -2rem;">
+                                <svg fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="26px" height="26px">
+                                    <path d="M 5.5625 0 C 4.136719 0 2.707031 0.542969 1.625 1.625 C -0.539063 3.789063 -0.539063 7.335938 1.625 9.5 L 5.28125 13.15625 C 5.667969 13.554688 6.304688 13.558594 6.703125 13.171875 C 7.101563 12.785156 7.105469 12.148438 6.71875 11.75 L 3.03125 8.0625 C 1.632813 6.664063 1.632813 4.429688 3.03125 3.03125 C 4.429688 1.632813 6.664063 1.632813 8.0625 3.03125 L 12.96875 7.9375 C 14.367188 9.335938 14.367188 11.570313 12.96875 12.96875 C 12.804688 13.132813 12.621094 13.25 12.4375 13.375 C 11.980469 13.6875 11.859375 14.308594 12.171875 14.765625 C 12.484375 15.222656 13.105469 15.34375 13.5625 15.03125 C 13.847656 14.835938 14.125 14.625 14.375 14.375 C 16.539063 12.210938 16.539063 8.664063 14.375 6.5 L 9.5 1.625 C 8.417969 0.542969 6.988281 0 5.5625 0 Z M 10.78125 8.875 C 10.738281 8.882813 10.695313 8.894531 10.65625 8.90625 C 10.507813 8.9375 10.371094 9 10.25 9.09375 C 10.039063 9.253906 9.820313 9.429688 9.625 9.625 C 7.460938 11.789063 7.460938 15.335938 9.625 17.5 L 14.5 22.375 C 16.664063 24.539063 20.210938 24.539063 22.375 22.375 C 24.539063 20.210938 24.539063 16.664063 22.375 14.5 L 18.71875 10.875 C 18.476563 10.578125 18.089844 10.441406 17.714844 10.527344 C 17.34375 10.613281 17.050781 10.90625 16.964844 11.277344 C 16.878906 11.652344 17.015625 12.039063 17.3125 12.28125 L 20.96875 15.9375 C 22.367188 17.335938 22.367188 19.570313 20.96875 20.96875 C 19.570313 22.367188 17.335938 22.367188 15.9375 20.96875 L 11.03125 16.0625 C 9.632813 14.664063 9.632813 12.429688 11.03125 11.03125 C 11.152344 10.90625 11.300781 10.820313 11.4375 10.71875 C 11.839844 10.472656 12.015625 9.976563 11.855469 9.53125 C 11.699219 9.085938 11.25 8.8125 10.78125 8.875 Z"></path>
+                                </svg>
+                            </span>
+                        </span>
+                    </a>
+                </h3>
+                <p>
+                    <div>
+                        Within <a href="https://github.com/nstevens1040/NLP/">this</a> repository, you will find a Python script entitled <strong>preprocess_transcript.py.</strong> The repository also includes sample input data. The first five lines of which are shown below.
+                        <pre>
+                            <code class="transcript">
+                                <span class="transcriptline">Can you hear me? Can you hear me? You hear me? Okay. Congratulations class of 2015. You guys and girls, and young men and women are the reason I'm here. I'm really looking forward to talking with you all tonight. You heard my dad played football here and I believe he even graduated from here. That was some extra incentive for me to come. Short and sweet or long and salty? A sugar doughnut or some oatmeal? Now, out of respect for you and your efforts in getting your degree, I thought long and hard about what I could share with you tonight. Did I want to stand up here at a podium and read you your rights? Did I want to come up here and just share some funny stories. I thought about what you would want, I thought about what you might need. I also thought about what I want to say and what I need to say. Hopefully, we're both going to be happy on both accounts. As the saying goes, take what you like, leave the rest. Thank you for having me.</span>
+                                <span class="transcriptline"></span>
+                                <span class="transcriptline">So before I share with you some what I do knows, I want to talk with you about what I don't know. I have two older brothers. One was in high school in the early 1970s. And this was a time when a high school GED got you a job, and the college degree was exemplary. My other brother, Pat, was in high school in the early 80s. And by this time, the GED wasn't enough to guarantee employment. He needed a college degree. And if you got one, you had a pretty good chance of getting the kind of job that you wanted after you graduated. Me, I graduated high school in 1988. Got my college degree in 1993. And that college degree in '93 did not mean much. It was not a ticket. It was not a voucher. It was not a free pass go to anything. So I asked the question, what does your college degree mean?</span>
+                                <span class="transcriptline"></span>
+                                <span class="transcriptline">It means you got an education. It means you have more knowledge in a specific subject, vocation. It means you may have more expertise in what your degree is in. But what's it worth in the job market out there today? We know the market for college graduates is more competitive now than ever. Now, some of you already have a job lined up, you've got a path where today's job is going to become tomorrow's career. But for most of you, the future is probably still pretty fuzzy. And you don't have that job that directly reflects the degree you just got. Many of you don't even have a job at all. Think about it. You've just completed your scholastic educational curriculum in life, the one that you started when you were five years old in kindergarten up until now, and your future may not be any more clearer than it was five years ago. You don't have the answers and is probably pretty damn scary.</span>
+                            </code>
+                        </pre>
+                        In order to clean the data, the script removes carriage returns, line feeds, and punctuation. Once complete, then all characters are made lowercase. Here are the same five lines of the transcript after they have been cleaned.
+                        <pre>
+                            <code class="transcript">
+                                <span class="transcriptline">can you hear me can you hear me you hear me okay congratulations class of 2015 you guys and girls and young men and women are the reason im here im really looking forward to talking with you all tonight you heard my dad played football here and i believe he even graduated from here that was some extra incentive for me to come short and sweet or long and salty a sugar doughnut or some oatmeal now out of respect for you and your efforts in getting your degree i thought long and hard about what i could share with you tonight did i want to stand up here at a podium and read you your rights did i want to come up here and just share some funny stories i thought about what you would want i thought about what you might need i also thought about what i want to say and what i need to say hopefully were both going to be happy on both accounts as the saying goes take what you like leave the rest thank you for having me so before i share with you some what i do knows i want to talk with you about what i dont know i have two older brothers one was in high school in the early 1970s and this was a time when a high school ged got you a job and the college degree was exemplary my other brother pat was in high school in the early 80s and by this time the ged wasnt enough to guarantee employment he needed a college degree and if you got one you had a pretty good chance of getting the kind of job that you wanted after you graduated me i graduated high school in 1988 got my college degree in 1993 and that college degree in 93 did not mean much it was not a ticket it was not a voucher it was not a free pass go to anything so i asked the question what does your college degree mean it means you got an education it means you have more knowledge in a specific subject vocation it means you may have more expertise in what your degree is in but whats it worth in the job market out there today we know the market for college graduates is more competitive now than ever now some of you already have a job lined up youve got a path where todays job is going to become tomorrows career but for most of you the future is probably still pretty fuzzy and you dont have that job that directly reflects the degree you just got many of you dont even have a job at all think about it youve just completed your scholastic educational curriculum in life the one that you started when you were five years old in kindergarten up until now and your future may not be any more clearer than it was five years ago you dont have the answers and is probably pretty damn scary</span>
+                            </code>
+                        </pre>
+                        Five lines becomes one line and all that remains are alphanumeric characters and spaces. Once the script finishes the cleaning process, it then saves the cleaned transcript to a text file.<br/><br/>
+                        After cleaning the transcript, the script then tokenizes each word. This simply means creating a table where each word in the transcript gets it's own row in the table.<br/><br/>
+                        The cleaned and tokenized transcript is then fed into the <a href="https://nlp.stanford.edu/software/tagger.shtml">Stanford Part-of-Speech tagger</a>. What this does is it determines which lexical category each word in the transcript belongs to (noun, verb, adjective, etc.). Each word is then tagged with a label that represents the lexical category. The POS tagger uses the labels defined in the <a href="https://aclanthology.org/J93-2004.pdf">Penn Treebank tag set</a> to tag each word.<br/><br/>
+                        Once the tagging is complete, the result is the tokenized words in one column and their corresponding tag in the next column. The data is then formatted as comma separated values and saved. 
+                        <div style="height: 312px; overflow-y: auto; margin: 24px 0px 24px 0px; width: 100%;">
+                            <table style="width: 50%; margin: 0px auto 0px auto;">
+                                <colgroup><col/><col/></colgroup>
+                                <tr><td>can</td><td>MD</td></tr>
+                                <tr><td>you</td><td>PRP</td></tr>
+                                <tr><td>hear</td><td>VB</td></tr>
+                                <tr><td>me</td><td>PRP</td></tr>
+                                <tr><td>can</td><td>MD</td></tr>
+                                <tr><td>you</td><td>PRP</td></tr>
+                                <tr><td>hear</td><td>VB</td></tr>
+                                <tr><td>me</td><td>PRP</td></tr>
+                                <tr><td>you</td><td>PRP</td></tr>
+                                <tr><td>hear</td><td>VBP</td></tr>
+                                <tr><td>me</td><td>PRP</td></tr>
+                                <tr><td>okay</td><td>JJ</td></tr>
+                                <tr><td>congratulations</td><td>NNS</td></tr>
+                                <tr><td>class</td><td>NN</td></tr>
+                                <tr><td>of</td><td>IN</td></tr>
+                                <tr><td>2015</td><td>CD</td></tr>
+                                <tr><td>you</td><td>PRP</td></tr>
+                                <tr><td>guys</td><td>NNS</td></tr>
+                                <tr><td>and</td><td>CC</td></tr>
+                                <tr><td>girls</td><td>NNS</td></tr>
+                                <tr><td>and</td><td>CC</td></tr>
+                                <tr><td>young</td><td>JJ</td></tr>
+                                <tr><td>men</td><td>NNS</td></tr>
+                                <tr><td>and</td><td>CC</td></tr>
+                                <tr><td>women</td><td>NNS</td></tr>
+                                <tr><td>are</td><td>VBP</td></tr>
+                                <tr><td>the</td><td>DT</td></tr>
+                                <tr><td>reason</td><td>NN</td></tr>
+                                <tr><td>im</td><td>NN</td></tr>
+                                <tr><td>here</td><td>RB</td></tr>
+                                <tr><td>im</td><td>IN</td></tr>
+                                <tr><td>really</td><td>RB</td></tr>
+                                <tr><td>looking</td><td>VBG</td></tr>
+                                <tr><td>forward</td><td>RB</td></tr>
+                                <tr><td>to</td><td>IN</td></tr>
+                                <tr><td>talking</td><td>VBG</td></tr>
+                                <tr><td>with</td><td>IN</td></tr>
+                                <tr><td>you</td><td>PRP</td></tr>
+                                <tr><td>all</td><td>DT</td></tr>
+                                <tr><td>tonight</td><td>NN</td></tr>
+                                <tr><td>you</td><td>PRP</td></tr>
+                                <tr><td>heard</td><td>VBD</td></tr>
+                                <tr><td>my</td><td>PRP$</td></tr>
+                                <tr><td>dad</td><td>NN</td></tr>
+                                <tr><td>played</td><td>VBD</td></tr>
+                                <tr><td>football</td><td>NN</td></tr>
+                                <tr><td>here</td><td>RB</td></tr>
+                                <tr><td>and</td><td>CC</td></tr>
+                                <tr><td>i</td><td>PRP</td></tr>
+                                <tr><td>believe</td><td>VBP</td></tr>
+                                <tr><td>he</td><td>PRP</td></tr>
+                                <tr><td>even</td><td>RB</td></tr>
+                                <tr><td>graduated</td><td>VBD</td></tr>
+                                <tr><td>from</td><td>IN</td></tr>
+                                <tr><td>here</td><td>RB</td></tr>
+                                <tr><td>that</td><td>WDT</td></tr>
+                                <tr><td>was</td><td>VBD</td></tr>
+                                <tr><td>some</td><td>DT</td></tr>
+                                <tr><td>extra</td><td>JJ</td></tr>
+                                <tr><td>incentive</td><td>NN</td></tr>
+                                <tr><td>for</td><td>IN</td></tr>
+                                <tr><td>me</td><td>PRP</td></tr>
+                                <tr><td>to</td><td>TO</td></tr>
+                                <tr><td>come</td><td>VB</td></tr>
+                                <tr><td>short</td><td>JJ</td></tr>
+                                <tr><td>and</td><td>CC</td></tr>
+                                <tr><td>sweet</td><td>JJ</td></tr>
+                                <tr><td>or</td><td>CC</td></tr>
+                                <tr><td>long</td><td>JJ</td></tr>
+                                <tr><td>and</td><td>CC</td></tr>
+                                <tr><td>salty</td><td>JJ</td></tr>
+                                <tr><td>a</td><td>DT</td></tr>
+                                <tr><td>sugar</td><td>NN</td></tr>
+                                <tr><td>doughnut</td><td>NN</td></tr>
+                                <tr><td>or</td><td>CC</td></tr>
+                                <tr><td>some</td><td>DT</td></tr>
+                                <tr><td>oatmeal</td><td>NN</td></tr>
+                                <tr><td>now</td><td>RB</td></tr>
+                                <tr><td>out</td><td>IN</td></tr>
+                                <tr><td>of</td><td>IN</td></tr>
+                                <tr><td>respect</td><td>NN</td></tr>
+                                <tr><td>for</td><td>IN</td></tr>
+                                <tr><td>you</td><td>PRP</td></tr>
+                                <tr><td>and</td><td>CC</td></tr>
+                                <tr><td>your</td><td>PRP$</td></tr>
+                                <tr><td>efforts</td><td>NNS</td></tr>
+                                <tr><td>in</td><td>IN</td></tr>
+                                <tr><td>getting</td><td>VBG</td></tr>
+                                <tr><td>your</td><td>PRP$</td></tr>
+                                <tr><td>degree</td><td>NN</td></tr>
+                                <tr><td>i</td><td>PRP</td></tr>
+                                <tr><td>thought</td><td>VBD</td></tr>
+                                <tr><td>long</td><td>JJ</td></tr>
+                                <tr><td>and</td><td>CC</td></tr>
+                                <tr><td>hard</td><td>JJ</td></tr>
+                                <tr><td>about</td><td>IN</td></tr>
+                                <tr><td>what</td><td>WP</td></tr>
+                                <tr><td>i</td><td>PRP</td></tr>
+                                <tr><td>could</td><td>MD</td></tr>
+                                <tr><td>share</td><td>VB</td></tr>
+                                <tr><td>with</td><td>IN</td></tr>
+                                <tr><td>you</td><td>PRP</td></tr>
+                                <tr><td>tonight</td><td>NN</td></tr>
+                                <tr><td>did</td><td>VBD</td></tr>
+                                <tr><td>i</td><td>PRP</td></tr>
+                                <tr><td>want</td><td>VB</td></tr>
+                                <tr><td>to</td><td>TO</td></tr>
+                                <tr><td>stand</td><td>VB</td></tr>
+                                <tr><td>up</td><td>RP</td></tr>
+                                <tr><td>here</td><td>RB</td></tr>
+                                <tr><td>at</td><td>IN</td></tr>
+                                <tr><td>a</td><td>DT</td></tr>
+                                <tr><td>podium</td><td>NN</td></tr>
+                                <tr><td>and</td><td>CC</td></tr>
+                                <tr><td>read</td><td>VB</td></tr>
+                                <tr><td>you</td><td>PRP</td></tr>
+                                <tr><td>your</td><td>PRP$</td></tr>
+                                <tr><td>rights</td><td>NNS</td></tr>
+                                <tr><td>did</td><td>VBD</td></tr>
+                                <tr><td>i</td><td>PRP</td></tr>
+                                <tr><td>want</td><td>VB</td></tr>
+                                <tr><td>to</td><td>TO</td></tr>
+                                <tr><td>come</td><td>VB</td></tr>
+                                <tr><td>up</td><td>RP</td></tr>
+                                <tr><td>here</td><td>RB</td></tr>
+                                <tr><td>and</td><td>CC</td></tr>
+                                <tr><td>just</td><td>RB</td></tr>
+                                <tr><td>share</td><td>VB</td></tr>
+                                <tr><td>some</td><td>DT</td></tr>
+                                <tr><td>funny</td><td>JJ</td></tr>
+                                <tr><td>stories</td><td>NNS</td></tr>
+                                <tr><td>i</td><td>PRP</td></tr>
+                                <tr><td>thought</td><td>VBD</td></tr>
+                                <tr><td>about</td><td>IN</td></tr>
+                                <tr><td>what</td><td>WP</td></tr>
+                                <tr><td>you</td><td>PRP</td></tr>
+                                <tr><td>would</td><td>MD</td></tr>
+                                <tr><td>want</td><td>VB</td></tr>
+                                <tr><td>i</td><td>PRP</td></tr>
+                                <tr><td>thought</td><td>VBD</td></tr>
+                                <tr><td>about</td><td>IN</td></tr>
+                                <tr><td>what</td><td>WP</td></tr>
+                                <tr><td>you</td><td>PRP</td></tr>
+                                <tr><td>might</td><td>MD</td></tr>
+                                <tr><td>need</td><td>VB</td></tr>
+                                <tr><td>i</td><td>PRP</td></tr>
+                                <tr><td>also</td><td>RB</td></tr>
+                                <tr><td>thought</td><td>VBD</td></tr>
+                                <tr><td>about</td><td>IN</td></tr>
+                                <tr><td>what</td><td>WP</td></tr>
+                                <tr><td>i</td><td>PRP</td></tr>
+                                <tr><td>want</td><td>VBP</td></tr>
+                                <tr><td>to</td><td>TO</td></tr>
+                                <tr><td>say</td><td>VB</td></tr>
+                                <tr><td>and</td><td>CC</td></tr>
+                                <tr><td>what</td><td>WP</td></tr>
+                                <tr><td>i</td><td>PRP</td></tr>
+                                <tr><td>need</td><td>VBP</td></tr>
+                                <tr><td>to</td><td>TO</td></tr>
+                                <tr><td>say</td><td>VB</td></tr>
+                                <tr><td>hopefully</td><td>RB</td></tr>
+                                <tr><td>were</td><td>VBD</td></tr>
+                                <tr><td>both</td><td>DT</td></tr>
+                                <tr><td>going</td><td>VBG</td></tr>
+                                <tr><td>to</td><td>TO</td></tr>
+                                <tr><td>be</td><td>VB</td></tr>
+                                <tr><td>happy</td><td>JJ</td></tr>
+                                <tr><td>on</td><td>IN</td></tr>
+                                <tr><td>both</td><td>DT</td></tr>
+                                <tr><td>accounts</td><td>NNS</td></tr>
+                                <tr><td>as</td><td>IN</td></tr>
+                                <tr><td>the</td><td>DT</td></tr>
+                                <tr><td>saying</td><td>NN</td></tr>
+                                <tr><td>goes</td><td>VBZ</td></tr>
+                                <tr><td>take</td><td>VB</td></tr>
+                                <tr><td>what</td><td>WP</td></tr>
+                                <tr><td>you</td><td>PRP</td></tr>
+                                <tr><td>like</td><td>UH</td></tr>
+                                <tr><td>leave</td><td>VB</td></tr>
+                                <tr><td>the</td><td>DT</td></tr>
+                                <tr><td>rest</td><td>NN</td></tr>
+                                <tr><td>thank</td><td>VBP</td></tr>
+                                <tr><td>you</td><td>PRP</td></tr>
+                                <tr><td>for</td><td>IN</td></tr>
+                                <tr><td>having</td><td>VBG</td></tr>
+                                <tr><td>me</td><td>PRP</td></tr>
+                                <tr><td>so</td><td>RB</td></tr>
+                                <tr><td>before</td><td>IN</td></tr>
+                                <tr><td>i</td><td>PRP</td></tr>
+                                <tr><td>share</td><td>VBP</td></tr>
+                                <tr><td>with</td><td>IN</td></tr>
+                                <tr><td>you</td><td>PRP</td></tr>
+                                <tr><td>some</td><td>DT</td></tr>
+                                <tr><td>what</td><td>WP</td></tr>
+                                <tr><td>i</td><td>PRP</td></tr>
+                                <tr><td>do</td><td>VBP</td></tr>
+                                <tr><td>knows</td><td>VBZ</td></tr>
+                                <tr><td>i</td><td>PRP</td></tr>
+                                <tr><td>want</td><td>VBP</td></tr>
+                                <tr><td>to</td><td>TO</td></tr>
+                                <tr><td>talk</td><td>VB</td></tr>
+                                <tr><td>with</td><td>IN</td></tr>
+                                <tr><td>you</td><td>PRP</td></tr>
+                                <tr><td>about</td><td>IN</td></tr>
+                                <tr><td>what</td><td>WP</td></tr>
+                                <tr><td>i</td><td>FW</td></tr>
+                                <tr><td>dont</td><td>FW</td></tr>
+                                <tr><td>know</td><td>VBP</td></tr>
+                                <tr><td>i</td><td>PRP</td></tr>
+                                <tr><td>have</td><td>VBP</td></tr>
+                                <tr><td>two</td><td>CD</td></tr>
+                                <tr><td>older</td><td>JJR</td></tr>
+                                <tr><td>brothers</td><td>NNS</td></tr>
+                                <tr><td>one</td><td>CD</td></tr>
+                                <tr><td>was</td><td>VBD</td></tr>
+                                <tr><td>in</td><td>IN</td></tr>
+                                <tr><td>high</td><td>JJ</td></tr>
+                                <tr><td>school</td><td>NN</td></tr>
+                                <tr><td>in</td><td>IN</td></tr>
+                                <tr><td>the</td><td>DT</td></tr>
+                                <tr><td>early</td><td>JJ</td></tr>
+                                <tr><td>1970s</td><td>NNS</td></tr>
+                                <tr><td>and</td><td>CC</td></tr>
+                                <tr><td>this</td><td>DT</td></tr>
+                                <tr><td>was</td><td>VBD</td></tr>
+                                <tr><td>a</td><td>DT</td></tr>
+                                <tr><td>time</td><td>NN</td></tr>
+                                <tr><td>when</td><td>WRB</td></tr>
+                                <tr><td>a</td><td>DT</td></tr>
+                                <tr><td>high</td><td>JJ</td></tr>
+                                <tr><td>school</td><td>NN</td></tr>
+                                <tr><td>ged</td><td>NN</td></tr>
+                                <tr><td>got</td><td>VBD</td></tr>
+                                <tr><td>you</td><td>PRP</td></tr>
+                                <tr><td>a</td><td>DT</td></tr>
+                                <tr><td>job</td><td>NN</td></tr>
+                                <tr><td>and</td><td>CC</td></tr>
+                                <tr><td>the</td><td>DT</td></tr>
+                                <tr><td>college</td><td>NN</td></tr>
+                                <tr><td>degree</td><td>NN</td></tr>
+                                <tr><td>was</td><td>VBD</td></tr>
+                                <tr><td>exemplary</td><td>JJ</td></tr>
+                                <tr><td>my</td><td>PRP$</td></tr>
+                                <tr><td>other</td><td>JJ</td></tr>
+                                <tr><td>brother</td><td>NN</td></tr>
+                                <tr><td>pat</td><td>VB</td></tr>
+                                <tr><td>was</td><td>VBD</td></tr>
+                                <tr><td>in</td><td>IN</td></tr>
+                                <tr><td>high</td><td>JJ</td></tr>
+                                <tr><td>school</td><td>NN</td></tr>
+                                <tr><td>in</td><td>IN</td></tr>
+                                <tr><td>the</td><td>DT</td></tr>
+                                <tr><td>early</td><td>JJ</td></tr>
+                                <tr><td>80s</td><td>NNS</td></tr>
+                                <tr><td>and</td><td>CC</td></tr>
+                                <tr><td>by</td><td>IN</td></tr>
+                                <tr><td>this</td><td>DT</td></tr>
+                                <tr><td>time</td><td>NN</td></tr>
+                                <tr><td>the</td><td>DT</td></tr>
+                                <tr><td>ged</td><td>FW</td></tr>
+                                <tr><td>wasnt</td><td>FW</td></tr>
+                                <tr><td>enough</td><td>JJ</td></tr>
+                                <tr><td>to</td><td>TO</td></tr>
+                                <tr><td>guarantee</td><td>VB</td></tr>
+                                <tr><td>employment</td><td>NN</td></tr>
+                                <tr><td>he</td><td>PRP</td></tr>
+                                <tr><td>needed</td><td>VBD</td></tr>
+                                <tr><td>a</td><td>DT</td></tr>
+                                <tr><td>college</td><td>NN</td></tr>
+                                <tr><td>degree</td><td>NN</td></tr>
+                                <tr><td>and</td><td>CC</td></tr>
+                                <tr><td>if</td><td>IN</td></tr>
+                                <tr><td>you</td><td>PRP</td></tr>
+                                <tr><td>got</td><td>VBD</td></tr>
+                                <tr><td>one</td><td>CD</td></tr>
+                                <tr><td>you</td><td>PRP</td></tr>
+                                <tr><td>had</td><td>VBD</td></tr>
+                                <tr><td>a</td><td>DT</td></tr>
+                                <tr><td>pretty</td><td>RB</td></tr>
+                                <tr><td>good</td><td>JJ</td></tr>
+                                <tr><td>chance</td><td>NN</td></tr>
+                                <tr><td>of</td><td>IN</td></tr>
+                                <tr><td>getting</td><td>VBG</td></tr>
+                                <tr><td>the</td><td>DT</td></tr>
+                                <tr><td>kind</td><td>NN</td></tr>
+                                <tr><td>of</td><td>IN</td></tr>
+                                <tr><td>job</td><td>NN</td></tr>
+                                <tr><td>that</td><td>WDT</td></tr>
+                                <tr><td>you</td><td>PRP</td></tr>
+                                <tr><td>wanted</td><td>VBD</td></tr>
+                                <tr><td>after</td><td>IN</td></tr>
+                                <tr><td>you</td><td>PRP</td></tr>
+                                <tr><td>graduated</td><td>VBD</td></tr>
+                                <tr><td>me</td><td>PRP</td></tr>
+                                <tr><td>i</td><td>PRP</td></tr>
+                                <tr><td>graduated</td><td>VBD</td></tr>
+                                <tr><td>high</td><td>JJ</td></tr>
+                                <tr><td>school</td><td>NN</td></tr>
+                                <tr><td>in</td><td>IN</td></tr>
+                                <tr><td>1988</td><td>CD</td></tr>
+                                <tr><td>got</td><td>VBD</td></tr>
+                                <tr><td>my</td><td>PRP$</td></tr>
+                                <tr><td>college</td><td>NN</td></tr>
+                                <tr><td>degree</td><td>NN</td></tr>
+                                <tr><td>in</td><td>IN</td></tr>
+                                <tr><td>1993</td><td>CD</td></tr>
+                                <tr><td>and</td><td>CC</td></tr>
+                                <tr><td>that</td><td>IN</td></tr>
+                                <tr><td>college</td><td>NN</td></tr>
+                                <tr><td>degree</td><td>NN</td></tr>
+                                <tr><td>in</td><td>IN</td></tr>
+                                <tr><td>93</td><td>CD</td></tr>
+                                <tr><td>did</td><td>VBD</td></tr>
+                                <tr><td>not</td><td>RB</td></tr>
+                                <tr><td>mean</td><td>VB</td></tr>
+                                <tr><td>much</td><td>JJ</td></tr>
+                                <tr><td>it</td><td>PRP</td></tr>
+                                <tr><td>was</td><td>VBD</td></tr>
+                                <tr><td>not</td><td>RB</td></tr>
+                                <tr><td>a</td><td>DT</td></tr>
+                                <tr><td>ticket</td><td>NN</td></tr>
+                                <tr><td>it</td><td>PRP</td></tr>
+                                <tr><td>was</td><td>VBD</td></tr>
+                                <tr><td>not</td><td>RB</td></tr>
+                                <tr><td>a</td><td>DT</td></tr>
+                                <tr><td>voucher</td><td>NN</td></tr>
+                                <tr><td>it</td><td>PRP</td></tr>
+                                <tr><td>was</td><td>VBD</td></tr>
+                                <tr><td>not</td><td>RB</td></tr>
+                                <tr><td>a</td><td>DT</td></tr>
+                                <tr><td>free</td><td>JJ</td></tr>
+                                <tr><td>pass</td><td>NN</td></tr>
+                                <tr><td>go</td><td>VB</td></tr>
+                                <tr><td>to</td><td>IN</td></tr>
+                                <tr><td>anything</td><td>NN</td></tr>
+                                <tr><td>so</td><td>RB</td></tr>
+                                <tr><td>i</td><td>PRP</td></tr>
+                                <tr><td>asked</td><td>VBD</td></tr>
+                                <tr><td>the</td><td>DT</td></tr>
+                                <tr><td>question</td><td>NN</td></tr>
+                                <tr><td>what</td><td>WP</td></tr>
+                                <tr><td>does</td><td>VBZ</td></tr>
+                                <tr><td>your</td><td>PRP$</td></tr>
+                                <tr><td>college</td><td>NN</td></tr>
+                                <tr><td>degree</td><td>NN</td></tr>
+                                <tr><td>mean</td><td>VBP</td></tr>
+                                <tr><td>it</td><td>PRP</td></tr>
+                                <tr><td>means</td><td>VBZ</td></tr>
+                                <tr><td>you</td><td>PRP</td></tr>
+                                <tr><td>got</td><td>VBD</td></tr>
+                                <tr><td>an</td><td>DT</td></tr>
+                                <tr><td>education</td><td>NN</td></tr>
+                                <tr><td>it</td><td>PRP</td></tr>
+                                <tr><td>means</td><td>VBZ</td></tr>
+                                <tr><td>you</td><td>PRP</td></tr>
+                                <tr><td>have</td><td>VBP</td></tr>
+                                <tr><td>more</td><td>JJR</td></tr>
+                                <tr><td>knowledge</td><td>NN</td></tr>
+                                <tr><td>in</td><td>IN</td></tr>
+                                <tr><td>a</td><td>DT</td></tr>
+                                <tr><td>specific</td><td>JJ</td></tr>
+                                <tr><td>subject</td><td>NN</td></tr>
+                                <tr><td>vocation</td><td>NN</td></tr>
+                                <tr><td>it</td><td>PRP</td></tr>
+                                <tr><td>means</td><td>VBZ</td></tr>
+                                <tr><td>you</td><td>PRP</td></tr>
+                                <tr><td>may</td><td>MD</td></tr>
+                                <tr><td>have</td><td>VB</td></tr>
+                                <tr><td>more</td><td>JJR</td></tr>
+                                <tr><td>expertise</td><td>NN</td></tr>
+                                <tr><td>in</td><td>IN</td></tr>
+                                <tr><td>what</td><td>WP</td></tr>
+                                <tr><td>your</td><td>PRP$</td></tr>
+                                <tr><td>degree</td><td>NN</td></tr>
+                                <tr><td>is</td><td>VBZ</td></tr>
+                                <tr><td>in</td><td>IN</td></tr>
+                                <tr><td>but</td><td>CC</td></tr>
+                                <tr><td>whats</td><td>VBZ</td></tr>
+                                <tr><td>it</td><td>PRP</td></tr>
+                                <tr><td>worth</td><td>JJ</td></tr>
+                                <tr><td>in</td><td>IN</td></tr>
+                                <tr><td>the</td><td>DT</td></tr>
+                                <tr><td>job</td><td>NN</td></tr>
+                                <tr><td>market</td><td>NN</td></tr>
+                                <tr><td>out</td><td>RB</td></tr>
+                                <tr><td>there</td><td>RB</td></tr>
+                                <tr><td>today</td><td>NN</td></tr>
+                                <tr><td>we</td><td>PRP</td></tr>
+                                <tr><td>know</td><td>VBP</td></tr>
+                                <tr><td>the</td><td>DT</td></tr>
+                                <tr><td>market</td><td>NN</td></tr>
+                                <tr><td>for</td><td>IN</td></tr>
+                                <tr><td>college</td><td>NN</td></tr>
+                                <tr><td>graduates</td><td>NNS</td></tr>
+                                <tr><td>is</td><td>VBZ</td></tr>
+                                <tr><td>more</td><td>RBR</td></tr>
+                                <tr><td>competitive</td><td>JJ</td></tr>
+                                <tr><td>now</td><td>RB</td></tr>
+                                <tr><td>than</td><td>IN</td></tr>
+                                <tr><td>ever</td><td>RB</td></tr>
+                                <tr><td>now</td><td>RB</td></tr>
+                                <tr><td>some</td><td>DT</td></tr>
+                                <tr><td>of</td><td>IN</td></tr>
+                                <tr><td>you</td><td>PRP</td></tr>
+                                <tr><td>already</td><td>RB</td></tr>
+                                <tr><td>have</td><td>VBP</td></tr>
+                                <tr><td>a</td><td>DT</td></tr>
+                                <tr><td>job</td><td>NN</td></tr>
+                                <tr><td>lined</td><td>VBN</td></tr>
+                                <tr><td>up</td><td>RP</td></tr>
+                                <tr><td>youve</td><td>NNP</td></tr>
+                                <tr><td>got</td><td>VBD</td></tr>
+                                <tr><td>a</td><td>DT</td></tr>
+                                <tr><td>path</td><td>NN</td></tr>
+                                <tr><td>where</td><td>WRB</td></tr>
+                                <tr><td>todays</td><td>NNS</td></tr>
+                                <tr><td>job</td><td>NN</td></tr>
+                                <tr><td>is</td><td>VBZ</td></tr>
+                                <tr><td>going</td><td>VBG</td></tr>
+                                <tr><td>to</td><td>TO</td></tr>
+                                <tr><td>become</td><td>VB</td></tr>
+                                <tr><td>tomorrows</td><td>NNS</td></tr>
+                                <tr><td>career</td><td>NN</td></tr>
+                                <tr><td>but</td><td>CC</td></tr>
+                                <tr><td>for</td><td>IN</td></tr>
+                                <tr><td>most</td><td>JJS</td></tr>
+                                <tr><td>of</td><td>IN</td></tr>
+                                <tr><td>you</td><td>PRP</td></tr>
+                                <tr><td>the</td><td>DT</td></tr>
+                                <tr><td>future</td><td>NN</td></tr>
+                                <tr><td>is</td><td>VBZ</td></tr>
+                                <tr><td>probably</td><td>RB</td></tr>
+                                <tr><td>still</td><td>RB</td></tr>
+                                <tr><td>pretty</td><td>RB</td></tr>
+                                <tr><td>fuzzy</td><td>JJ</td></tr>
+                                <tr><td>and</td><td>CC</td></tr>
+                                <tr><td>you</td><td>PRP</td></tr>
+                                <tr><td>dont</td><td>VBP</td></tr>
+                                <tr><td>have</td><td>VB</td></tr>
+                                <tr><td>that</td><td>DT</td></tr>
+                                <tr><td>job</td><td>NN</td></tr>
+                                <tr><td>that</td><td>WDT</td></tr>
+                                <tr><td>directly</td><td>RB</td></tr>
+                                <tr><td>reflects</td><td>VBZ</td></tr>
+                                <tr><td>the</td><td>DT</td></tr>
+                                <tr><td>degree</td><td>NN</td></tr>
+                                <tr><td>you</td><td>PRP</td></tr>
+                                <tr><td>just</td><td>RB</td></tr>
+                                <tr><td>got</td><td>VBD</td></tr>
+                                <tr><td>many</td><td>JJ</td></tr>
+                                <tr><td>of</td><td>IN</td></tr>
+                                <tr><td>you</td><td>PRP</td></tr>
+                                <tr><td>dont</td><td>VBP</td></tr>
+                                <tr><td>even</td><td>RB</td></tr>
+                                <tr><td>have</td><td>VB</td></tr>
+                                <tr><td>a</td><td>DT</td></tr>
+                                <tr><td>job</td><td>NN</td></tr>
+                                <tr><td>at</td><td>RB</td></tr>
+                                <tr><td>all</td><td>RB</td></tr>
+                                <tr><td>think</td><td>VB</td></tr>
+                                <tr><td>about</td><td>IN</td></tr>
+                                <tr><td>it</td><td>PRP</td></tr>
+                                <tr><td>youve</td><td>VBD</td></tr>
+                                <tr><td>just</td><td>RB</td></tr>
+                                <tr><td>completed</td><td>VBN</td></tr>
+                                <tr><td>your</td><td>PRP$</td></tr>
+                                <tr><td>scholastic</td><td>JJ</td></tr>
+                                <tr><td>educational</td><td>JJ</td></tr>
+                                <tr><td>curriculum</td><td>NN</td></tr>
+                                <tr><td>in</td><td>IN</td></tr>
+                                <tr><td>life</td><td>NN</td></tr>
+                                <tr><td>the</td><td>DT</td></tr>
+                                <tr><td>one</td><td>NN</td></tr>
+                                <tr><td>that</td><td>WDT</td></tr>
+                                <tr><td>you</td><td>PRP</td></tr>
+                                <tr><td>started</td><td>VBD</td></tr>
+                                <tr><td>when</td><td>WRB</td></tr>
+                                <tr><td>you</td><td>PRP</td></tr>
+                                <tr><td>were</td><td>VBD</td></tr>
+                                <tr><td>five</td><td>CD</td></tr>
+                                <tr><td>years</td><td>NNS</td></tr>
+                                <tr><td>old</td><td>JJ</td></tr>
+                                <tr><td>in</td><td>IN</td></tr>
+                                <tr><td>kindergarten</td><td>NN</td></tr>
+                                <tr><td>up</td><td>IN</td></tr>
+                                <tr><td>until</td><td>IN</td></tr>
+                                <tr><td>now</td><td>RB</td></tr>
+                                <tr><td>and</td><td>CC</td></tr>
+                                <tr><td>your</td><td>PRP$</td></tr>
+                                <tr><td>future</td><td>NN</td></tr>
+                                <tr><td>may</td><td>MD</td></tr>
+                                <tr><td>not</td><td>RB</td></tr>
+                                <tr><td>be</td><td>VB</td></tr>
+                                <tr><td>any</td><td>DT</td></tr>
+                                <tr><td>more</td><td>JJR</td></tr>
+                                <tr><td>clearer</td><td>JJR</td></tr>
+                                <tr><td>than</td><td>IN</td></tr>
+                                <tr><td>it</td><td>PRP</td></tr>
+                                <tr><td>was</td><td>VBD</td></tr>
+                                <tr><td>five</td><td>CD</td></tr>
+                                <tr><td>years</td><td>NNS</td></tr>
+                                <tr><td>ago</td><td>RB</td></tr>
+                                <tr><td>you</td><td>PRP</td></tr>
+                                <tr><td>dont</td><td>VBP</td></tr>
+                                <tr><td>have</td><td>VB</td></tr>
+                                <tr><td>the</td><td>DT</td></tr>
+                                <tr><td>answers</td><td>NNS</td></tr>
+                                <tr><td>and</td><td>CC</td></tr>
+                                <tr><td>is</td><td>VBZ</td></tr>
+                                <tr><td>probably</td><td>RB</td></tr>
+                                <tr><td>pretty</td><td>RB</td></tr>
+                                <tr><td>damn</td><td>RB</td></tr>
+                                <tr><td>scary</td><td>JJ</td></tr>
+                            </table>
+                        </div>
+                        After this process is complete, the script performs a second iteration that includes the lemmatization of each word in the transcript. Lemmatization is the process of determining a given word's lemma or it's dictionary form.<br/><br/>
+                        For example, the word "best" is a comparitive inflection of the word "good". Therefore, the lemma for the word "best" is "good".<br/><br/>
+                        The script will create another text file containing the lemmatized version of the cleaned transcript. Here are the same five lines of the transcript after they have been cleaned and lemmatized.
+                        <pre>
+                            <code class="transcript">
+                                <span class="transcriptline">can you hear me can you hear me you hear me okay congratulation class of 2015 you guy and girl and young men and woman are the reason im here im really looking forward to talking with you all tonight you heard my dad played football here and i believe he even graduated from here that wa some extra incentive for me to come short and sweet or long and salty a sugar doughnut or some oatmeal now out of respect for you and your effort in getting your degree i thought long and hard about what i could share with you tonight did i want to stand up here at a podium and read you your right did i want to come up here and just share some funny story i thought about what you would want i thought about what you might need i also thought about what i want to say and what i need to say hopefully were both going to be happy on both account a the saying go take what you like leave the rest thank you for having me so before i share with you some what i do know i want to talk with you about what i dont know i have two older brother one wa in high school in the early 1970s and this wa a time when a high school ged got you a job and the college degree wa exemplary my other brother pat wa in high school in the early 80 and by this time the ged wasnt enough to guarantee employment he needed a college degree and if you got one you had a pretty good chance of getting the kind of job that you wanted after you graduated me i graduated high school in 1988 got my college degree in 1993 and that college degree in 93 did not mean much it wa not a ticket it wa not a voucher it wa not a free pas go to anything so i asked the question what doe your college degree mean it mean you got an education it mean you have more knowledge in a specific subject vocation it mean you may have more expertise in what your degree is in but whats it worth in the job market out there today we know the market for college graduate is more competitive now than ever now some of you already have a job lined up youve got a path where today job is going to become tomorrow career but for most of you the future is probably still pretty fuzzy and you dont have that job that directly reflects the degree you just got many of you dont even have a job at all think about it youve just completed your scholastic educational curriculum in life the one that you started when you were five year old in kindergarten up until now and your future may not be any more clearer than it wa five year ago you dont have the answer and is probably pretty damn scary</span>
+                            </code>
+                        </pre>
+                        Once the script completes the lemmatization, it performs the same tokenizing and tagging process on the lemmatized transcript that it did during the first iteration. The result is structured the same way, with the lemmatized words in one column and their corresponding tag in the next. The data is then formatted as comma separated values and saved.
+                        <div style="height: 312px; overflow-y: auto; margin: 24px 0px 24px 0px; width: 100%;">
+                            <table style="width: 50%; margin: 0px auto 0px auto;">
+                                <colgroup><col/><col/></colgroup>
+                                <tr><td>can</td><td>MD</td></tr>
+                                <tr><td>you</td><td>PRP</td></tr>
+                                <tr><td>hear</td><td>VB</td></tr>
+                                <tr><td>me</td><td>PRP</td></tr>
+                                <tr><td>can</td><td>MD</td></tr>
+                                <tr><td>you</td><td>PRP</td></tr>
+                                <tr><td>hear</td><td>VB</td></tr>
+                                <tr><td>me</td><td>PRP</td></tr>
+                                <tr><td>you</td><td>PRP</td></tr>
+                                <tr><td>hear</td><td>VBP</td></tr>
+                                <tr><td>me</td><td>PRP</td></tr>
+                                <tr><td>okay</td><td>JJ</td></tr>
+                                <tr><td>congratulation</td><td>NN</td></tr>
+                                <tr><td>class</td><td>NN</td></tr>
+                                <tr><td>of</td><td>IN</td></tr>
+                                <tr><td>2015</td><td>CD</td></tr>
+                                <tr><td>you</td><td>PRP</td></tr>
+                                <tr><td>guy</td><td>NN</td></tr>
+                                <tr><td>and</td><td>CC</td></tr>
+                                <tr><td>girl</td><td>NN</td></tr>
+                                <tr><td>and</td><td>CC</td></tr>
+                                <tr><td>young</td><td>JJ</td></tr>
+                                <tr><td>men</td><td>NNS</td></tr>
+                                <tr><td>and</td><td>CC</td></tr>
+                                <tr><td>woman</td><td>NN</td></tr>
+                                <tr><td>are</td><td>VBP</td></tr>
+                                <tr><td>the</td><td>DT</td></tr>
+                                <tr><td>reason</td><td>NN</td></tr>
+                                <tr><td>im</td><td>NN</td></tr>
+                                <tr><td>here</td><td>RB</td></tr>
+                                <tr><td>im</td><td>IN</td></tr>
+                                <tr><td>really</td><td>RB</td></tr>
+                                <tr><td>looking</td><td>VBG</td></tr>
+                                <tr><td>forward</td><td>RB</td></tr>
+                                <tr><td>to</td><td>IN</td></tr>
+                                <tr><td>talking</td><td>VBG</td></tr>
+                                <tr><td>with</td><td>IN</td></tr>
+                                <tr><td>you</td><td>PRP</td></tr>
+                                <tr><td>all</td><td>DT</td></tr>
+                                <tr><td>tonight</td><td>NN</td></tr>
+                                <tr><td>you</td><td>PRP</td></tr>
+                                <tr><td>heard</td><td>VBD</td></tr>
+                                <tr><td>my</td><td>PRP$</td></tr>
+                                <tr><td>dad</td><td>NN</td></tr>
+                                <tr><td>played</td><td>VBD</td></tr>
+                                <tr><td>football</td><td>NN</td></tr>
+                                <tr><td>here</td><td>RB</td></tr>
+                                <tr><td>and</td><td>CC</td></tr>
+                                <tr><td>i</td><td>PRP</td></tr>
+                                <tr><td>believe</td><td>VBP</td></tr>
+                                <tr><td>he</td><td>PRP</td></tr>
+                                <tr><td>even</td><td>RB</td></tr>
+                                <tr><td>graduated</td><td>VBD</td></tr>
+                                <tr><td>from</td><td>IN</td></tr>
+                                <tr><td>here</td><td>RB</td></tr>
+                                <tr><td>that</td><td>DT</td></tr>
+                                <tr><td>wa</td><td>NN</td></tr>
+                                <tr><td>some</td><td>DT</td></tr>
+                                <tr><td>extra</td><td>JJ</td></tr>
+                                <tr><td>incentive</td><td>NN</td></tr>
+                                <tr><td>for</td><td>IN</td></tr>
+                                <tr><td>me</td><td>PRP</td></tr>
+                                <tr><td>to</td><td>TO</td></tr>
+                                <tr><td>come</td><td>VB</td></tr>
+                                <tr><td>short</td><td>JJ</td></tr>
+                                <tr><td>and</td><td>CC</td></tr>
+                                <tr><td>sweet</td><td>JJ</td></tr>
+                                <tr><td>or</td><td>CC</td></tr>
+                                <tr><td>long</td><td>JJ</td></tr>
+                                <tr><td>and</td><td>CC</td></tr>
+                                <tr><td>salty</td><td>JJ</td></tr>
+                                <tr><td>a</td><td>DT</td></tr>
+                                <tr><td>sugar</td><td>NN</td></tr>
+                                <tr><td>doughnut</td><td>NN</td></tr>
+                                <tr><td>or</td><td>CC</td></tr>
+                                <tr><td>some</td><td>DT</td></tr>
+                                <tr><td>oatmeal</td><td>NN</td></tr>
+                                <tr><td>now</td><td>RB</td></tr>
+                                <tr><td>out</td><td>IN</td></tr>
+                                <tr><td>of</td><td>IN</td></tr>
+                                <tr><td>respect</td><td>NN</td></tr>
+                                <tr><td>for</td><td>IN</td></tr>
+                                <tr><td>you</td><td>PRP</td></tr>
+                                <tr><td>and</td><td>CC</td></tr>
+                                <tr><td>your</td><td>PRP$</td></tr>
+                                <tr><td>effort</td><td>NN</td></tr>
+                                <tr><td>in</td><td>IN</td></tr>
+                                <tr><td>getting</td><td>VBG</td></tr>
+                                <tr><td>your</td><td>PRP$</td></tr>
+                                <tr><td>degree</td><td>NN</td></tr>
+                                <tr><td>i</td><td>PRP</td></tr>
+                                <tr><td>thought</td><td>VBD</td></tr>
+                                <tr><td>long</td><td>JJ</td></tr>
+                                <tr><td>and</td><td>CC</td></tr>
+                                <tr><td>hard</td><td>JJ</td></tr>
+                                <tr><td>about</td><td>IN</td></tr>
+                                <tr><td>what</td><td>WP</td></tr>
+                                <tr><td>i</td><td>PRP</td></tr>
+                                <tr><td>could</td><td>MD</td></tr>
+                                <tr><td>share</td><td>VB</td></tr>
+                                <tr><td>with</td><td>IN</td></tr>
+                                <tr><td>you</td><td>PRP</td></tr>
+                                <tr><td>tonight</td><td>NN</td></tr>
+                                <tr><td>did</td><td>VBD</td></tr>
+                                <tr><td>i</td><td>PRP</td></tr>
+                                <tr><td>want</td><td>VB</td></tr>
+                                <tr><td>to</td><td>TO</td></tr>
+                                <tr><td>stand</td><td>VB</td></tr>
+                                <tr><td>up</td><td>RP</td></tr>
+                                <tr><td>here</td><td>RB</td></tr>
+                                <tr><td>at</td><td>IN</td></tr>
+                                <tr><td>a</td><td>DT</td></tr>
+                                <tr><td>podium</td><td>NN</td></tr>
+                                <tr><td>and</td><td>CC</td></tr>
+                                <tr><td>read</td><td>VB</td></tr>
+                                <tr><td>you</td><td>PRP</td></tr>
+                                <tr><td>your</td><td>PRP$</td></tr>
+                                <tr><td>right</td><td>NN</td></tr>
+                                <tr><td>did</td><td>VBD</td></tr>
+                                <tr><td>i</td><td>PRP</td></tr>
+                                <tr><td>want</td><td>VB</td></tr>
+                                <tr><td>to</td><td>TO</td></tr>
+                                <tr><td>come</td><td>VB</td></tr>
+                                <tr><td>up</td><td>RP</td></tr>
+                                <tr><td>here</td><td>RB</td></tr>
+                                <tr><td>and</td><td>CC</td></tr>
+                                <tr><td>just</td><td>RB</td></tr>
+                                <tr><td>share</td><td>VB</td></tr>
+                                <tr><td>some</td><td>DT</td></tr>
+                                <tr><td>funny</td><td>JJ</td></tr>
+                                <tr><td>story</td><td>NN</td></tr>
+                                <tr><td>i</td><td>PRP</td></tr>
+                                <tr><td>thought</td><td>VBD</td></tr>
+                                <tr><td>about</td><td>IN</td></tr>
+                                <tr><td>what</td><td>WP</td></tr>
+                                <tr><td>you</td><td>PRP</td></tr>
+                                <tr><td>would</td><td>MD</td></tr>
+                                <tr><td>want</td><td>VB</td></tr>
+                                <tr><td>i</td><td>PRP</td></tr>
+                                <tr><td>thought</td><td>VBD</td></tr>
+                                <tr><td>about</td><td>IN</td></tr>
+                                <tr><td>what</td><td>WP</td></tr>
+                                <tr><td>you</td><td>PRP</td></tr>
+                                <tr><td>might</td><td>MD</td></tr>
+                                <tr><td>need</td><td>VB</td></tr>
+                                <tr><td>i</td><td>PRP</td></tr>
+                                <tr><td>also</td><td>RB</td></tr>
+                                <tr><td>thought</td><td>VBD</td></tr>
+                                <tr><td>about</td><td>IN</td></tr>
+                                <tr><td>what</td><td>WP</td></tr>
+                                <tr><td>i</td><td>PRP</td></tr>
+                                <tr><td>want</td><td>VBP</td></tr>
+                                <tr><td>to</td><td>TO</td></tr>
+                                <tr><td>say</td><td>VB</td></tr>
+                                <tr><td>and</td><td>CC</td></tr>
+                                <tr><td>what</td><td>WP</td></tr>
+                                <tr><td>i</td><td>PRP</td></tr>
+                                <tr><td>need</td><td>VBP</td></tr>
+                                <tr><td>to</td><td>TO</td></tr>
+                                <tr><td>say</td><td>VB</td></tr>
+                                <tr><td>hopefully</td><td>RB</td></tr>
+                                <tr><td>were</td><td>VBD</td></tr>
+                                <tr><td>both</td><td>DT</td></tr>
+                                <tr><td>going</td><td>VBG</td></tr>
+                                <tr><td>to</td><td>TO</td></tr>
+                                <tr><td>be</td><td>VB</td></tr>
+                                <tr><td>happy</td><td>JJ</td></tr>
+                                <tr><td>on</td><td>IN</td></tr>
+                                <tr><td>both</td><td>DT</td></tr>
+                                <tr><td>account</td><td>NN</td></tr>
+                                <tr><td>a</td><td>DT</td></tr>
+                                <tr><td>the</td><td>DT</td></tr>
+                                <tr><td>saying</td><td>NN</td></tr>
+                                <tr><td>go</td><td>VB</td></tr>
+                                <tr><td>take</td><td>VB</td></tr>
+                                <tr><td>what</td><td>WP</td></tr>
+                                <tr><td>you</td><td>PRP</td></tr>
+                                <tr><td>like</td><td>UH</td></tr>
+                                <tr><td>leave</td><td>VB</td></tr>
+                                <tr><td>the</td><td>DT</td></tr>
+                                <tr><td>rest</td><td>NN</td></tr>
+                                <tr><td>thank</td><td>VBP</td></tr>
+                                <tr><td>you</td><td>PRP</td></tr>
+                                <tr><td>for</td><td>IN</td></tr>
+                                <tr><td>having</td><td>VBG</td></tr>
+                                <tr><td>me</td><td>PRP</td></tr>
+                                <tr><td>so</td><td>RB</td></tr>
+                                <tr><td>before</td><td>IN</td></tr>
+                                <tr><td>i</td><td>PRP</td></tr>
+                                <tr><td>share</td><td>VBP</td></tr>
+                                <tr><td>with</td><td>IN</td></tr>
+                                <tr><td>you</td><td>PRP</td></tr>
+                                <tr><td>some</td><td>DT</td></tr>
+                                <tr><td>what</td><td>WP</td></tr>
+                                <tr><td>i</td><td>PRP</td></tr>
+                                <tr><td>do</td><td>VBP</td></tr>
+                                <tr><td>know</td><td>VB</td></tr>
+                                <tr><td>i</td><td>PRP</td></tr>
+                                <tr><td>want</td><td>VBP</td></tr>
+                                <tr><td>to</td><td>TO</td></tr>
+                                <tr><td>talk</td><td>VB</td></tr>
+                                <tr><td>with</td><td>IN</td></tr>
+                                <tr><td>you</td><td>PRP</td></tr>
+                                <tr><td>about</td><td>IN</td></tr>
+                                <tr><td>what</td><td>WP</td></tr>
+                                <tr><td>i</td><td>FW</td></tr>
+                                <tr><td>dont</td><td>FW</td></tr>
+                                <tr><td>know</td><td>VBP</td></tr>
+                                <tr><td>i</td><td>PRP</td></tr>
+                                <tr><td>have</td><td>VBP</td></tr>
+                                <tr><td>two</td><td>CD</td></tr>
+                                <tr><td>older</td><td>JJR</td></tr>
+                                <tr><td>brother</td><td>NN</td></tr>
+                                <tr><td>one</td><td>CD</td></tr>
+                                <tr><td>wa</td><td>NN</td></tr>
+                                <tr><td>in</td><td>IN</td></tr>
+                                <tr><td>high</td><td>JJ</td></tr>
+                                <tr><td>school</td><td>NN</td></tr>
+                                <tr><td>in</td><td>IN</td></tr>
+                                <tr><td>the</td><td>DT</td></tr>
+                                <tr><td>early</td><td>JJ</td></tr>
+                                <tr><td>1970s</td><td>NNS</td></tr>
+                                <tr><td>and</td><td>CC</td></tr>
+                                <tr><td>this</td><td>DT</td></tr>
+                                <tr><td>wa</td><td>NN</td></tr>
+                                <tr><td>a</td><td>DT</td></tr>
+                                <tr><td>time</td><td>NN</td></tr>
+                                <tr><td>when</td><td>WRB</td></tr>
+                                <tr><td>a</td><td>DT</td></tr>
+                                <tr><td>high</td><td>JJ</td></tr>
+                                <tr><td>school</td><td>NN</td></tr>
+                                <tr><td>ged</td><td>NN</td></tr>
+                                <tr><td>got</td><td>VBD</td></tr>
+                                <tr><td>you</td><td>PRP</td></tr>
+                                <tr><td>a</td><td>DT</td></tr>
+                                <tr><td>job</td><td>NN</td></tr>
+                                <tr><td>and</td><td>CC</td></tr>
+                                <tr><td>the</td><td>DT</td></tr>
+                                <tr><td>college</td><td>NN</td></tr>
+                                <tr><td>degree</td><td>NN</td></tr>
+                                <tr><td>wa</td><td>NN</td></tr>
+                                <tr><td>exemplary</td><td>JJ</td></tr>
+                                <tr><td>my</td><td>PRP$</td></tr>
+                                <tr><td>other</td><td>JJ</td></tr>
+                                <tr><td>brother</td><td>NN</td></tr>
+                                <tr><td>pat</td><td>VBP</td></tr>
+                                <tr><td>wa</td><td>NN</td></tr>
+                                <tr><td>in</td><td>IN</td></tr>
+                                <tr><td>high</td><td>JJ</td></tr>
+                                <tr><td>school</td><td>NN</td></tr>
+                                <tr><td>in</td><td>IN</td></tr>
+                                <tr><td>the</td><td>DT</td></tr>
+                                <tr><td>early</td><td>JJ</td></tr>
+                                <tr><td>80</td><td>CD</td></tr>
+                                <tr><td>and</td><td>CC</td></tr>
+                                <tr><td>by</td><td>IN</td></tr>
+                                <tr><td>this</td><td>DT</td></tr>
+                                <tr><td>time</td><td>NN</td></tr>
+                                <tr><td>the</td><td>DT</td></tr>
+                                <tr><td>ged</td><td>FW</td></tr>
+                                <tr><td>wasnt</td><td>FW</td></tr>
+                                <tr><td>enough</td><td>JJ</td></tr>
+                                <tr><td>to</td><td>TO</td></tr>
+                                <tr><td>guarantee</td><td>VB</td></tr>
+                                <tr><td>employment</td><td>NN</td></tr>
+                                <tr><td>he</td><td>PRP</td></tr>
+                                <tr><td>needed</td><td>VBD</td></tr>
+                                <tr><td>a</td><td>DT</td></tr>
+                                <tr><td>college</td><td>NN</td></tr>
+                                <tr><td>degree</td><td>NN</td></tr>
+                                <tr><td>and</td><td>CC</td></tr>
+                                <tr><td>if</td><td>IN</td></tr>
+                                <tr><td>you</td><td>PRP</td></tr>
+                                <tr><td>got</td><td>VBD</td></tr>
+                                <tr><td>one</td><td>CD</td></tr>
+                                <tr><td>you</td><td>PRP</td></tr>
+                                <tr><td>had</td><td>VBD</td></tr>
+                                <tr><td>a</td><td>DT</td></tr>
+                                <tr><td>pretty</td><td>RB</td></tr>
+                                <tr><td>good</td><td>JJ</td></tr>
+                                <tr><td>chance</td><td>NN</td></tr>
+                                <tr><td>of</td><td>IN</td></tr>
+                                <tr><td>getting</td><td>VBG</td></tr>
+                                <tr><td>the</td><td>DT</td></tr>
+                                <tr><td>kind</td><td>NN</td></tr>
+                                <tr><td>of</td><td>IN</td></tr>
+                                <tr><td>job</td><td>NN</td></tr>
+                                <tr><td>that</td><td>WDT</td></tr>
+                                <tr><td>you</td><td>PRP</td></tr>
+                                <tr><td>wanted</td><td>VBD</td></tr>
+                                <tr><td>after</td><td>IN</td></tr>
+                                <tr><td>you</td><td>PRP</td></tr>
+                                <tr><td>graduated</td><td>VBD</td></tr>
+                                <tr><td>me</td><td>PRP</td></tr>
+                                <tr><td>i</td><td>PRP</td></tr>
+                                <tr><td>graduated</td><td>VBD</td></tr>
+                                <tr><td>high</td><td>JJ</td></tr>
+                                <tr><td>school</td><td>NN</td></tr>
+                                <tr><td>in</td><td>IN</td></tr>
+                                <tr><td>1988</td><td>CD</td></tr>
+                                <tr><td>got</td><td>VBD</td></tr>
+                                <tr><td>my</td><td>PRP$</td></tr>
+                                <tr><td>college</td><td>NN</td></tr>
+                                <tr><td>degree</td><td>NN</td></tr>
+                                <tr><td>in</td><td>IN</td></tr>
+                                <tr><td>1993</td><td>CD</td></tr>
+                                <tr><td>and</td><td>CC</td></tr>
+                                <tr><td>that</td><td>IN</td></tr>
+                                <tr><td>college</td><td>NN</td></tr>
+                                <tr><td>degree</td><td>NN</td></tr>
+                                <tr><td>in</td><td>IN</td></tr>
+                                <tr><td>93</td><td>CD</td></tr>
+                                <tr><td>did</td><td>VBD</td></tr>
+                                <tr><td>not</td><td>RB</td></tr>
+                                <tr><td>mean</td><td>VB</td></tr>
+                                <tr><td>much</td><td>JJ</td></tr>
+                                <tr><td>it</td><td>PRP</td></tr>
+                                <tr><td>wa</td><td>NN</td></tr>
+                                <tr><td>not</td><td>RB</td></tr>
+                                <tr><td>a</td><td>DT</td></tr>
+                                <tr><td>ticket</td><td>NN</td></tr>
+                                <tr><td>it</td><td>IN</td></tr>
+                                <tr><td>wa</td><td>NN</td></tr>
+                                <tr><td>not</td><td>RB</td></tr>
+                                <tr><td>a</td><td>DT</td></tr>
+                                <tr><td>voucher</td><td>NN</td></tr>
+                                <tr><td>it</td><td>IN</td></tr>
+                                <tr><td>wa</td><td>NN</td></tr>
+                                <tr><td>not</td><td>RB</td></tr>
+                                <tr><td>a</td><td>DT</td></tr>
+                                <tr><td>free</td><td>JJ</td></tr>
+                                <tr><td>pas</td><td>NN</td></tr>
+                                <tr><td>go</td><td>VB</td></tr>
+                                <tr><td>to</td><td>IN</td></tr>
+                                <tr><td>anything</td><td>NN</td></tr>
+                                <tr><td>so</td><td>RB</td></tr>
+                                <tr><td>i</td><td>PRP</td></tr>
+                                <tr><td>asked</td><td>VBD</td></tr>
+                                <tr><td>the</td><td>DT</td></tr>
+                                <tr><td>question</td><td>NN</td></tr>
+                                <tr><td>what</td><td>WDT</td></tr>
+                                <tr><td>doe</td><td>NN</td></tr>
+                                <tr><td>your</td><td>PRP$</td></tr>
+                                <tr><td>college</td><td>NN</td></tr>
+                                <tr><td>degree</td><td>NN</td></tr>
+                                <tr><td>mean</td><td>VBP</td></tr>
+                                <tr><td>it</td><td>PRP</td></tr>
+                                <tr><td>mean</td><td>VB</td></tr>
+                                <tr><td>you</td><td>PRP</td></tr>
+                                <tr><td>got</td><td>VBD</td></tr>
+                                <tr><td>an</td><td>DT</td></tr>
+                                <tr><td>education</td><td>NN</td></tr>
+                                <tr><td>it</td><td>PRP</td></tr>
+                                <tr><td>mean</td><td>VBP</td></tr>
+                                <tr><td>you</td><td>PRP</td></tr>
+                                <tr><td>have</td><td>VBP</td></tr>
+                                <tr><td>more</td><td>JJR</td></tr>
+                                <tr><td>knowledge</td><td>NN</td></tr>
+                                <tr><td>in</td><td>IN</td></tr>
+                                <tr><td>a</td><td>DT</td></tr>
+                                <tr><td>specific</td><td>JJ</td></tr>
+                                <tr><td>subject</td><td>NN</td></tr>
+                                <tr><td>vocation</td><td>NN</td></tr>
+                                <tr><td>it</td><td>PRP</td></tr>
+                                <tr><td>mean</td><td>VBP</td></tr>
+                                <tr><td>you</td><td>PRP</td></tr>
+                                <tr><td>may</td><td>MD</td></tr>
+                                <tr><td>have</td><td>VB</td></tr>
+                                <tr><td>more</td><td>JJR</td></tr>
+                                <tr><td>expertise</td><td>NN</td></tr>
+                                <tr><td>in</td><td>IN</td></tr>
+                                <tr><td>what</td><td>WP</td></tr>
+                                <tr><td>your</td><td>PRP$</td></tr>
+                                <tr><td>degree</td><td>NN</td></tr>
+                                <tr><td>is</td><td>VBZ</td></tr>
+                                <tr><td>in</td><td>IN</td></tr>
+                                <tr><td>but</td><td>CC</td></tr>
+                                <tr><td>whats</td><td>VBZ</td></tr>
+                                <tr><td>it</td><td>PRP</td></tr>
+                                <tr><td>worth</td><td>JJ</td></tr>
+                                <tr><td>in</td><td>IN</td></tr>
+                                <tr><td>the</td><td>DT</td></tr>
+                                <tr><td>job</td><td>NN</td></tr>
+                                <tr><td>market</td><td>NN</td></tr>
+                                <tr><td>out</td><td>RB</td></tr>
+                                <tr><td>there</td><td>RB</td></tr>
+                                <tr><td>today</td><td>NN</td></tr>
+                                <tr><td>we</td><td>PRP</td></tr>
+                                <tr><td>know</td><td>VBP</td></tr>
+                                <tr><td>the</td><td>DT</td></tr>
+                                <tr><td>market</td><td>NN</td></tr>
+                                <tr><td>for</td><td>IN</td></tr>
+                                <tr><td>college</td><td>NN</td></tr>
+                                <tr><td>graduate</td><td>NN</td></tr>
+                                <tr><td>is</td><td>VBZ</td></tr>
+                                <tr><td>more</td><td>RBR</td></tr>
+                                <tr><td>competitive</td><td>JJ</td></tr>
+                                <tr><td>now</td><td>RB</td></tr>
+                                <tr><td>than</td><td>IN</td></tr>
+                                <tr><td>ever</td><td>RB</td></tr>
+                                <tr><td>now</td><td>RB</td></tr>
+                                <tr><td>some</td><td>DT</td></tr>
+                                <tr><td>of</td><td>IN</td></tr>
+                                <tr><td>you</td><td>PRP</td></tr>
+                                <tr><td>already</td><td>RB</td></tr>
+                                <tr><td>have</td><td>VBP</td></tr>
+                                <tr><td>a</td><td>DT</td></tr>
+                                <tr><td>job</td><td>NN</td></tr>
+                                <tr><td>lined</td><td>VBN</td></tr>
+                                <tr><td>up</td><td>RP</td></tr>
+                                <tr><td>youve</td><td>NNP</td></tr>
+                                <tr><td>got</td><td>VBD</td></tr>
+                                <tr><td>a</td><td>DT</td></tr>
+                                <tr><td>path</td><td>NN</td></tr>
+                                <tr><td>where</td><td>WRB</td></tr>
+                                <tr><td>today</td><td>NN</td></tr>
+                                <tr><td>job</td><td>NN</td></tr>
+                                <tr><td>is</td><td>VBZ</td></tr>
+                                <tr><td>going</td><td>VBG</td></tr>
+                                <tr><td>to</td><td>TO</td></tr>
+                                <tr><td>become</td><td>VB</td></tr>
+                                <tr><td>tomorrow</td><td>NN</td></tr>
+                                <tr><td>career</td><td>NN</td></tr>
+                                <tr><td>but</td><td>CC</td></tr>
+                                <tr><td>for</td><td>IN</td></tr>
+                                <tr><td>most</td><td>JJS</td></tr>
+                                <tr><td>of</td><td>IN</td></tr>
+                                <tr><td>you</td><td>PRP</td></tr>
+                                <tr><td>the</td><td>DT</td></tr>
+                                <tr><td>future</td><td>NN</td></tr>
+                                <tr><td>is</td><td>VBZ</td></tr>
+                                <tr><td>probably</td><td>RB</td></tr>
+                                <tr><td>still</td><td>RB</td></tr>
+                                <tr><td>pretty</td><td>RB</td></tr>
+                                <tr><td>fuzzy</td><td>JJ</td></tr>
+                                <tr><td>and</td><td>CC</td></tr>
+                                <tr><td>you</td><td>PRP</td></tr>
+                                <tr><td>dont</td><td>VBP</td></tr>
+                                <tr><td>have</td><td>VB</td></tr>
+                                <tr><td>that</td><td>DT</td></tr>
+                                <tr><td>job</td><td>NN</td></tr>
+                                <tr><td>that</td><td>WDT</td></tr>
+                                <tr><td>directly</td><td>RB</td></tr>
+                                <tr><td>reflects</td><td>VBZ</td></tr>
+                                <tr><td>the</td><td>DT</td></tr>
+                                <tr><td>degree</td><td>NN</td></tr>
+                                <tr><td>you</td><td>PRP</td></tr>
+                                <tr><td>just</td><td>RB</td></tr>
+                                <tr><td>got</td><td>VBD</td></tr>
+                                <tr><td>many</td><td>JJ</td></tr>
+                                <tr><td>of</td><td>IN</td></tr>
+                                <tr><td>you</td><td>PRP</td></tr>
+                                <tr><td>dont</td><td>VBP</td></tr>
+                                <tr><td>even</td><td>RB</td></tr>
+                                <tr><td>have</td><td>VB</td></tr>
+                                <tr><td>a</td><td>DT</td></tr>
+                                <tr><td>job</td><td>NN</td></tr>
+                                <tr><td>at</td><td>RB</td></tr>
+                                <tr><td>all</td><td>RB</td></tr>
+                                <tr><td>think</td><td>VB</td></tr>
+                                <tr><td>about</td><td>IN</td></tr>
+                                <tr><td>it</td><td>PRP</td></tr>
+                                <tr><td>youve</td><td>VBD</td></tr>
+                                <tr><td>just</td><td>RB</td></tr>
+                                <tr><td>completed</td><td>VBN</td></tr>
+                                <tr><td>your</td><td>PRP$</td></tr>
+                                <tr><td>scholastic</td><td>JJ</td></tr>
+                                <tr><td>educational</td><td>JJ</td></tr>
+                                <tr><td>curriculum</td><td>NN</td></tr>
+                                <tr><td>in</td><td>IN</td></tr>
+                                <tr><td>life</td><td>NN</td></tr>
+                                <tr><td>the</td><td>DT</td></tr>
+                                <tr><td>one</td><td>NN</td></tr>
+                                <tr><td>that</td><td>WDT</td></tr>
+                                <tr><td>you</td><td>PRP</td></tr>
+                                <tr><td>started</td><td>VBD</td></tr>
+                                <tr><td>when</td><td>WRB</td></tr>
+                                <tr><td>you</td><td>PRP</td></tr>
+                                <tr><td>were</td><td>VBD</td></tr>
+                                <tr><td>five</td><td>CD</td></tr>
+                                <tr><td>year</td><td>NN</td></tr>
+                                <tr><td>old</td><td>JJ</td></tr>
+                                <tr><td>in</td><td>IN</td></tr>
+                                <tr><td>kindergarten</td><td>NN</td></tr>
+                                <tr><td>up</td><td>IN</td></tr>
+                                <tr><td>until</td><td>IN</td></tr>
+                                <tr><td>now</td><td>RB</td></tr>
+                                <tr><td>and</td><td>CC</td></tr>
+                                <tr><td>your</td><td>PRP$</td></tr>
+                                <tr><td>future</td><td>NN</td></tr>
+                                <tr><td>may</td><td>MD</td></tr>
+                                <tr><td>not</td><td>RB</td></tr>
+                                <tr><td>be</td><td>VB</td></tr>
+                                <tr><td>any</td><td>DT</td></tr>
+                                <tr><td>more</td><td>JJR</td></tr>
+                                <tr><td>clearer</td><td>JJR</td></tr>
+                                <tr><td>than</td><td>IN</td></tr>
+                                <tr><td>it</td><td>PRP</td></tr>
+                                <tr><td>wa</td><td>NN</td></tr>
+                                <tr><td>five</td><td>CD</td></tr>
+                                <tr><td>year</td><td>NN</td></tr>
+                                <tr><td>ago</td><td>RB</td></tr>
+                                <tr><td>you</td><td>PRP</td></tr>
+                                <tr><td>dont</td><td>VBP</td></tr>
+                                <tr><td>have</td><td>VB</td></tr>
+                                <tr><td>the</td><td>DT</td></tr>
+                                <tr><td>answer</td><td>NN</td></tr>
+                                <tr><td>and</td><td>CC</td></tr>
+                                <tr><td>is</td><td>VBZ</td></tr>
+                                <tr><td>probably</td><td>RB</td></tr>
+                                <tr><td>pretty</td><td>RB</td></tr>
+                                <tr><td>damn</td><td>RB</td></tr>
+                                <tr><td>scary</td><td>JJ</td></tr>
+                            </table>
+                        </div>
+                        Now that you familiar with what the Python script will accomplish, I will now take you through it's execution.
+                    </div>
+                </p>
+                <ol>
+                    <li>
+                        Strike WinKey <svg xmlns="http://www.w3.org/2000/svg" height="16px" viewBox="0 0 448 512"><path d="M0 93.7l183.6-25.3v177.4H0V93.7zm0 324.6l183.6 25.3V268.4H0v149.9zm203.8 28L448 480V268.4H203.8v177.9zm0-380.6v180.1H448V32L203.8 65.7z" fill="#000000"/></svg> and type <strong>powershell.</strong><br/><br/>
+                        <strong>Windows PowerShell</strong> will appear near the top of your Start menu underneath <strong>Best match.</strong><br/><br/>
+                        Right click <strong>Windows PowerShell</strong> and select <strong>Run As Administrator.</strong><br/>
+                        <img style="display: inline;" src="https://raw.githubusercontent.com/nstevens1040/images/main/pwsh_sm.png" alt="">
+                    </li>
+                    <li>
+                        <p>
+                            In PowerShell, change directories to the folder you created during <a href="#createvenv">this</a> step. In my case
+                            <div class="tool">
+                                <code class="code3" style="display: block;">
+                                    <ul class="pwshlist">
+                                        <li class=pwshitem style="margin: 0; padding: 0;">
+                                            <span class="command">cd </span><span class="param">C:\.TEMP\NLP\venv\</span>
+                                        </li>
+                                    </ul>
+                                    <a onclick="onCopyClick(this);" class="copy">Copy</a>
+                                </code>
+                            </div>
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            Enter your virtual environment by running
+                            <div class="tool">
+                                <code class="code3" style="display: block;">
+                                    <ul class="pwshlist">
+                                        <li class=pwshitem3 style="margin: 0; padding: 0;">
+                                            <span class="command">.\Scripts\activate.ps1</span>
+                                        </li>
+                                    </ul>
+                                    <a onclick="onCopyClick(this);" class="copy">Copy</a>
+                                </code>
+                            </div>
+                            <code class="code3"><span class="param">PS C:\></span></code> should now be prepended with <strong>(venv)</strong> so that it looks like 
+                            <code class="code3"><span class="param">(venv) PS C:\></span></code>.
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            Use <strong>Git</strong> to create a local copy of <a href="https://github.com/nstevens1040/NLP/">this</a> repository.
+                            <div class="tool">
+                                <code class="code3" style="display: block;">
+                                    <ul class="pwshlist">
+                                        <li class=pwshvenv2 style="margin: 0; padding: 0;">
+                                            <span class="command">git </span><span class="param">clone https://github.com/nstevens1040/NLP.git</span>
+                                        </li>
+                                    </ul>
+                                    <a onclick="onCopyClick(this);" class="copy">Copy</a>
+                                </code>
+                            </div>
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            By default, the <strong>git clone</strong> command creates a folder named after the repository and downloads the contents of the repository to that folder.<br/><br/>
+                            Change directories to the newly created <strong>NLP</strong> folder.
+                            <div class="tool">
+                                <code class="code3" style="display: block;">
+                                    <ul class="pwshlist">
+                                        <li class=pwshvenv2 style="margin: 0; padding: 0;">
+                                            <span class="command">cd </span><span class="param">NLP</span>
+                                        </li>
+                                    </ul>
+                                    <a onclick="onCopyClick(this);" class="copy">Copy</a>
+                                </code>
+                            </div>
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            Here is how you can execute <strong>preprocess_transcript.py</strong> while providing the file path to the sample data as a parameter.
+                            <div class="tool">
+                                <code class="code3" style="display: block;">
+                                    <ul class="pwshlist">
+                                        <li class=pwshvenv3 style="margin: 0; padding: 0;">
+                                            <span class="command">python </span><span class="param">preprocess_transcript.py </span><span class="switch">--transcript_file </span><span class="string">'.\data\Matthew McConaughey University of Houston Speech.txt'</span>
+                                        </li>
+                                    </ul>
+                                    <a onclick="onCopyClick(this);" class="copy">Copy</a>
+                                </code>
+                            </div>
+                            The script will create four new files.<br/>
+                            In my case, they were saved to the folder <code class="code3"><span class="param">C:\.TEMP\NLP\venv\NLP\data</span></code>.<br/>
+                            <br/>
+                            Each of these files cana be identified by the prefix appended to the filename.
+                            <div style="width: 100%; margin-bottom: 24px; margin-top: 24px;">
+                                <table style="width: 50%; margin: 0px auto 0px auto;">
+                                    <tr><th>Prefix</th><td class="filedata">cleaned_</td></tr>
+                                    <tr><th>Filetype</th><td class="filedata">txt</td></tr>
+                                    <tr><th>Description</th><td class="filedata">The all-lowercase transcript after removing carriage returns, line feeds, and punctuation.</td></tr>
+                                </table>
+                            </div>
+                            <div style="width: 100%; margin-bottom: 24px;">
+                                <table style="width: 50%; margin: 0px auto 0px auto;">
+                                    <tr><th>Prefix</th><td class="filedata">cleaned_and_lemmatized_</td></tr>
+                                    <tr><th>Filetype</th><td class="filedata">txt</td></tr>
+                                    <tr><th>Description</th><td class="filedata">The all-lowercase and lemmatized transcript after removing carriage returns, line feeds, and punctuation.</td></tr>
+                                </table>
+                            </div>
+                            <div style="width: 100%; margin-bottom: 24px;">
+                                <table style="width: 50%; margin: 0px auto 0px auto;">
+                                    <tr><th>Prefix</th><td class="filedata">tagged_and_tokenized_</td></tr>
+                                    <tr><th>Filetype</th><td class="filedata">csv</td></tr>
+                                    <tr><th>Description</th><td class="filedata">A table with each word in one column and each word's corresponding part-of-speech tag in the next.</td></tr>
+                                </table>
+                            </div>
+                            <div style="width: 100%; margin-bottom: 24px;">
+                                <table style="width: 50%; margin: 0px auto 0px auto;">
+                                    <tr><th>Prefix</th><td class="filedata">tagged_tokenized_and_lemmatized_</td></tr>
+                                    <tr><th>Filetype</th><td class="filedata">csv</td></tr>
+                                    <tr><th>Description</th><td class="filedata">A table with each word's lemma in one column and each word's corresponding part-of-speech tag in the next.</td></tr>
+                                </table>
+                            </div>
+                        </p>
+                    </li>
+                </ol>
+                To illustrate the steps described above.<br>
+                <video height="auto" width="100%" muted autoplay playsinline loop style="display: inline; border: none; border-image: none;" src="https://nlp-137cf635-6c92-49b5-b943-f5c8c75e686f.s3.us-east-2.amazonaws.com/render1651307633362.mp4"></video>
+            </section>
+            <section>
                 <h3 id="installing-gensim">
                     Installing Gensim
                     <a href="#installing-gensim">
-                        <span class="anchor" onmouseover="onMouseOver(this);" onmouseleave="onMouseLeave(this);" data-clipboard-text="#installing-dependencies-nltk-and-nltk-data" style="position: relative;">
+                        <span class="anchor" onmouseover="onMouseOver(this);" onmouseleave="onMouseLeave(this);" data-clipboard-text="#installing-gensim" style="position: relative;">
                             <span style="position: absolute; top: 70%; left: 0.75rem; transform: translateY(-50%); right: -2rem;">
                                 <svg fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="26px" height="26px">
                                     <path d="M 5.5625 0 C 4.136719 0 2.707031 0.542969 1.625 1.625 C -0.539063 3.789063 -0.539063 7.335938 1.625 9.5 L 5.28125 13.15625 C 5.667969 13.554688 6.304688 13.558594 6.703125 13.171875 C 7.101563 12.785156 7.105469 12.148438 6.71875 11.75 L 3.03125 8.0625 C 1.632813 6.664063 1.632813 4.429688 3.03125 3.03125 C 4.429688 1.632813 6.664063 1.632813 8.0625 3.03125 L 12.96875 7.9375 C 14.367188 9.335938 14.367188 11.570313 12.96875 12.96875 C 12.804688 13.132813 12.621094 13.25 12.4375 13.375 C 11.980469 13.6875 11.859375 14.308594 12.171875 14.765625 C 12.484375 15.222656 13.105469 15.34375 13.5625 15.03125 C 13.847656 14.835938 14.125 14.625 14.375 14.375 C 16.539063 12.210938 16.539063 8.664063 14.375 6.5 L 9.5 1.625 C 8.417969 0.542969 6.988281 0 5.5625 0 Z M 10.78125 8.875 C 10.738281 8.882813 10.695313 8.894531 10.65625 8.90625 C 10.507813 8.9375 10.371094 9 10.25 9.09375 C 10.039063 9.253906 9.820313 9.429688 9.625 9.625 C 7.460938 11.789063 7.460938 15.335938 9.625 17.5 L 14.5 22.375 C 16.664063 24.539063 20.210938 24.539063 22.375 22.375 C 24.539063 20.210938 24.539063 16.664063 22.375 14.5 L 18.71875 10.875 C 18.476563 10.578125 18.089844 10.441406 17.714844 10.527344 C 17.34375 10.613281 17.050781 10.90625 16.964844 11.277344 C 16.878906 11.652344 17.015625 12.039063 17.3125 12.28125 L 20.96875 15.9375 C 22.367188 17.335938 22.367188 19.570313 20.96875 20.96875 C 19.570313 22.367188 17.335938 22.367188 15.9375 20.96875 L 11.03125 16.0625 C 9.632813 14.664063 9.632813 12.429688 11.03125 11.03125 C 11.152344 10.90625 11.300781 10.820313 11.4375 10.71875 C 11.839844 10.472656 12.015625 9.976563 11.855469 9.53125 C 11.699219 9.085938 11.25 8.8125 10.78125 8.875 Z"></path>
