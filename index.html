@@ -192,6 +192,14 @@
                     font-size: 1.4em;
                 }
             }
+            @media all and (min-width: 601px) {
+                #gitclone {
+                    margin-bottom: 48px;
+                }
+                #prep {
+                    margin-bottom: 48px;
+                }
+            }
             blockquote {
                 font-family: 'Droid Serif', serif;
                 font-style: italic;
@@ -988,7 +996,7 @@
                 </h3>
                 <ul style="list-style: circle;">
                     <li>
-                        At least <strong>6GB</strong> RAM is required to avoid <strong>java.lang.OutOfMemoryError</strong> while using the <a href="https://nlp.stanford.edu/software/tagger.shtml"> Stanford POS tagger</a>.
+                        At least <strong>6GB</strong> RAM is required to avoid <strong>java.lang.OutOfMemoryError</strong> while using the <a target="_blank" href="https://nlp.stanford.edu/software/tagger.shtml"> Stanford POS tagger</a>.
                     </li>
                 </ol>
             </section>
@@ -1007,7 +1015,7 @@
                 </h3>
                 <ol>
                     <li>
-                        First, download the <a href="https://www.python.org/ftp/python/3.8.3/python-3.8.3.exe">Python 3.8.3 32-bit installer.</a>
+                        First, download the <a target="_blank" href="https://www.python.org/ftp/python/3.8.3/python-3.8.3.exe">Python 3.8.3 32-bit installer.</a>
                     </li>
                     <li>
                         Launch the installer file. It should be named <strong>python-3.8.3.exe</strong>
@@ -1097,18 +1105,18 @@
                     </a>
                 </h3>
                 <p>If you're familiar with Linux or Ubuntu, then you've likely used package managers such as <strong>apt,</strong> <strong>yum,</strong> <strong>pacman,</strong> or <strong>rpm.</strong> If you're usually a macOS user, then you may be familiar with <strong>homebrew.</strong></p>
-                <p><strong><a href="https://chocolatey.org/">Chocolatey</a></strong> is a package manager built for Windows. Installing Chocolatey is not required to use NLTK, but I'm including it because this guide would be much longer if I didn't.</p>
+                <p><strong><a target="_blank" href="https://chocolatey.org/">Chocolatey</a></strong> is a package manager built for Windows. Installing Chocolatey is not required to use NLTK, but I'm including it because this guide would be much longer if I didn't.</p>
                 <ol>
-                    <li>
+                    <li id="pwshadmin">
                         Strike WinKey <svg xmlns="http://www.w3.org/2000/svg" height="16px" viewBox="0 0 448 512"><path d="M0 93.7l183.6-25.3v177.4H0V93.7zm0 324.6l183.6 25.3V268.4H0v149.9zm203.8 28L448 480V268.4H203.8v177.9zm0-380.6v180.1H448V32L203.8 65.7z" fill="#000000"/></svg> and type <strong>powershell.</strong><br/><br/>
                         <strong>Windows PowerShell</strong> will appear near the top of your Start menu underneath <strong>Best match.</strong><br/><br/>
                         Right click <strong>Windows PowerShell</strong> and select <strong>Run As Administrator.</strong><br/>
                         <img style="display: inline;" src="https://raw.githubusercontent.com/nstevens1040/images/main/pwsh_sm.png" alt="">
                     </li>
                     <li>
-                        Per <a href="https://chocolatey.org/install#individual-method">Chocolatey's installation documentation page</a>, the method described below is the standard procedure that they offer as a means to installing their software.<br/><br/>
+                        Per <a target="_blank" href="https://chocolatey.org/install#individual-method">Chocolatey's installation documentation page</a>, the method described below is the standard procedure that they offer as a means to installing their software.<br/><br/>
                         Copy the script below, paste it into PowerShell, and strike <strong>Enter</strong> to install Chocolatey.
-                        <div class="tool" style="height: 74.8px;"> <!-- style="line-height: 11.60px; height: 67px;" -->
+                        <div class="tool" style="height: 74.8px; margin-bottom: 48px;"> <!-- style="line-height: 11.60px; height: 67px;" -->
                             <code class="code2">
                                 <ul class="pwshlist"> <!-- style="line-height: 11.60px;" -->
                                     <li class="pwshitem" style="margin: 0; padding: 0;">
@@ -1125,9 +1133,14 @@
                             </code>
                         </div>
                     </li>
-                    <li><p>Once you have started the script you will see a fair amount of output messages in your PowerShell console. With the exception of telling you when the installation has completed, these output messages can be safely ignored. Installing Chocolatey will require no further interaction.</p></li>
+                    <li>
+                        <p>
+                            Once you have started the script you will see a fair amount of output messages in your PowerShell console. With the exception of telling you when the installation has completed, these output messages can be safely ignored. Installing Chocolatey will require no further interaction.<br/><br/>
+                            Feel free to leave your PowerShell window open as you continue to the next step.
+                        </p>
+                    </li>
                 </ol>
-                This is what the Chocolatey installation looks like<br>
+                This is what the Chocolatey installation looks like.<br>
                 <video height="auto" width="100%" muted autoplay playsinline loop style="display: inline; border: none; border-image: none;" src="https://nlp-137cf635-6c92-49b5-b943-f5c8c75e686f.s3.us-east-2.amazonaws.com/render1649080447876.mp4"></video>
             </section>
             <section>
@@ -1145,10 +1158,9 @@
                 </h3>
                 <ol>
                     <li>
-                        Strike WinKey <svg xmlns="http://www.w3.org/2000/svg" height="16px" viewBox="0 0 448 512"><path d="M0 93.7l183.6-25.3v177.4H0V93.7zm0 324.6l183.6 25.3V268.4H0v149.9zm203.8 28L448 480V268.4H203.8v177.9zm0-380.6v180.1H448V32L203.8 65.7z" fill="#000000"/></svg> and type <strong>powershell.</strong><br/><br/>
-                        <strong>Windows PowerShell</strong> will appear near the top of your Start menu underneath <strong>Best match.</strong><br/><br/>
-                        Right click <strong>Windows PowerShell</strong> and select <strong>Run As Administrator.</strong><br/>
-                        <img style="display: inline;" src="https://raw.githubusercontent.com/nstevens1040/images/main/pwsh_sm.png" alt="">
+                        <p>
+                            You should still have your PowerShell window open from the previous step. If you do not, then open an elevated PowerShell session as described <a href="#pwshadmin">here.</a>
+                        </p>
                     </li>
                     <li>
                         Use <strong>Chocolatey</strong> to install Java by running the command below.
@@ -1164,7 +1176,12 @@
                             </code>
                         </div>
                     </li>
-                    <li><p>The installation script will send output to your PowerShell console. With the exception of telling you when the installation has completed, these output messages can be safely ignored. Installing Java will require no further interaction.</p></li>
+                    <li>
+                        <p>
+                            The installation script will send output to your PowerShell console. With the exception of telling you when the installation has completed, these output messages can be safely ignored. Installing Java will require no further interaction.<br/><br/>
+                            Feel free to leave your PowerShell window open as you continue to the next step.
+                        </p>
+                    </li>
                 </ol>
                 This is what the Java installation looks like<br>
                 <video height="auto" width="100%" muted autoplay playsinline loop style="display: inline; border: none; border-image: none;" src="https://nlp-137cf635-6c92-49b5-b943-f5c8c75e686f.s3.us-east-2.amazonaws.com/render1649985907833.mp4"></video>
@@ -1184,10 +1201,9 @@
                 </h3>
                 <ol>
                     <li>
-                        Strike WinKey <svg xmlns="http://www.w3.org/2000/svg" height="16px" viewBox="0 0 448 512"><path d="M0 93.7l183.6-25.3v177.4H0V93.7zm0 324.6l183.6 25.3V268.4H0v149.9zm203.8 28L448 480V268.4H203.8v177.9zm0-380.6v180.1H448V32L203.8 65.7z" fill="#000000"/></svg> and type <strong>powershell.</strong><br/><br/>
-                        <strong>Windows PowerShell</strong> will appear near the top of your Start menu underneath <strong>Best match.</strong><br/><br/>
-                        Right click <strong>Windows PowerShell</strong> and select <strong>Run As Administrator.</strong><br/>
-                        <img style="display: inline;" src="https://raw.githubusercontent.com/nstevens1040/images/main/pwsh_sm.png" alt="">
+                        <p>
+                            You should still have your PowerShell window open from the previous step. If you do not, then open an elevated PowerShell session as described <a href="#pwshadmin">here.</a>
+                        </p>
                     </li>
                     <li>
                         Use <strong>Chocolatey</strong> to install Git by running the command below.
@@ -1202,7 +1218,12 @@
                             </code>
                         </div>
                     </li>
-                    <li><p>The installation script will send output to your PowerShell console. With the exception of telling you when the installation has completed, these output messages can be safely ignored. Installing Git will require no further interaction.</p></li>
+                    <li>
+                        <p>
+                            The installation script will send output to your PowerShell console. With the exception of telling you when the installation has completed, these output messages can be safely ignored. Installing Git will require no further interaction.<br/><br/>
+                            Feel free to leave your PowerShell window open as you continue to the next step.
+                        </p>
+                    </li>
                 </ol>
                 This is what the Git installation looks like<br>
                 <video height="auto" width="100%" muted autoplay playsinline loop style="display: inline; border: none; border-image: none;" src="https://nlp-137cf635-6c92-49b5-b943-f5c8c75e686f.s3.us-east-2.amazonaws.com/render1649983145626.mp4"></video>
@@ -1222,10 +1243,9 @@
                 </h3>
                 <ol>
                     <li>
-                        Strike WinKey <svg xmlns="http://www.w3.org/2000/svg" height="16px" viewBox="0 0 448 512"><path d="M0 93.7l183.6-25.3v177.4H0V93.7zm0 324.6l183.6 25.3V268.4H0v149.9zm203.8 28L448 480V268.4H203.8v177.9zm0-380.6v180.1H448V32L203.8 65.7z" fill="#000000"/></svg> and type <strong>powershell.</strong><br/><br/>
-                        <strong>Windows PowerShell</strong> will appear near the top of your Start menu underneath <strong>Best match.</strong><br/><br/>
-                        Right click <strong>Windows PowerShell</strong> and select <strong>Run As Administrator.</strong><br/>
-                        <img style="display: inline;" src="https://raw.githubusercontent.com/nstevens1040/images/main/pwsh_sm.png" alt="">
+                        <p>
+                            You should still have your PowerShell window open from the previous step. If you do not, then open an elevated PowerShell session as described <a href="#pwshadmin">here.</a>
+                        </p>
                     </li>
                     <li>
                         Use <strong>Chocolatey</strong> to install the Visual C++ Build Tools Workload by running the command below.
@@ -1240,7 +1260,12 @@
                             </code>
                         </div>
                     </li>
-                    <li><p>The installation script will send output to your PowerShell console. With the exception of telling you when the installation has completed, these output messages can be safely ignored. Installing the Visual C++ Build Tools Workload will require no further interaction.</p></li>
+                    <li>
+                        <p>
+                            The installation script will send output to your PowerShell console. With the exception of telling you when the installation has completed, these output messages can be safely ignored. Installing the Visual C++ Build Tools Workload will require no further interaction.<br/><br/>
+                            Feel free to leave your PowerShell window open as you continue to the next step.
+                        </p>
+                    </li>
                 </ol>
                 This is what the Visual C++ Build Tools Workload installation looks like<br>
                 <video height="auto" width="100%" muted autoplay playsinline loop style="display: inline; border: none; border-image: none;" src="https://nlp-137cf635-6c92-49b5-b943-f5c8c75e686f.s3.us-east-2.amazonaws.com/render1650876350141.mp4"></video>
@@ -1258,28 +1283,25 @@
                         </span>
                     </a>
                 </h3>
-                <p>Now that you have Python installed, you may now prepare the virtual environment that all of your work for this project will reside in.  </p>
+                <p>Now that you have Python installed, you may now prepare the virtual environment that all of your work for this project will reside in.</p>
                 <p>The virtual environment is a way to create an isolated python environment so that you can operate independently of your system-wide instance of Python.  </p>
                 <p>
-                    While <strong>virtualenv</strong>
-                    is not absolutely critical to use the nltk libraries, it is recommended as a best practice pre-requisite on nltk.org's <a href="https://www.nltk.org/install.html">Installing NLTK</a>
-                    page.
+                    While <strong>virtualenv</strong> is not absolutely critical to use the nltk libraries, it is recommended as a best practice pre-requisite on nltk.org's <a target="_blank" href="https://www.nltk.org/install.html">Installing NLTK</a> page.
                 </p>
                 <p>Further reading on virtualenv</p>
                 <ul class="unlist">
                     <li>
-                        <a href="https://virtualenv.pypa.io/en/latest/">virtualenv.pypa.io</a>
+                        <a target="_blank" href="https://virtualenv.pypa.io/en/latest/">virtualenv.pypa.io</a>
                     </li>
                     <li>
-                        <a href="https://docs.python-guide.org/dev/virtualenvs/#lower-level-virtualenv">docs.python-guide.org</a>
+                        <a target="_blank" href="https://docs.python-guide.org/dev/virtualenvs/#lower-level-virtualenv">docs.python-guide.org</a>
                     </li>
                 </ul>
                 <ol>
                     <li>
-                        Strike WinKey <svg xmlns="http://www.w3.org/2000/svg" height="16px" viewBox="0 0 448 512"><path d="M0 93.7l183.6-25.3v177.4H0V93.7zm0 324.6l183.6 25.3V268.4H0v149.9zm203.8 28L448 480V268.4H203.8v177.9zm0-380.6v180.1H448V32L203.8 65.7z" fill="#000000"/></svg> and type <strong>powershell.</strong><br/><br/>
-                        <strong>Windows PowerShell</strong> will appear near the top of your Start menu underneath <strong>Best match.</strong><br/><br/>
-                        Right click <strong>Windows PowerShell</strong> and select <strong>Run As Administrator.</strong><br/>
-                        <img style="display: inline;" src="https://raw.githubusercontent.com/nstevens1040/images/main/pwsh_sm.png" alt="">
+                        <p>
+                            You should still have your PowerShell window open from the previous step. If you do not, then open an elevated PowerShell session as described <a href="#pwshadmin">here.</a>
+                        </p>
                     </li>
                     <li id="firstfolder">
                         Choose an empty folder or create a new one. The folder I chose was
@@ -1444,6 +1466,21 @@
                 </li>
                 <li>
                     <p>
+                        Exit PowerShell.
+                        <div class="tool">
+                            <code class="code3" style="display: block;">
+                                <ul class="pwshlist">
+                                    <li class=pwshitem2 style="margin: 0; padding: 0;">
+                                        <span class="command">exit</span>
+                                    </li>
+                                </ul>
+                                <a onclick="onCopyClick(this);" class="copy">Copy</a>
+                            </code>
+                        </div>
+                    </p>
+                </li>
+                <li>
+                    <p>
                         Strike WinKey 
                         <svg xmlns="http://www.w3.org/2000/svg" height="16px" viewBox="0 0 448 512">
                             <path d="M0 93.7l183.6-25.3v177.4H0V93.7zm0 324.6l183.6 25.3V268.4H0v149.9zm203.8 28L448 480V268.4H203.8v177.9zm0-380.6v180.1H448V32L203.8 65.7z" fill="#000000"/>
@@ -1524,10 +1561,9 @@
                 <p>Now that you have your Python virtual environment ready and you've set the NLTK_DATA environment variable, you may now enter your virtual environment and install the packages that NLTK relies on, install NLTK itself, and then download NLTK data.</p>
                 <ol>
                     <li>
-                        Strike WinKey <svg xmlns="http://www.w3.org/2000/svg" height="16px" viewBox="0 0 448 512"><path d="M0 93.7l183.6-25.3v177.4H0V93.7zm0 324.6l183.6 25.3V268.4H0v149.9zm203.8 28L448 480V268.4H203.8v177.9zm0-380.6v180.1H448V32L203.8 65.7z" fill="#000000"/></svg> and type <strong>powershell.</strong><br/><br/>
-                        <strong>Windows PowerShell</strong> will appear near the top of your Start menu underneath <strong>Best match.</strong><br/><br/>
-                        Right click <strong>Windows PowerShell</strong> and select <strong>Run As Administrator.</strong><br/>
-                        <img style="display: inline;" src="https://raw.githubusercontent.com/nstevens1040/images/main/pwsh_sm.png" alt="">
+                        <p>
+                            If you do not already have an elevated PowerShell window open, then open an elevated PowerShell session as described <a href="#pwshadmin">here.</a>
+                        </p>
                     </li>
                     <li>
                         In PowerShell, change directories to the folder you chose during <a href="#firstfolder">this</a> step. In my case
@@ -1562,7 +1598,7 @@
                     <li>
                         Once you've entered your virtual environment, install 
                         <strong>
-                            <a href="https://scipy.org/">scipy</a>
+                            <a target="_blank" href="https://scipy.org/">scipy</a>
                         </strong>
                         <div class="tool">
                             <code class="code3" style="display: block;">
@@ -1578,7 +1614,7 @@
                     <li>
                         Once scipy is installed, then install 
                         <strong>
-                            <a href="https://nltk.org">nltk</a>
+                            <a target="_blank" href="https://nltk.org">nltk</a>
                         </strong>
                         <div class="tool">
                             <code class="code3" style="display: block;">
@@ -1603,11 +1639,42 @@
                                 <a onclick="onCopyClick(this);" class="copy">Copy</a>
                             </code>
                         </div>
-                        To illustrate<br/><br/>
-                        <video height="auto" width="100%" muted autoplay playsinline loop style="display: inline; border: none; border-image: none;" src="https://nlp-137cf635-6c92-49b5-b943-f5c8c75e686f.s3.us-east-2.amazonaws.com/render1650625746731.mp4"></video>
-                        <!-- video height="auto" width="100%" muted autoplay playsinline loop style="display: inline; border: none; border-image: none;" src="https://nlp-137cf635-6c92-49b5-b943-f5c8c75e686f.s3.us-east-2.amazonaws.com/render1649083450538.mp4"></video -->
+                    </li>
+                    <li>
+                        <p>
+                            After the download is complete, exit your virtual environment.
+                            <div class="tool">
+                                <code class="code3" style="display: block;">
+                                    <ul class="pwshlist">
+                                        <li class=pwshvenv style="margin: 0; padding: 0;">
+                                            <span class="command">deactivate</span>
+                                        </li>
+                                    </ul>
+                                    <a onclick="onCopyClick(this);" class="copy">Copy</a>
+                                </code>
+                            </div>
+                            <code class="code3"><span class="param">(venv) PS C:\></span></code> will be returned to <code class="code3"><span class="param">PS C:\></span></code>.<br/>
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            Exit PowerShell.
+                            <div class="tool">
+                                <code class="code3" style="display: block;">
+                                    <ul class="pwshlist">
+                                        <li class=pwshitem2 style="margin: 0; padding: 0;">
+                                            <span class="command">exit</span>
+                                        </li>
+                                    </ul>
+                                    <a onclick="onCopyClick(this);" class="copy">Copy</a>
+                                </code>
+                            </div>
+                        </p>
                     </li>
                 </ol>
+                To illustrate<br/><br/>
+                <video height="auto" width="100%" muted autoplay playsinline loop style="display: inline; border: none; border-image: none;" src="https://nlp-137cf635-6c92-49b5-b943-f5c8c75e686f.s3.us-east-2.amazonaws.com/render1650625746731.mp4"></video>
+                <!-- video height="auto" width="100%" muted autoplay playsinline loop style="display: inline; border: none; border-image: none;" src="https://nlp-137cf635-6c92-49b5-b943-f5c8c75e686f.s3.us-east-2.amazonaws.com/render1649083450538.mp4"></video -->
             </section>
             <section>
                 <h3 id="preprocessing-transcript-data">
@@ -1624,7 +1691,7 @@
                 </h3>
                 <p>
                     <div>
-                        Within <a href="https://github.com/nstevens1040/NLP/">this</a> repository, you will find a Python script entitled <strong>preprocess_transcript.py.</strong> The repository also includes sample input data. The first five lines of which are shown below.
+                        Within <a target="_blank" href="https://github.com/nstevens1040/NLP/">this</a> repository, you will find a Python script entitled <strong>preprocess_transcript.py.</strong> The repository also includes sample input data. The first five lines of which are shown below.
                         <pre>
                             <code class="transcript">
                                 <span class="transcriptline">Can you hear me? Can you hear me? You hear me? Okay. Congratulations class of 2015. You guys and girls, and young men and women are the reason I'm here. I'm really looking forward to talking with you all tonight. You heard my dad played football here and I believe he even graduated from here. That was some extra incentive for me to come. Short and sweet or long and salty? A sugar doughnut or some oatmeal? Now, out of respect for you and your efforts in getting your degree, I thought long and hard about what I could share with you tonight. Did I want to stand up here at a podium and read you your rights? Did I want to come up here and just share some funny stories. I thought about what you would want, I thought about what you might need. I also thought about what I want to say and what I need to say. Hopefully, we're both going to be happy on both accounts. As the saying goes, take what you like, leave the rest. Thank you for having me.</span>
@@ -1642,7 +1709,7 @@
                         </pre>
                         Five lines becomes one line and all that remains are alphanumeric characters and spaces. Once the script finishes the cleaning process, it then saves the cleaned transcript to a text file.<br/><br/>
                         After cleaning the transcript, the script then tokenizes each word. This simply means creating a table where each word in the transcript gets it's own row in the table.<br/><br/>
-                        The cleaned and tokenized transcript is then fed into the <a href="https://nlp.stanford.edu/software/tagger.shtml">Stanford Part-of-Speech tagger</a>. What this does is it determines which lexical category each word in the transcript belongs to (noun, verb, adjective, etc.). Each word is then tagged with a label that represents the lexical category. The POS tagger uses the labels defined in the <a href="https://aclanthology.org/J93-2004.pdf">Penn Treebank tag set</a> to tag each word.<br/><br/>
+                        The cleaned and tokenized transcript is then fed into the <a target="_blank" href="https://nlp.stanford.edu/software/tagger.shtml">Stanford Part-of-Speech tagger</a>. What this does is it determines which lexical category each word in the transcript belongs to (noun, verb, adjective, etc.). Each word is then tagged with a label that represents the lexical category. The POS tagger uses the labels defined in the <a target="_blank" href="https://aclanthology.org/J93-2004.pdf">Penn Treebank tag set</a> to tag each word.<br/><br/>
                         Once the tagging is complete, the result is the tokenized words in one column and their corresponding tag in the next column. The data is then formatted as comma separated values and saved. 
                         <div style="height: 312px; overflow-y: auto; margin: 24px 0px 24px 0px; width: 100%;">
                             <table style="width: 50%; margin: 0px auto 0px auto;">
@@ -2694,10 +2761,13 @@
                 </p>
                 <ol>
                     <li>
-                        Strike WinKey <svg xmlns="http://www.w3.org/2000/svg" height="16px" viewBox="0 0 448 512"><path d="M0 93.7l183.6-25.3v177.4H0V93.7zm0 324.6l183.6 25.3V268.4H0v149.9zm203.8 28L448 480V268.4H203.8v177.9zm0-380.6v180.1H448V32L203.8 65.7z" fill="#000000"/></svg> and type <strong>powershell.</strong><br/><br/>
-                        <strong>Windows PowerShell</strong> will appear near the top of your Start menu underneath <strong>Best match.</strong><br/><br/>
-                        Right click <strong>Windows PowerShell</strong> and select <strong>Run As Administrator.</strong><br/>
-                        <img style="display: inline;" src="https://raw.githubusercontent.com/nstevens1040/images/main/pwsh_sm.png" alt="">
+                        <p>
+                            Even if you already have a PowerShell window open, you must open a new PowerShell session to make the <strong>git</strong> command available to you.<br/><br/>
+                            Strike WinKey <svg xmlns="http://www.w3.org/2000/svg" height="16px" viewBox="0 0 448 512"><path d="M0 93.7l183.6-25.3v177.4H0V93.7zm0 324.6l183.6 25.3V268.4H0v149.9zm203.8 28L448 480V268.4H203.8v177.9zm0-380.6v180.1H448V32L203.8 65.7z" fill="#000000"/></svg> and type <strong>powershell.</strong><br/><br/>
+                            <strong>Windows PowerShell</strong> will appear near the top of your Start menu.<br/><br/>
+                            Strike <strong>Enter.</strong>
+                            <img style="display: inline;" src="https://raw.githubusercontent.com/nstevens1040/images/main/searchhost_ZKa2TFqIl7.png" alt="">
+                        </p>
                     </li>
                     <li>
                         <p>
@@ -2733,8 +2803,8 @@
                     </li>
                     <li>
                         <p>
-                            Use <strong>Git</strong> to create a local copy of <a href="https://github.com/nstevens1040/NLP/">this</a> repository.
-                            <div class="tool">
+                            Use <strong>Git</strong> to create a local copy of <a target="_blank" href="https://github.com/nstevens1040/NLP/">this</a> repository.
+                            <div class="tool" id="gitclone">
                                 <code class="code3" style="display: block;">
                                     <ul class="pwshlist">
                                         <li class=pwshvenv2 style="margin: 0; padding: 0;">
@@ -2765,7 +2835,7 @@
                     <li>
                         <p>
                             Here is how you can execute <strong>preprocess_transcript.py</strong> while providing the file path to the sample data as a parameter.
-                            <div class="tool">
+                            <div class="tool" id="prep">
                                 <code class="code3" style="display: block;">
                                     <ul class="pwshlist">
                                         <li class=pwshvenv3 style="margin: 0; padding: 0;">
@@ -2775,8 +2845,8 @@
                                     <a onclick="onCopyClick(this);" class="copy">Copy</a>
                                 </code>
                             </div>
-                            The script will create four new files.<br/>
-                            In my case, they were saved to the folder <code class="code3"><span class="param">C:\.TEMP\NLP\venv\NLP\data</span></code>.<br/>
+                            The script will create four new files in the same folder that your input data is in.<br/><br/>
+                            In my case, these files were saved to the folder <code class="code3"><span class="param">C:\.TEMP\NLP\venv\NLP\data</span></code>.<br/>
                             <br/>
                             Each of these files can be identified by the prefix appended to the filename.
                             <div style="width: 100%; margin-bottom: 24px; margin-top: 24px;">
@@ -2836,7 +2906,7 @@
                     <li>
                         Install 
                         <strong>
-                            <a href="https://radimrehurek.com/gensim/">Gensim</a>
+                            <a target="_blank" href="https://radimrehurek.com/gensim/">Gensim</a>
                         </strong> using the command below.
                         <div class="tool">
                             <code class="code3" style="display: block;">
@@ -2848,10 +2918,10 @@
                                 <a onclick="onCopyClick(this);" class="copy">Copy</a>
                             </code>
                         </div>
-                        To illustrate<br/><br/>
-                        <video height="auto" width="100%" muted autoplay playsinline loop style="display: inline; border: none; border-image: none;" src="https://nlp-137cf635-6c92-49b5-b943-f5c8c75e686f.s3.us-east-2.amazonaws.com/render1650715816433.mp4"></video>
                     </li>
                 </ol>
+                To illustrate<br/><br/>
+                <video height="auto" width="100%" muted autoplay playsinline loop style="display: inline; border: none; border-image: none;" src="https://nlp-137cf635-6c92-49b5-b943-f5c8c75e686f.s3.us-east-2.amazonaws.com/render1650715816433.mp4"></video>
             </section>
         </article>
         <img height="0" width="0" style="height: 0px; width: 0px; opacity: 0;" src="https://beserver.nanick.org/pixel.gif"/>
