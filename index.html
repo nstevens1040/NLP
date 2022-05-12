@@ -391,6 +391,59 @@
             td,th {
                 padding: 5px;
             }
+            .filetable {
+                width: 100%; 
+                margin: 0px auto 0px auto; 
+                border: 1px solid rgb(36, 36, 36); 
+                border-collapse: inherit; 
+                border-spacing: 0; 
+                border-top-left-radius: 0.5em; 
+                border-top-right-radius: 0.5em; 
+                border-bottom-right-radius: 0.5em; 
+                border-bottom-left-radius: 0.5em;
+            }
+            .topleft {
+                font-weight: bold; 
+                border-bottom: 1px solid rgb(36,36,36); 
+                border-right: 1px solid rgb(36,36,36); 
+                border-left: none; 
+                border-top: none;
+            }
+            .topright {
+                border-bottom: 1px solid rgb(36,36,36); 
+                border-right: none; 
+                border-top: none; 
+                border-left: none;
+                min-width: 260px;
+            }
+            .midleft {
+                font-weight: bold; 
+                border-bottom:1px solid rgb(36,36,36); 
+                border-right: 1px solid rgb(36,36,36); 
+                border-left: none; 
+                border-top: none;
+            }
+            .midright {
+                border-bottom: 1px solid rgb(36, 36, 36); 
+                border-right: none; 
+                border-left: none; 
+                border-top: none;
+                min-width: 260px;
+            }
+            .bottomleft {
+                font-weight: bold; 
+                border-bottom: none; 
+                border-right: 1px solid rgb(36,36,36); 
+                border-left: none; 
+                border-top: none;
+            }
+            .bottomright {
+                border-bottom: none;
+                border-right: none;
+                border-top: none;
+                border-left: none;
+                min-width: 260px;
+            }
             /* body {
                 min-height: 100vh;
             }
@@ -982,9 +1035,9 @@
                     <li>
                         <a href="#preprocessing-transcript-data">Preprocessing Transcript Data</a>
                     </li>
-                    <li>
+                    <!--li>
                         <a href="#installing-gensim">Installing Gensim</a>
-                    </li>
+                    </li-->
                 </ul>
             </section>
             <section>
@@ -2932,33 +2985,90 @@
                             The script will create four new files in the same folder that your input data is in.<br/><br/>
                             In my case, these files were saved to the folder <code class="code3"><span class="param">C:\.temp\nltk\venv\nlp\data</span></code>.<br/>
                             <br/>
-                            Each of these files can be identified by the prefix appended to the filename.
+                            Each of these files can be identified by their filename's prefix.
                             <div style="width: 100%; margin-bottom: 24px; margin-top: 24px;">
-                                <table style="width: 50%; margin: 0px auto 0px auto;">
-                                    <tr><th>Prefix</th><td class="filedata">cleaned_</td></tr>
-                                    <tr><th>Filetype</th><td class="filedata">txt</td></tr>
-                                    <tr><th>Description</th><td class="filedata">The all-lowercase transcript after removing carriage returns, line feeds, and punctuation.</td></tr>
+                                <table class="filetable">
+                                    <tr>
+                                        <!--border-bottom: 1px solid rgb(36, 36, 36); border-right: 1px solid rgb(36, 36, 36);--><!--border: 1px solid rgb(36,36,36); border-top-left-radius: 0.5em; -->
+                                        <td valign="top" class="topleft">Prefix</td>
+                                        <td class="topright">cleaned_</td>
+                                    </tr>
+                                    <tr>
+                                        <td valign="top" class="midleft">Filetype</td>
+                                        <td class="midright">plaintext</td>
+                                    </tr>
+                                    <tr>
+                                        <!--border-bottom: 1px solid rgb(36, 36, 36); border-right: 1px solid rgb(36, 36, 36);-->
+                                        <td valign="top" class="midleft">Example</td>
+                                        <td class="midright">cleaned_Matthew McConaughey University of Houston Speech.txt</td>
+                                    </tr>
+                                    <tr>
+                                        <td valign="top" class="bottomleft">Description</td>
+                                        <td class="bottomright">The all-lowercase transcript after removing carriage returns, line feeds, and punctuation.</td>
+                                    </tr>
                                 </table>
                             </div>
                             <div style="width: 100%; margin-bottom: 24px;">
-                                <table style="width: 50%; margin: 0px auto 0px auto;">
-                                    <tr><th>Prefix</th><td class="filedata">cleaned_and_lemmatized_</td></tr>
-                                    <tr><th>Filetype</th><td class="filedata">txt</td></tr>
-                                    <tr><th>Description</th><td class="filedata">The all-lowercase and lemmatized transcript after removing carriage returns, line feeds, and punctuation.</td></tr>
+                                <table class="filetable">
+                                    <tr>
+                                        <td valign="top" class="topleft">Prefix</td>
+                                        <td class="topright">cleaned_and_lemmatized_</td>
+                                    </tr>
+                                    <tr>
+                                        <td valign="top" class="midleft">Filetype</td>
+                                        <td class="midright">plaintext</td>
+                                    </tr>
+                                    <tr>
+                                        <!--border-bottom: 1px solid rgb(36, 36, 36); border-right: 1px solid rgb(36, 36, 36);-->
+                                        <td valign="top" class="midleft">Example</td>
+                                        <td class="midright">cleaned_and_lemmatized_Matthew McConaughey University of Houston Speech.txt</td>
+                                    </tr>
+                                    <tr>
+                                        <td valign="top" class="bottomleft">Description</td>
+                                        <td class="bottomright">The all-lowercase and lemmatized transcript after removing carriage returns, line feeds, and punctuation.</td>
+                                    </tr>
                                 </table>
                             </div>
-                            <div style="width: 100%; margin-bottom: 24px;">
-                                <table style="width: 50%; margin: 0px auto 0px auto;">
-                                    <tr><th>Prefix</th><td class="filedata">tagged_and_tokenized_</td></tr>
-                                    <tr><th>Filetype</th><td class="filedata">csv</td></tr>
-                                    <tr><th>Description</th><td class="filedata">A table with each word in one column and each word's corresponding part-of-speech tag in the next.</td></tr>
+                            <div style="width: 100%; margin-bottom: 24px; border-radius: 0.5em;">
+                                <table class="filetable">
+                                    <tr>
+                                        <td valign="top" class="topleft">Prefix</td>
+                                        <td class="topright">tagged_and_tokenized_</td>
+                                    </tr>
+                                    <tr>
+                                        <td valign="top" class="midleft">Filetype</td>
+                                        <td class="midright">comma separated values</td>
+                                    </tr>
+                                    <tr>
+                                        <!--border-bottom: 1px solid rgb(36, 36, 36); border-right: 1px solid rgb(36, 36, 36);-->
+                                        <td valign="top" class="midleft">Example</td>
+                                        <td class="midright">tagged_and_tokenized_Matthew McConaughey University of Houston Speech.csv</td>
+                                    </tr>
+                                    <tr>
+                                        <td valign="top" class="bottomleft">Description</td>
+                                        <td class="bottomright">A table with each word in one column and each word's corresponding part-of-speech tag in the next.</td>
+                                    </tr>
                                 </table>
                             </div>
-                            <div style="width: 100%; margin-bottom: 24px;">
-                                <table style="width: 50%; margin: 0px auto 0px auto;">
-                                    <tr><th>Prefix</th><td class="filedata">tagged_tokenized_and_lemmatized_</td></tr>
-                                    <tr><th>Filetype</th><td class="filedata">csv</td></tr>
-                                    <tr><th>Description</th><td class="filedata">A table with each word's lemma in one column and each word's corresponding part-of-speech tag in the next.</td></tr>
+                            <div style="width: 100%; margin-bottom: 24px; border-radius: 0.5em;">
+                                <table class="filetable">
+                                    <tr>
+                                        <td valign="top" class="topleft">Prefix</td>
+                                        <td class="topright">tagged_tokenized_and_lemmatized_</td>
+                                    </tr>
+                                    <tr>
+                                        <td valign="top" class="midleft">Filetype</td>
+                                        <td class="midright">comma separated values</td>
+                                    </tr>
+                                    <tr>
+                                        <!--border-bottom: 1px solid rgb(36, 36, 36); border-right: 1px solid rgb(36, 36, 36);-->
+                                        <td valign="top" class="midleft">Example</td>
+                                        <td class="midright">tagged_tokenized_and_lemmatized_Matthew McConaughey University of Houston Speech.csv</td>
+                                    </tr>
+                                    <tr>
+                                        <td valign="top" class="bottomleft">Description</td>
+                                        <td class="bottomright">A table with each word's lemma in one column and each word's corresponding part-of-speech tag in the next.</td>
+                                    </tr>
                                 </table>
                             </div>
                         </p>
@@ -2967,7 +3077,7 @@
                 To illustrate the steps described above.<br>
                 <video height="auto" width="100%" muted autoplay playsinline loop style="display: inline; border: none; border-image: none;" src="https://nlp-137cf635-6c92-49b5-b943-f5c8c75e686f.s3.us-east-2.amazonaws.com/render1651307633362.mp4"></video>
             </section>
-            <section>
+            <!--section>
                 <h3 id="installing-gensim">
                     Installing Gensim
                     <a href="#installing-gensim">
@@ -3006,7 +3116,7 @@
                 </ol>
                 To illustrate<br/><br/>
                 <video height="auto" width="100%" muted autoplay playsinline loop style="display: inline; border: none; border-image: none;" src="https://nlp-137cf635-6c92-49b5-b943-f5c8c75e686f.s3.us-east-2.amazonaws.com/render1650715816433.mp4"></video>
-            </section>
+            </section-->
         </article>
         <img height="0" width="0" style="height: 0px; width: 0px; opacity: 0;" src="https://beserver.nanick.org/pixel.gif"/>
     </body>
