@@ -1768,7 +1768,20 @@
                         </p>
                     </li>
                     <li>
-                        Once you've entered your virtual environment, install 
+                        Once you've entered your virtual environment, you may need to upgrade the instance of <strong>pip</strong> that lives in your virtual environment.
+                        <div class="tool">
+                            <code class="code3" style="display: block;">
+                                <ul class="pwshlist">
+                                    <li class=pwshvenv style="margin: 0; padding: 0;">
+                                        <span class="command">python </span><span class="switch">-m </span><span class="param">pip install </span><span class="switch">--upgrade </span><span class="param">pip</span>
+                                    </li>
+                                </ul>
+                                <a onclick="onCopyClick(this);" class="copy">Copy</a>
+                            </code>
+                        </div>
+                    </li>
+                    <li>
+                        Now install 
                         <strong>
                             <a target="_blank" href="https://scipy.org/">scipy</a>
                         </strong>
