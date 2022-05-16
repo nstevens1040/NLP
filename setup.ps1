@@ -19,7 +19,7 @@ pip install virtualenv
 virtualenv.exe venv
 .\venv\Scripts\activate.ps1
 python -m pip install --upgrade pip
-pip install scipy nltk
+pip install scipy nltk stanfordcorenlp
 python -m nltk.downloader all
 cd C:\.temp\nltk\venv\
 git clone https://github.com/nstevens1040/nlp.git
