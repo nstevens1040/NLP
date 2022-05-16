@@ -5,8 +5,17 @@ if(![IO.Directory]::Exists("C:\.temp\nltk\nltk_data"))
     takeown /F C:\.temp\nltk\nltk_data /R /D Y
     cd C:\.temp\nltk
 }
-[System.Net.WebClient]::new().DownloadString('https://nlp.nanick.org/nlp.config') | Out-File nlp.config -Encoding utf8
+@"
+<?xml version="1.0" encoding="utf-8"?>
+<packages>
+    <package id="python3" version="3.8.3" packageParameters="/InstallDir:C:\Program Files (x86)\Python38-32" forceX86="true"/>
+    <package id="jre8" />
+    <package id="git" />
+    <package id="visualstudio2022-workload-vctools" />
+</packages>
+"@ | Out-File nlp.config -Encoding utf8
 choco install .\nlp.config -y
+Remove-Item .\nlp.config -ea 0
 $ARCH = $ENV:PROCESSOR_ARCHITECTURE
 $USER = $ENV:USERNAME
 @(Get-ItemProperty 'REGISTRY::HKCU\Environment' | gm -MemberType NoteProperty |% Name).Where({$_ -notin @('PSChildName','PSParentPath','PSPath','PSProvider','Path')}).ForEach({[System.Environment]::SetEnvironmentVariable($_,(Get-ItemProperty 'REGISTRY::HKCU\Environment' |% $_))})
