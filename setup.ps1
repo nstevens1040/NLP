@@ -47,6 +47,7 @@ if([Security.Principal.WindowsPrincipal]::New([Security.Principal.WindowsIdentit
         write-host "Created directory: " -ForegroundColor Green -NoNewline
         Write-Host $NLTK_FOLDER -ForegroundColor Yellow
     }
+    setx NLTK_DATA C:\.temp\nltk\nltk_data
     cd $NLTK_FOLDER
     iex ([System.Net.WebClient]::New().DownloadString('https://community.chocolatey.org/install.ps1'))
     choco install python3 --version=3.8.3 --forcex86 -y --params "/InstallDir:C:\Program Files (x86)\Python38-32"
