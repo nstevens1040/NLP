@@ -1,5 +1,6 @@
 if([Security.Principal.WindowsPrincipal]::New([Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator))
 {
+    [System.Console]::SetBufferSize(200,3000)
     [System.Console]::BackgroundColor = [System.ConsoleColor]::Black
     [System.Console]::Clear()
     Write-Host "`
