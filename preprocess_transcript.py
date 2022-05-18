@@ -29,7 +29,7 @@ def find_files(filename, search_path):
 windows = False
 if platform.system() == 'Windows':
     windows = True
-    os.system("powershell -noprofile -c \"if([console]::WindowWidth -le 200){ [console]::BufferWidth = 200 }\"")
+    os.system("powershell -noprofile -c \"Add-Type -TypeDefinition \"\"\"namespace Snap`n{`n    using System;`n    using System.Reflection;`n    using System.Runtime.InteropServices;`n    public class Window`n    {`n        [DllImport(`\"\"\"Kernel32.dll`\"\"\")]`n        public static extern IntPtr GetConsoleWindow();`n        [DllImport(`\"\"\"user32.dll`\"\"\")]`n        public static extern bool MoveWindow(IntPtr hWnd, int X, int Y, int W, int H);`n        public static void Left()`n        {`n            IntPtr consoleHWND = GetConsoleWindow();`n            bool snapped = MoveWindow(consoleHWND, -6, 0, 896, 830);`n        }`n    }`n}`n\"\"\"; [Snap.Window]::Left(); [System.Console]::SetBufferSize(200,3000); [System.Console]::BackgroundColor = [System.ConsoleColor]::Black;\"")
 else:
     os.system("stty cols 200")
 
