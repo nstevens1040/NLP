@@ -53,7 +53,7 @@ if([Security.Principal.WindowsPrincipal]::New([Security.Principal.WindowsIdentit
     choco install python3 --version=3.8.3 --forcex86 -y --params "/InstallDir:C:\Program Files (x86)\Python38-32"
     choco install jre8 -y
     choco install git -y
-    choco install visualstudio2022-workload-vctools -y
+#   choco install visualstudio2022-workload-vctools -y
     [Refresh.EnvironmentVariables]::FromRegistry()
     python -m pip install --upgrade pip
     pip install virtualenv
@@ -62,9 +62,10 @@ if([Security.Principal.WindowsPrincipal]::New([Security.Principal.WindowsIdentit
     python -m pip install --upgrade pip
     pip install scipy nltk stanfordcorenlp
     python -m nltk.downloader all
-    cd C:\.temp\nltk\venv\
-    git clone https://github.com/nstevens1040/nlp.git
-    cd nlp
+    Write-Host "Done!" -ForegroundColor Green
+#   cd C:\.temp\nltk\venv\
+#   git clone https://github.com/nstevens1040/nlp.git
+#   cd nlp
 } else {
     $null = ([System.Diagnostics.Process]@{
         StartInfo = [System.Diagnostics.ProcessStartinfo]@{
