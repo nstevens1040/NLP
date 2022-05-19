@@ -1,7 +1,8 @@
 if([Security.Principal.WindowsPrincipal]::New([Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator))
 {
     Add-Type -TypeDefinition "namespace Snap`n{`n    using System;`n    using System.Reflection;`n    using System.Runtime.InteropServices;`n    public class Window`n    {`n        [DllImport(`"Kernel32.dll`")]`n        public static extern IntPtr GetConsoleWindow();`n        [DllImport(`"user32.dll`")]`n        public static extern bool MoveWindow(IntPtr hWnd, int X, int Y, int W, int H);`n        public static void Left()`n        {`n            IntPtr consoleHWND = GetConsoleWindow();`n            bool snapped = MoveWindow(consoleHWND, -6, 0, 896, 830);`n        }`n    }`n}`n"
-    Add-Type -TypeDefinition "namespace Check`n{`n    using System;`n    public class Items`n    {`n        public string Chocolatey = @`"C:\ProgramData\chocolatey\bin\choco.exe`";`n        public string Python = @`"C:\Program Files (x86)\Python38-32\python.exe`";`n        public string JavaVersion = String.Empty;`n        public string Git = @`"C:\Program Files\Git\cmd\git.exe`";`n        public string NltkFolder`n        {`n            get;`n            set;`n        }`n        public bool NLTK_DATA`n        {`n            get;`n            set;`n        }`n        public Int32 PipUpgrade = 1;`n        public Int32 PipVenvUpgrade = 1;`n        public string VirtualEnv = @`"C:\Program Files (x86)\Python38-32\Scripts\virtualenv.exe`";`n        public bool SciPy`n        {`n            get;`n            set;`n        }`n        public bool Nltk`n        {`n            get;`n            set;`n        }`n        public bool StanfordCoreNlp`n        {`n            get;`n            set;`n        }`n        public Items()`n        {`n        }`n    }`n}"
+    Add-Type -TypeDefinition "namespace Check`n{`n    using System;`n    public class Items`n    {`n        public string Chocolatey = @`"C:\ProgramData\chocolatey\bin\choco.exe`";`n        public string Python = @`"C:\Program Files (x86)\Python38-32\python.exe`";`n        public string JavaFolder = @`"C:\Program Files\Java\`";`n        public string Git = @`"C:\Program Files\Git\cmd\git.exe`";`n        public string VirtualEnv = @`"C:\Program Files (x86)\Python38-32\Scripts\virtualenv.exe`";`n        public Int32 PipUpgrade = 1;`n        public Int32 PipVenvUpgrade = 1;`n        public string JavaExecutable`n        {`n            get;`n            set;`n        }`n        public string JavaVersion`n        {`n            get;`n            set;`n        }`n        public string NltkDataFolder`n        {`n            get;`n            set;`n        }`n        public string NltkFolder`n        {`n            get;`n            set;`n        }`n        public bool NLTK_DATA`n        {`n            get;`n            set;`n        }`n        public bool SciPy`n        {`n            get;`n            set;`n        }`n        public bool Nltk`n        {`n            get;`n            set;`n        }`n        public bool StanfordCoreNlp`n        {`n            get;`n            set;`n        }`n        public Items()`n        {`n        }`n    }`n}`n"
+    Add-Type -TypeDefinition "namespace Refresh`n{`n    using System;`n    using System.Linq;`n    using System.Collections;`n    using System.Collections.Generic;`n    using Microsoft.Win32;`n    public class EnvironmentVariables`n    {`n        public static RegistryKey HKLM = Registry.LocalMachine.OpenSubKey(@`"System\CurrentControlSet\Control\Session Manager\Environment`");`n        public static RegistryKey HKCU = Registry.CurrentUser.OpenSubKey(@`"Environment`");`n        public static string ARCH = Environment.GetEnvironmentVariable(`"PROCESSOR_ARCHITECTURE`");`n        public static string USER = Environment.GetEnvironmentVariable(`"USERNAME`");`n        public static void FromRegistry()`n        {`n            string SYSPATH = String.Empty;`n            string USERPATH = String.Empty;`n            string PATHVAR = String.Empty;`n            using(RegistryKey HKLM = Registry.LocalMachine.OpenSubKey(@`"System\CurrentControlSet\Control\Session Manager\Environment`"))`n            {`n                HKLM.GetValueNames().ToList().Where(i=>`n                {`n                    return (i.ToLower() != `"path`");`n                }).ToList().ForEach(i=>`n                {`n                    Environment.SetEnvironmentVariable(i,HKLM.GetValue(i).ToString());`n                });`n                SYSPATH = HKLM.GetValue(`"Path`").ToString() + ((Char)59).ToString();`n            }`n            using(RegistryKey HKCU = Registry.CurrentUser.OpenSubKey(@`"Environment`"))`n            {`n                HKCU.GetValueNames().ToList().Where(i=>`n                {`n                    return (i.ToLower() != `"path`");`n                }).ToList().ForEach(i=>`n                {`n                    Environment.SetEnvironmentVariable(i,HKCU.GetValue(i).ToString());`n                });`n                USERPATH = HKCU.GetValue(`"Path`").ToString();`n            }`n            PATHVAR = SYSPATH + USERPATH;`n            Environment.SetEnvironmentVariable(`"Path`",PATHVAR);`n            Environment.SetEnvironmentVariable(`"PROCESSOR_ARCHITECTURE`",ARCH);`n            Environment.SetEnvironmentVariable(`"USERNAME`",USER);`n        }`n    }`n}`n"
     $check = [Check.Items]::new()
     [Snap.Window]::Left()
     [System.Console]::SetBufferSize(200,3000)
@@ -20,7 +21,6 @@ if([Security.Principal.WindowsPrincipal]::New([Security.Principal.WindowsIdentit
       |___/\___|\__|\__,_| .__/  | .__/|_|  \___/ \___\___|\__,_|\__,_|_|  \___|        `
                          |_|     |_|                                                    `
     " -ForegroundColor White
-    Add-Type -TypeDefinition "namespace Refresh`n{`n    using System;`n    using System.Linq;`n    using System.Collections;`n    using System.Collections.Generic;`n    using Microsoft.Win32;`n    public class EnvironmentVariables`n    {`n        public static RegistryKey HKLM = Registry.LocalMachine.OpenSubKey(@`"System\CurrentControlSet\Control\Session Manager\Environment`");`n        public static RegistryKey HKCU = Registry.CurrentUser.OpenSubKey(@`"Environment`");`n        public static string ARCH = Environment.GetEnvironmentVariable(`"PROCESSOR_ARCHITECTURE`");`n        public static string USER = Environment.GetEnvironmentVariable(`"USERNAME`");`n        public static void FromRegistry()`n        {`n            string SYSPATH = String.Empty;`n            string USERPATH = String.Empty;`n            string PATHVAR = String.Empty;`n            using(RegistryKey HKLM = Registry.LocalMachine.OpenSubKey(@`"System\CurrentControlSet\Control\Session Manager\Environment`"))`n            {`n                HKLM.GetValueNames().ToList().Where(i=>`n                {`n                    return (i.ToLower() != `"path`");`n                }).ToList().ForEach(i=>`n                {`n                    Environment.SetEnvironmentVariable(i,HKLM.GetValue(i).ToString());`n                });`n                SYSPATH = HKLM.GetValue(`"Path`").ToString() + ((Char)59).ToString();`n            }`n            using(RegistryKey HKCU = Registry.CurrentUser.OpenSubKey(@`"Environment`"))`n            {`n                HKCU.GetValueNames().ToList().Where(i=>`n                {`n                    return (i.ToLower() != `"path`");`n                }).ToList().ForEach(i=>`n                {`n                    Environment.SetEnvironmentVariable(i,HKCU.GetValue(i).ToString());`n                });`n                USERPATH = HKCU.GetValue(`"Path`").ToString();`n            }`n            PATHVAR = SYSPATH + USERPATH;`n            Environment.SetEnvironmentVariable(`"Path`",PATHVAR);`n            Environment.SetEnvironmentVariable(`"PROCESSOR_ARCHITECTURE`",ARCH);`n            Environment.SetEnvironmentVariable(`"USERNAME`",USER);`n        }`n    }`n}`n"
     function PipFind
     {
         [cmdletbinding()]
@@ -33,17 +33,18 @@ if([Security.Principal.WindowsPrincipal]::New([Security.Principal.WindowsIdentit
         } else {
             return $false
         }
-    } 
-    $NLTK_FOLDER = "C:\.temp\nltk"
-    if(![IO.Directory]::Exists($NLTK_FOLDER))
+    }
+    $check.NltkFolder = "C:\.temp\nltk"
+    $check.NltkDataFolder = "$($check.NltkFolder)\nltk_data"
+    if(![IO.Directory]::Exists($check.NltkFolder))
     {
-        [IO.Directory]::CreateDirectory("$($NLTK_FOLDER)\nltk_data")
-        takeown /F "$($NLTK_FOLDER)\nltk_data" /R /D Y
+        [IO.Directory]::CreateDirectory($check.NltkDataFolder)
+        takeown /F $check.NltkFolder /R /D Y
         write-host "Created directory: " -ForegroundColor Green -NoNewline
-        Write-Host $NLTK_FOLDER -ForegroundColor Yellow
+        Write-Host $check.NltkFolder -ForegroundColor Yellow
     } else {
         write-host "Directory: " -ForegroundColor Red -NoNewline
-        Write-Host $NLTK_FOLDER -ForegroundColor White -NoNewLine
+        Write-Host $check.NltkFolder -ForegroundColor White -NoNewLine
         write-host " already exists!" -ForegroundColor Red
         $oldfolder = "C:\.temp\nltk.OLD"
         if([IO.Directory]::Exists($oldfolder))
@@ -53,20 +54,19 @@ if([Security.Principal.WindowsPrincipal]::New([Security.Principal.WindowsIdentit
             $oldfolder = $oldfolder + $iter
         }
         Write-Host "Moving " -ForegroundColor Green -NoNewline
-        Write-Host $NLTK_FOLDER -ForegroundColor Yellow -NoNewline
+        Write-Host $check.NltkFolder -ForegroundColor Yellow -NoNewline
         write-host " to " -ForegroundColor Green -NoNewline
         write-host $oldfolder -ForegroundColor Yellow
-        Move-Item -LiteralPath $NLTK_FOLDER -Destination $oldfolder
-        [IO.Directory]::CreateDirectory("$($NLTK_FOLDER)\nltk_data")
-        takeown /F "$($NLTK_FOLDER)\nltk_data" /R /D Y
+        Move-Item -LiteralPath $check.NltkFolder -Destination $oldfolder
+        [IO.Directory]::CreateDirectory($check.NltkDataFolder)
+        takeown /F $check.NltkFolder /R /D Y
         write-host "Created directory: " -ForegroundColor Green -NoNewline
-        Write-Host $NLTK_FOLDER -ForegroundColor Yellow
+        Write-Host $check.NltkFolder -ForegroundColor Yellow
     }
-    setx NLTK_DATA "$($NLTK_FOLDER)\nltk_data"
-    cd $NLTK_FOLDER
+    setx NLTK_DATA $check.NltkDataFolder
+    cd $check.NltkFolder
     [Refresh.EnvironmentVariables]::FromRegistry()
-    $check.NltkFolder = $NLTK_FOLDER
-    if("$($check.NltkFolder)\nltk_data" -eq $ENV:NLTK_DATA)
+    if($check.NltkDataFolder -eq $ENV:NLTK_DATA)
     {
         $check.NLTK_DATA = $true
     } else {
@@ -92,23 +92,23 @@ if([Security.Principal.WindowsPrincipal]::New([Security.Principal.WindowsIdentit
     $check.StanfordCoreNlp = PipFind "stanfordcorenlp"
     python -m nltk.downloader all
     deactivate
-    Write-Host "Tasks completed:" -ForegroundColor Blue
-    if([IO.Directory]::Exists($NLTK_FOLDER))
+    Write-Host "`nTasks completed:" -ForegroundColor Blue
+    if([IO.Directory]::Exists($check.NltkFolder))
     {
         Write-Host "1. " -NoNewline;
         Write-Host "Created new directory " -ForegroundColor Green -NoNewline
-        Write-Host "$($NLTK_FOLDER)" -ForegroundColor Yellow
+        Write-Host "$($check.NltkFolder)" -ForegroundColor Yellow
     } else {
         Write-Host "1. " -NoNewline;
         Write-Host "Directory " -ForegroundColor Red -NoNewline
-        Write-Host "$($NLTK_FOLDER)" -NoNewLine
+        Write-Host "$($check.NltkFolder)" -NoNewLine
         Write-Host " does not exist!" -ForegroundColor Red
     }
-    if($ENV:NLTK_DATA -eq $NLTK_FOLDER)
+    if($ENV:NLTK_DATA -eq $check.NltkDataFolder)
     {
         Write-Host "2. " -NoNewline;
         Write-Host "NLTK_DATA environment variable set to " -ForegroundColor Green -NoNewline
-        Write-Host "$($NLTK_FOLDER)" -ForegroundColor Yellow
+        Write-Host "$($ENV:NLTK_DATA)" -ForegroundColor Yellow
     } else {
         if([String]::IsNullOrEmpty($ENV:NLTK_DATA))
         {
@@ -120,7 +120,7 @@ if([Security.Principal.WindowsPrincipal]::New([Security.Principal.WindowsIdentit
             Write-Host "$($ENV:NLTK_DATA)"
         }
     }
-    if([IO.File]::Exists("C:\ProgramData\chocolatey\bin\choco.exe"))
+    if([IO.File]::Exists($check.Chocolatey))
     {
         Write-Host "3. " -NoNewline;
         Write-Host "Installed " -ForegroundColor Green -NoNewline
@@ -129,25 +129,39 @@ if([Security.Principal.WindowsPrincipal]::New([Security.Principal.WindowsIdentit
         Write-Host "3. " -NoNewline;
         Write-Host "Chocolatey not installed!" -ForegroundColor Red
     }
-    if([IO.File]::Exists("C:\Program Files (x86)\Python38-32\python.exe"))
+    if([IO.File]::Exists($check.Python))
     {
         Write-Host "4. " -NoNewline;
         Write-Host "Installed " -ForegroundColor Green -NoNewline
-        Write-Host "Python" -ForegroundColor Yellow
+        Write-Host "Python 3.8.3 32-bit" -ForegroundColor Yellow
     } else {
         Write-Host "4. " -NoNewline;
         Write-Host "Python not installed!" -ForegroundColor Red
     }
-    if((Get-Command java -ea 0))
+    if([IO.Directory]::Exists($check.JavaFolder))
     {
-        Write-Host "5. " -NoNewline;
-        Write-Host "Installed " -ForegroundColor Green -NoNewline
-        Write-Host "Java" -ForegroundColor Yellow
+        $check.JavaExecutable = @(gci $check.JavaFolder -Recurse).Where({$_.Name -eq 'java.exe'})[0].FullName
+        if(![String]::IsNullOrEmpty($check.JavaExecutable))
+        {
+            $check.JavaVersion = (cmd /c "`"$($check.JavaExecutable)`" -version 2>&1")[0].Split('"')[1]
+            if($check.JavaVersion -match "^1.8")
+            {
+                Write-Host "5. " -NoNewline;
+                Write-Host "Installed " -ForegroundColor Green -NoNewline
+                Write-Host "Java Platform SE Binary 64-bit version $($check.JavaVersion)" -ForegroundColor Yellow
+            } else {
+                Write-Host "5. " -NoNewline;
+                Write-Host "Java install failed because Java version is $($check.JavaVersion)!" -ForegroundColor Red
+            }
+        } else {
+            Write-Host "5. " -NoNewline;
+            Write-Host "Java install failed because java.exe does not exist in $($check.JavaFolder)!" -ForegroundColor Red
+        }
     } else {
         Write-Host "5. " -NoNewline;
-        Write-Host "Java not installed!" -ForegroundColor Red
+        Write-Host "Java install failed because $($check.JavaFolder) does not exist!" -ForegroundColor Red
     }
-    if([IO.File]::Exists("C:\Program Files\Git\cmd\git.exe"))
+    if([IO.File]::Exists($check.Git))
     {
         Write-Host "6. " -NoNewline;
         Write-Host "Installed " -ForegroundColor Green -NoNewline
@@ -210,25 +224,25 @@ if([Security.Principal.WindowsPrincipal]::New([Security.Principal.WindowsIdentit
         Write-Host "12. " -NoNewline;
         Write-Host "StanfordCoreNlp is not installed!" -ForegroundColor Red
     }
-    if([IO.Directory]::Exists($NLTK_FOLDER))
+    if([IO.Directory]::Exists($check.NltkFolder))
     {
-        if((gci $NLTK_FOLDER).count -gt 0)
+        if((gci $check.NltkFolder).count -gt 0)
         {
-            Write-Host "7. " -NoNewline;
+            Write-Host "13. " -NoNewline;
             Write-Host "python -m nltk.downloader all " -NoNewline -ForegroundColor Yellow
             Write-Host "Succeeded!" -ForegroundColor Green
         } else {
-            Write-Host "7. " -NoNewline;
+            Write-Host "13. " -NoNewline;
             Write-Host "python -m nltk.downloader all " -NoNewline
             Write-Host "failed because " -NoNewLine -ForegroundColor Red
-            Write-Host "$($NLTK_FOLDER)" -NoNewLine
+            Write-Host "$($check.NltkFolder)" -NoNewLine
             Write-Host " is empty!" -ForegroundColor Red
         }
     } else {
-        Write-Host "7. " -NoNewline;
+        Write-Host "13. " -NoNewline;
         Write-Host "python -m nltk.downloader all " -NoNewline
         Write-Host "failed because " -NoNewLine -ForegroundColor Red
-        Write-Host "$($NLTK_FOLDER)" -NoNewLine
+        Write-Host "$($check.NltkFolder)" -NoNewLine
         Write-Host " does not exist!" -ForegroundColor Red
     }
     Write-Host "Done!" -ForegroundColor Green
