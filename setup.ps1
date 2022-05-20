@@ -1,26 +1,24 @@
 if([Security.Principal.WindowsPrincipal]::New([Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator))
 {
-    Add-Type -TypeDefinition "namespace Snap`n{`n    using System;`n    using System.Reflection;`n    using System.Runtime.InteropServices;`n    public class Window`n    {`n        [DllImport(`"Kernel32.dll`")]`n        public static extern IntPtr GetConsoleWindow();`n        [DllImport(`"user32.dll`")]`n        public static extern bool MoveWindow(IntPtr hWnd, int X, int Y, int W, int H);`n        public static void Left()`n        {`n            IntPtr consoleHWND = GetConsoleWindow();`n            bool snapped = MoveWindow(consoleHWND, -6, 0, 896, 830);`n        }`n    }`n}`n"
     Add-Type -TypeDefinition "namespace Check`n{`n    using System;`n    public class Items`n    {`n        public string Chocolatey = @`"C:\ProgramData\chocolatey\bin\choco.exe`";`n        public string Python = @`"C:\Program Files (x86)\Python38-32\python.exe`";`n        public string JavaFolder = @`"C:\Program Files\Java\`";`n        public string Git = @`"C:\Program Files\Git\cmd\git.exe`";`n        public string VirtualEnv = @`"C:\Program Files (x86)\Python38-32\Scripts\virtualenv.exe`";`n        public Int32 PipUpgrade = 1;`n        public Int32 PipVenvUpgrade = 1;`n        public string JavaExecutable`n        {`n            get;`n            set;`n        }`n        public string JavaVersion`n        {`n            get;`n            set;`n        }`n        public string NltkDataFolder`n        {`n            get;`n            set;`n        }`n        public string NltkFolder`n        {`n            get;`n            set;`n        }`n        public bool NLTK_DATA`n        {`n            get;`n            set;`n        }`n        public bool SciPy`n        {`n            get;`n            set;`n        }`n        public bool Nltk`n        {`n            get;`n            set;`n        }`n        public bool StanfordCoreNlp`n        {`n            get;`n            set;`n        }`n        public Items()`n        {`n        }`n    }`n}`n"
     Add-Type -TypeDefinition "namespace Refresh`n{`n    using System;`n    using System.Linq;`n    using System.Collections;`n    using System.Collections.Generic;`n    using Microsoft.Win32;`n    public class EnvironmentVariables`n    {`n        public static RegistryKey HKLM = Registry.LocalMachine.OpenSubKey(@`"System\CurrentControlSet\Control\Session Manager\Environment`");`n        public static RegistryKey HKCU = Registry.CurrentUser.OpenSubKey(@`"Environment`");`n        public static string ARCH = Environment.GetEnvironmentVariable(`"PROCESSOR_ARCHITECTURE`");`n        public static string USER = Environment.GetEnvironmentVariable(`"USERNAME`");`n        public static void FromRegistry()`n        {`n            string SYSPATH = String.Empty;`n            string USERPATH = String.Empty;`n            string PATHVAR = String.Empty;`n            using(RegistryKey HKLM = Registry.LocalMachine.OpenSubKey(@`"System\CurrentControlSet\Control\Session Manager\Environment`"))`n            {`n                HKLM.GetValueNames().ToList().Where(i=>`n                {`n                    return (i.ToLower() != `"path`");`n                }).ToList().ForEach(i=>`n                {`n                    Environment.SetEnvironmentVariable(i,HKLM.GetValue(i).ToString());`n                });`n                SYSPATH = HKLM.GetValue(`"Path`").ToString() + ((Char)59).ToString();`n            }`n            using(RegistryKey HKCU = Registry.CurrentUser.OpenSubKey(@`"Environment`"))`n            {`n                HKCU.GetValueNames().ToList().Where(i=>`n                {`n                    return (i.ToLower() != `"path`");`n                }).ToList().ForEach(i=>`n                {`n                    Environment.SetEnvironmentVariable(i,HKCU.GetValue(i).ToString());`n                });`n                USERPATH = HKCU.GetValue(`"Path`").ToString();`n            }`n            PATHVAR = SYSPATH + USERPATH;`n            Environment.SetEnvironmentVariable(`"Path`",PATHVAR);`n            Environment.SetEnvironmentVariable(`"PROCESSOR_ARCHITECTURE`",ARCH);`n            Environment.SetEnvironmentVariable(`"USERNAME`",USER);`n        }`n    }`n}`n"
     $check = [Check.Items]::new()
-    [Snap.Window]::Left()
     [System.Console]::SetBufferSize(200,3000)
     [System.Console]::BackgroundColor = [System.ConsoleColor]::Black
     [System.Console]::Clear()
     write-host "`
-      _   _ _   _____ _  __                  _                                      _   `
-     | \ | | | |_   _| |/ /   ___ _ ____   _(_)_ __ ___  _ __  _ __ ___   ___ _ __ | |_ `
-     |  \| | |   | | | ' /   / _ \ '_ \ \ / / | '__/ _ \| '_ \| '_ `` _ \ / _ \ '_ \| __|`
-     | |\  | |___| | | . \  |  __/ | | \ V /| | | | (_) | | | | | | | | |  __/ | | | |_ `
-     |_| \_|_____|_| |_|\_\  \___|_| |_|\_/ |_|_|  \___/|_| |_|_| |_| |_|\___|_| |_|\__|`
-                _                                              _                        `
-       ___  ___| |_ _   _ _ __    _ __  _ __ ___   ___ ___  __| |_   _ _ __ ___         `
-      / __|/ _ \ __| | | | '_ \  | '_ \| '__/ _ \ / __/ _ \/ _`` | | | | '__/ _ \        `
-      \__ \  __/ |_| |_| | |_) | | |_) | | | (_) | (_|  __/ (_| | |_| | | |  __/        `
-      |___/\___|\__|\__,_| .__/  | .__/|_|  \___/ \___\___|\__,_|\__,_|_|  \___|        `
-                         |_|     |_|                                                    `
-    " -ForegroundColor White
+    888b    888 888      8888888b.                         888                      `
+    8888b   888 888      888   Y88b                        888                      `
+    88888b  888 888      888    888                        888                      `
+    888Y88b 888 888      888   d88P      .d8888b   .d88b.  888888 888  888 88888b.  `
+    888 Y88b888 888      8888888P`"       88K      d8P  Y8b 888    888  888 888 `"88b `
+    888  Y88888 888      888             `"Y8888b. 88888888 888    888  888 888  888 `
+    888   Y8888 888      888                  X88 Y8b.     Y88b.  Y88b 888 888 d88P `
+    888    Y888 88888888 888              88888P'  `"Y8888   `"Y888  `"Y88888 88888P`"  `
+                                                                           888      `
+                                                                           888      `
+                                                                           888      `
+    " -ForegroundColor Yellow
     function PipFind
     {
         [cmdletbinding()]
