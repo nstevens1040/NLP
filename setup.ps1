@@ -4,8 +4,8 @@
     Add-Type -TypeDefinition "namespace Refresh`n{`n    using System;`n    using System.Linq;`n    using System.Collections;`n    using System.Collections.Generic;`n    using Microsoft.Win32;`n    public class EnvironmentVariables`n    {`n        public static RegistryKey HKLM = Registry.LocalMachine.OpenSubKey(@`"System\CurrentControlSet\Control\Session Manager\Environment`");`n        public static RegistryKey HKCU = Registry.CurrentUser.OpenSubKey(@`"Environment`");`n        public static string ARCH = Environment.GetEnvironmentVariable(`"PROCESSOR_ARCHITECTURE`");`n        public static string USER = Environment.GetEnvironmentVariable(`"USERNAME`");`n        public static void FromRegistry()`n        {`n            string SYSPATH = String.Empty;`n            string USERPATH = String.Empty;`n            string PATHVAR = String.Empty;`n            using(RegistryKey HKLM = Registry.LocalMachine.OpenSubKey(@`"System\CurrentControlSet\Control\Session Manager\Environment`"))`n            {`n                HKLM.GetValueNames().ToList().Where(i=>`n                {`n                    return (i.ToLower() != `"path`");`n                }).ToList().ForEach(i=>`n                {`n                    Environment.SetEnvironmentVariable(i,HKLM.GetValue(i).ToString());`n                });`n                SYSPATH = HKLM.GetValue(`"Path`").ToString() + ((Char)59).ToString();`n            }`n            using(RegistryKey HKCU = Registry.CurrentUser.OpenSubKey(@`"Environment`"))`n            {`n                HKCU.GetValueNames().ToList().Where(i=>`n                {`n                    return (i.ToLower() != `"path`");`n                }).ToList().ForEach(i=>`n                {`n                    Environment.SetEnvironmentVariable(i,HKCU.GetValue(i).ToString());`n                });`n                USERPATH = HKCU.GetValue(`"Path`").ToString();`n            }`n            PATHVAR = SYSPATH + USERPATH;`n            Environment.SetEnvironmentVariable(`"Path`",PATHVAR);`n            Environment.SetEnvironmentVariable(`"PROCESSOR_ARCHITECTURE`",ARCH);`n            Environment.SetEnvironmentVariable(`"USERNAME`",USER);`n        }`n    }`n}`n"
     $check = [Check.Items]::new()
 #   [System.Console]::SetBufferSize(200,3000)
-    [System.Console]::BackgroundColor = [System.ConsoleColor]::Black
-    [System.Console]::Clear()
+#    [System.Console]::BackgroundColor = [System.ConsoleColor]::Black
+#    [System.Console]::Clear()
     write-host "`
     888b    888 888      8888888b.                         888                      `
     8888b   888 888      888   Y88b                        888                      `
@@ -55,6 +55,7 @@
         Write-Host $check.NltkFolder -ForegroundColor Yellow -NoNewline
         write-host " to " -ForegroundColor Green -NoNewline
         write-host $oldfolder -ForegroundColor Yellow
+        takeown /F $check.NltkFolder /R /D Y
         Move-Item -LiteralPath $check.NltkFolder -Destination $oldfolder
         [IO.Directory]::CreateDirectory($check.NltkDataFolder)
         takeown /F $check.NltkFolder /R /D Y
@@ -64,6 +65,7 @@
     setx NLTK_DATA $check.NltkDataFolder
     cd $check.NltkFolder
     [Refresh.EnvironmentVariables]::FromRegistry()
+    [System.Environment]::Exit(0)
 
 #   iex ([System.Net.WebClient]::New().DownloadString('https://community.chocolatey.org/install.ps1'))
 #   [Refresh.EnvironmentVariables]::FromRegistry()
