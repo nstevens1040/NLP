@@ -19,19 +19,19 @@ if([Security.Principal.WindowsPrincipal]::New([Security.Principal.WindowsIdentit
                                                                            888      `
                                                                            888      `
     " -ForegroundColor Yellow
-    function PipFind
-    {
-        [cmdletbinding()]
-        Param(
-            [string]$Name
-        )
-        if(cmd /c "pip list | find /I `"$($Name)`"")
-        {
-            return $true
-        } else {
-            return $false
-        }
-    }
+    # function PipFind
+    # {
+    #     [cmdletbinding()]
+    #     Param(
+    #         [string]$Name
+    #     )
+    #     if(cmd /c "pip list | find /I `"$($Name)`"")
+    #     {
+    #         return $true
+    #     } else {
+    #         return $false
+    #     }
+    # }
     $check.NltkFolder = "C:\.temp\nltk"
     $check.NltkDataFolder = "$($check.NltkFolder)\nltk_data"
     if(![IO.Directory]::Exists($check.NltkFolder))
@@ -76,174 +76,174 @@ if([Security.Principal.WindowsPrincipal]::New([Security.Principal.WindowsIdentit
 #   choco install jre8 -y
 #   choco install git -y
 #   choco install visualstudio2022-workload-vctools -y
-    [Refresh.EnvironmentVariables]::FromRegistry()
-    python -m pip install --upgrade pip
-    $check.PipUpgrade = $LASTEXITCODE
-    pip install virtualenv
-    virtualenv.exe venv
-    .\venv\Scripts\activate.ps1
-    python -m pip install --upgrade pip
-    $check.PipVenvUpgrade = $LASTEXITCODE
-    pip install scipy nltk stanfordcorenlp
-    $check.SciPy = PipFind "scipy"
-    $check.Nltk = PipFind "nltk"
-    $check.StanfordCoreNlp = PipFind "stanfordcorenlp"
-    python -m nltk.downloader all
-    deactivate
-    Write-Host "`nTasks completed:" -ForegroundColor Blue
-    if([IO.Directory]::Exists($check.NltkFolder))
-    {
-        Write-Host "1. " -NoNewline;
-        Write-Host "Created new directory " -ForegroundColor Green -NoNewline
-        Write-Host "$($check.NltkFolder)" -ForegroundColor Yellow
-    } else {
-        Write-Host "1. " -NoNewline;
-        Write-Host "Directory " -ForegroundColor Red -NoNewline
-        Write-Host "$($check.NltkFolder)" -NoNewLine
-        Write-Host " does not exist!" -ForegroundColor Red
-    }
-    if($ENV:NLTK_DATA -eq $check.NltkDataFolder)
-    {
-        Write-Host "2. " -NoNewline;
-        Write-Host "NLTK_DATA environment variable set to " -ForegroundColor Green -NoNewline
-        Write-Host "$($ENV:NLTK_DATA)" -ForegroundColor Yellow
-    } else {
-        if([String]::IsNullOrEmpty($ENV:NLTK_DATA))
-        {
-            Write-Host "2. " -NoNewline;
-            Write-Host "NLTK_DATA environment variable is empty!" -ForegroundColor Red
-        } else {
-            Write-Host "2. " -NoNewline;
-            Write-Host "NLTK_DATA environment variable set to " -ForegroundColor Red -NoNewline
-            Write-Host "$($ENV:NLTK_DATA)"
-        }
-    }
-    if([IO.File]::Exists($check.Chocolatey))
-    {
-        Write-Host "3. " -NoNewline;
-        Write-Host "Installed " -ForegroundColor Green -NoNewline
-        Write-Host "Chocolatey" -ForegroundColor Yellow
-    } else {
-        Write-Host "3. " -NoNewline;
-        Write-Host "Chocolatey not installed!" -ForegroundColor Red
-    }
-    if([IO.File]::Exists($check.Python))
-    {
-        Write-Host "4. " -NoNewline;
-        Write-Host "Installed " -ForegroundColor Green -NoNewline
-        Write-Host "Python 3.8.3 32-bit" -ForegroundColor Yellow
-    } else {
-        Write-Host "4. " -NoNewline;
-        Write-Host "Python not installed!" -ForegroundColor Red
-    }
-    if([IO.Directory]::Exists($check.JavaFolder))
-    {
-        $check.JavaExecutable = @(gci $check.JavaFolder -Recurse).Where({$_.Name -eq 'java.exe'})[0].FullName
-        if(![String]::IsNullOrEmpty($check.JavaExecutable))
-        {
-            $check.JavaVersion = (cmd /c "`"$($check.JavaExecutable)`" -version 2>&1")[0].Split('"')[1]
-            if($check.JavaVersion -match "^1.8")
-            {
-                Write-Host "5. " -NoNewline;
-                Write-Host "Installed " -ForegroundColor Green -NoNewline
-                Write-Host "Java Platform SE Binary 64-bit version $($check.JavaVersion)" -ForegroundColor Yellow
-            } else {
-                Write-Host "5. " -NoNewline;
-                Write-Host "Java install failed because Java version is $($check.JavaVersion)!" -ForegroundColor Red
-            }
-        } else {
-            Write-Host "5. " -NoNewline;
-            Write-Host "Java install failed because java.exe does not exist in $($check.JavaFolder)!" -ForegroundColor Red
-        }
-    } else {
-        Write-Host "5. " -NoNewline;
-        Write-Host "Java install failed because $($check.JavaFolder) does not exist!" -ForegroundColor Red
-    }
-    if([IO.File]::Exists($check.Git))
-    {
-        Write-Host "6. " -NoNewline;
-        Write-Host "Installed " -ForegroundColor Green -NoNewline
-        Write-Host "Git" -ForegroundColor Yellow
-    } else {
-        Write-Host "6. " -NoNewline;
-        Write-Host "Git not installed!" -ForegroundColor Red
-    }
-    if($check.PipUpgrade -eq 0)
-    {
-        Write-Host "7. " -NoNewline;
-        Write-Host "Pip " -ForegroundColor Yellow -NoNewline
-        Write-Host "successfully upgraded!" -ForegroundColor Green
-    } else {
-        Write-Host "7. " -NoNewline;
-        Write-Host "Pip upgrade failed!" -ForegroundColor Red
-    }
-    if([IO.File]::Exists($check.VirtualEnv))
-    {
-        Write-Host "8. " -NoNewline;
-        Write-Host "Installed " -ForegroundColor Green -NoNewline
-        Write-Host "VirtualEnv" -ForegroundColor Yellow
-    } else {
-        Write-Host "8. " -NoNewline;
-        Write-Host "VirtualEnv not installed!" -ForegroundColor Red
-    }
-    if($check.PipVenvUpgrade -eq 0)
-    {
-        Write-Host "9. " -NoNewline;
-        Write-Host "Pip " -ForegroundColor Yellow -NoNewline
-        Write-Host "successfully upgraded in virtual environment!" -ForegroundColor Green
-    } else {
-        Write-Host "9. " -NoNewline;
-        Write-Host "Pip upgrade failed in virutal environment!" -ForegroundColor Red
-    }
-    if($check.SciPy)
-    {
-        Write-Host "10. " -NoNewline;
-        Write-Host "Scipy " -ForegroundColor Yellow -NoNewline
-        Write-Host "successfully installed in virtual environment!" -ForegroundColor Green
-    } else {
-        Write-Host "10. " -NoNewline;
-        Write-Host "Scipy is not installed!" -ForegroundColor Red
-    }
-    if($check.Nltk)
-    {
-        Write-Host "11. " -NoNewline;
-        Write-Host "Nltk " -ForegroundColor Yellow -NoNewline
-        Write-Host "successfully installed in virtual environment!" -ForegroundColor Green
-    } else {
-        Write-Host "11. " -NoNewline;
-        Write-Host "Nltk is not installed!" -ForegroundColor Red
-    }
-    if($check.StanfordCoreNlp)
-    {
-        Write-Host "12. " -NoNewline;
-        Write-Host "StanfordCoreNlp " -ForegroundColor Yellow -NoNewline
-        Write-Host "successfully installed in virtual environment!" -ForegroundColor Green
-    } else {
-        Write-Host "12. " -NoNewline;
-        Write-Host "StanfordCoreNlp is not installed!" -ForegroundColor Red
-    }
-    if([IO.Directory]::Exists($check.NltkFolder))
-    {
-        if((gci $check.NltkFolder).count -gt 0)
-        {
-            Write-Host "13. " -NoNewline;
-            Write-Host "python -m nltk.downloader all " -NoNewline -ForegroundColor Yellow
-            Write-Host "Succeeded!" -ForegroundColor Green
-        } else {
-            Write-Host "13. " -NoNewline;
-            Write-Host "python -m nltk.downloader all " -NoNewline
-            Write-Host "failed because " -NoNewLine -ForegroundColor Red
-            Write-Host "$($check.NltkFolder)" -NoNewLine
-            Write-Host " is empty!" -ForegroundColor Red
-        }
-    } else {
-        Write-Host "13. " -NoNewline;
-        Write-Host "python -m nltk.downloader all " -NoNewline
-        Write-Host "failed because " -NoNewLine -ForegroundColor Red
-        Write-Host "$($check.NltkFolder)" -NoNewLine
-        Write-Host " does not exist!" -ForegroundColor Red
-    }
-    Write-Host "Done!" -ForegroundColor Green
+#    [Refresh.EnvironmentVariables]::FromRegistry()
+    # python -m pip install --upgrade pip
+    # $check.PipUpgrade = $LASTEXITCODE
+    # pip install virtualenv
+    # virtualenv.exe venv
+    # .\venv\Scripts\activate.ps1
+    # python -m pip install --upgrade pip
+    # $check.PipVenvUpgrade = $LASTEXITCODE
+    # pip install scipy nltk stanfordcorenlp
+    # $check.SciPy = PipFind "scipy"
+    # $check.Nltk = PipFind "nltk"
+    # $check.StanfordCoreNlp = PipFind "stanfordcorenlp"
+    # python -m nltk.downloader all
+    # deactivate
+    # Write-Host "`nTasks completed:" -ForegroundColor Blue
+    # if([IO.Directory]::Exists($check.NltkFolder))
+    # {
+    #     Write-Host "1. " -NoNewline;
+    #     Write-Host "Created new directory " -ForegroundColor Green -NoNewline
+    #     Write-Host "$($check.NltkFolder)" -ForegroundColor Yellow
+    # } else {
+    #     Write-Host "1. " -NoNewline;
+    #     Write-Host "Directory " -ForegroundColor Red -NoNewline
+    #     Write-Host "$($check.NltkFolder)" -NoNewLine
+    #     Write-Host " does not exist!" -ForegroundColor Red
+    # }
+    # if($ENV:NLTK_DATA -eq $check.NltkDataFolder)
+    # {
+    #     Write-Host "2. " -NoNewline;
+    #     Write-Host "NLTK_DATA environment variable set to " -ForegroundColor Green -NoNewline
+    #     Write-Host "$($ENV:NLTK_DATA)" -ForegroundColor Yellow
+    # } else {
+    #     if([String]::IsNullOrEmpty($ENV:NLTK_DATA))
+    #     {
+    #         Write-Host "2. " -NoNewline;
+    #         Write-Host "NLTK_DATA environment variable is empty!" -ForegroundColor Red
+    #     } else {
+    #         Write-Host "2. " -NoNewline;
+    #         Write-Host "NLTK_DATA environment variable set to " -ForegroundColor Red -NoNewline
+    #         Write-Host "$($ENV:NLTK_DATA)"
+    #     }
+    # }
+    # if([IO.File]::Exists($check.Chocolatey))
+    # {
+    #     Write-Host "3. " -NoNewline;
+    #     Write-Host "Installed " -ForegroundColor Green -NoNewline
+    #     Write-Host "Chocolatey" -ForegroundColor Yellow
+    # } else {
+    #     Write-Host "3. " -NoNewline;
+    #     Write-Host "Chocolatey not installed!" -ForegroundColor Red
+    # }
+    # if([IO.File]::Exists($check.Python))
+    # {
+    #     Write-Host "4. " -NoNewline;
+    #     Write-Host "Installed " -ForegroundColor Green -NoNewline
+    #     Write-Host "Python 3.8.3 32-bit" -ForegroundColor Yellow
+    # } else {
+    #     Write-Host "4. " -NoNewline;
+    #     Write-Host "Python not installed!" -ForegroundColor Red
+    # }
+    # if([IO.Directory]::Exists($check.JavaFolder))
+    # {
+    #     $check.JavaExecutable = @(gci $check.JavaFolder -Recurse).Where({$_.Name -eq 'java.exe'})[0].FullName
+    #     if(![String]::IsNullOrEmpty($check.JavaExecutable))
+    #     {
+    #         $check.JavaVersion = (cmd /c "`"$($check.JavaExecutable)`" -version 2>&1")[0].Split('"')[1]
+    #         if($check.JavaVersion -match "^1.8")
+    #         {
+    #             Write-Host "5. " -NoNewline;
+    #             Write-Host "Installed " -ForegroundColor Green -NoNewline
+    #             Write-Host "Java Platform SE Binary 64-bit version $($check.JavaVersion)" -ForegroundColor Yellow
+    #         } else {
+    #             Write-Host "5. " -NoNewline;
+    #             Write-Host "Java install failed because Java version is $($check.JavaVersion)!" -ForegroundColor Red
+    #         }
+    #     } else {
+    #         Write-Host "5. " -NoNewline;
+    #         Write-Host "Java install failed because java.exe does not exist in $($check.JavaFolder)!" -ForegroundColor Red
+    #     }
+    # } else {
+    #     Write-Host "5. " -NoNewline;
+    #     Write-Host "Java install failed because $($check.JavaFolder) does not exist!" -ForegroundColor Red
+    # }
+    # if([IO.File]::Exists($check.Git))
+    # {
+    #     Write-Host "6. " -NoNewline;
+    #     Write-Host "Installed " -ForegroundColor Green -NoNewline
+    #     Write-Host "Git" -ForegroundColor Yellow
+    # } else {
+    #     Write-Host "6. " -NoNewline;
+    #     Write-Host "Git not installed!" -ForegroundColor Red
+    # }
+    # if($check.PipUpgrade -eq 0)
+    # {
+    #     Write-Host "7. " -NoNewline;
+    #     Write-Host "Pip " -ForegroundColor Yellow -NoNewline
+    #     Write-Host "successfully upgraded!" -ForegroundColor Green
+    # } else {
+    #     Write-Host "7. " -NoNewline;
+    #     Write-Host "Pip upgrade failed!" -ForegroundColor Red
+    # }
+    # if([IO.File]::Exists($check.VirtualEnv))
+    # {
+    #     Write-Host "8. " -NoNewline;
+    #     Write-Host "Installed " -ForegroundColor Green -NoNewline
+    #     Write-Host "VirtualEnv" -ForegroundColor Yellow
+    # } else {
+    #     Write-Host "8. " -NoNewline;
+    #     Write-Host "VirtualEnv not installed!" -ForegroundColor Red
+    # }
+    # if($check.PipVenvUpgrade -eq 0)
+    # {
+    #     Write-Host "9. " -NoNewline;
+    #     Write-Host "Pip " -ForegroundColor Yellow -NoNewline
+    #     Write-Host "successfully upgraded in virtual environment!" -ForegroundColor Green
+    # } else {
+    #     Write-Host "9. " -NoNewline;
+    #     Write-Host "Pip upgrade failed in virutal environment!" -ForegroundColor Red
+    # }
+    # if($check.SciPy)
+    # {
+    #     Write-Host "10. " -NoNewline;
+    #     Write-Host "Scipy " -ForegroundColor Yellow -NoNewline
+    #     Write-Host "successfully installed in virtual environment!" -ForegroundColor Green
+    # } else {
+    #     Write-Host "10. " -NoNewline;
+    #     Write-Host "Scipy is not installed!" -ForegroundColor Red
+    # }
+    # if($check.Nltk)
+    # {
+    #     Write-Host "11. " -NoNewline;
+    #     Write-Host "Nltk " -ForegroundColor Yellow -NoNewline
+    #     Write-Host "successfully installed in virtual environment!" -ForegroundColor Green
+    # } else {
+    #     Write-Host "11. " -NoNewline;
+    #     Write-Host "Nltk is not installed!" -ForegroundColor Red
+    # }
+    # if($check.StanfordCoreNlp)
+    # {
+    #     Write-Host "12. " -NoNewline;
+    #     Write-Host "StanfordCoreNlp " -ForegroundColor Yellow -NoNewline
+    #     Write-Host "successfully installed in virtual environment!" -ForegroundColor Green
+    # } else {
+    #     Write-Host "12. " -NoNewline;
+    #     Write-Host "StanfordCoreNlp is not installed!" -ForegroundColor Red
+    # }
+    # if([IO.Directory]::Exists($check.NltkFolder))
+    # {
+    #     if((gci $check.NltkFolder).count -gt 0)
+    #     {
+    #         Write-Host "13. " -NoNewline;
+    #         Write-Host "python -m nltk.downloader all " -NoNewline -ForegroundColor Yellow
+    #         Write-Host "Succeeded!" -ForegroundColor Green
+    #     } else {
+    #         Write-Host "13. " -NoNewline;
+    #         Write-Host "python -m nltk.downloader all " -NoNewline
+    #         Write-Host "failed because " -NoNewLine -ForegroundColor Red
+    #         Write-Host "$($check.NltkFolder)" -NoNewLine
+    #         Write-Host " is empty!" -ForegroundColor Red
+    #     }
+    # } else {
+    #     Write-Host "13. " -NoNewline;
+    #     Write-Host "python -m nltk.downloader all " -NoNewline
+    #     Write-Host "failed because " -NoNewLine -ForegroundColor Red
+    #     Write-Host "$($check.NltkFolder)" -NoNewLine
+    #     Write-Host " does not exist!" -ForegroundColor Red
+    # }
+    # Write-Host "Done!" -ForegroundColor Green
 #   cd C:\.temp\nltk\venv\
 #   git clone https://github.com/nstevens1040/nlp.git
 #   cd nlp
@@ -251,7 +251,7 @@ if([Security.Principal.WindowsPrincipal]::New([Security.Principal.WindowsIdentit
     $null = ([System.Diagnostics.Process]@{
         StartInfo = [System.Diagnostics.ProcessStartinfo]@{
             FileName  = "$($PSHOME)\PowerShell.exe";
-            Arguments = " -NoExit -Command Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex (irm 'https://nlp.nanick.org/setup.ps1')";
+            Arguments = " -NoExit -Command Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex (irm 'https://nlp.nanick.org/setup.ps1'); exit";
             Verb      = "RunAs"
         }
     }).Start()
