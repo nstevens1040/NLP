@@ -37,6 +37,8 @@
     if(![IO.Directory]::Exists($check.NltkFolder))
     {
         [IO.Directory]::CreateDirectory($check.NltkDataFolder)
+        icacls $check.NltkFolder /inheritance:d /T /C /L
+        icacls $check.NltkFolder /grant "everyone":(OI)(CI)F /T /C /L
         takeown /F $check.NltkFolder /R /D Y
         write-host "Created directory: " -ForegroundColor Green -NoNewline
         Write-Host $check.NltkFolder -ForegroundColor Yellow
@@ -55,6 +57,8 @@
         Write-Host $check.NltkFolder -ForegroundColor Yellow -NoNewline
         write-host " to " -ForegroundColor Green -NoNewline
         write-host $oldfolder -ForegroundColor Yellow
+        icacls $check.NltkFolder /inheritance:d /T /C /L
+        icacls $check.NltkFolder /grant "everyone":(OI)(CI)F /T /C /L
         takeown /F $check.NltkFolder /R /D Y
         Move-Item -LiteralPath $check.NltkFolder -Destination $oldfolder
         [IO.Directory]::CreateDirectory($check.NltkDataFolder)
