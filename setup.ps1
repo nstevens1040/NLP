@@ -1,5 +1,5 @@
-if([Security.Principal.WindowsPrincipal]::New([Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator))
-{
+#if([Security.Principal.WindowsPrincipal]::New([Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator))
+#{
     Add-Type -TypeDefinition "namespace Check`n{`n    using System;`n    public class Items`n    {`n        public string Chocolatey = @`"C:\ProgramData\chocolatey\bin\choco.exe`";`n        public string Python = @`"C:\Program Files (x86)\Python38-32\python.exe`";`n        public string JavaFolder = @`"C:\Program Files\Java\`";`n        public string Git = @`"C:\Program Files\Git\cmd\git.exe`";`n        public string VirtualEnv = @`"C:\Program Files (x86)\Python38-32\Scripts\virtualenv.exe`";`n        public Int32 PipUpgrade = 1;`n        public Int32 PipVenvUpgrade = 1;`n        public string JavaExecutable`n        {`n            get;`n            set;`n        }`n        public string JavaVersion`n        {`n            get;`n            set;`n        }`n        public string NltkDataFolder`n        {`n            get;`n            set;`n        }`n        public string NltkFolder`n        {`n            get;`n            set;`n        }`n        public bool NLTK_DATA`n        {`n            get;`n            set;`n        }`n        public bool SciPy`n        {`n            get;`n            set;`n        }`n        public bool Nltk`n        {`n            get;`n            set;`n        }`n        public bool StanfordCoreNlp`n        {`n            get;`n            set;`n        }`n        public Items()`n        {`n        }`n    }`n}`n"
     Add-Type -TypeDefinition "namespace Refresh`n{`n    using System;`n    using System.Linq;`n    using System.Collections;`n    using System.Collections.Generic;`n    using Microsoft.Win32;`n    public class EnvironmentVariables`n    {`n        public static RegistryKey HKLM = Registry.LocalMachine.OpenSubKey(@`"System\CurrentControlSet\Control\Session Manager\Environment`");`n        public static RegistryKey HKCU = Registry.CurrentUser.OpenSubKey(@`"Environment`");`n        public static string ARCH = Environment.GetEnvironmentVariable(`"PROCESSOR_ARCHITECTURE`");`n        public static string USER = Environment.GetEnvironmentVariable(`"USERNAME`");`n        public static void FromRegistry()`n        {`n            string SYSPATH = String.Empty;`n            string USERPATH = String.Empty;`n            string PATHVAR = String.Empty;`n            using(RegistryKey HKLM = Registry.LocalMachine.OpenSubKey(@`"System\CurrentControlSet\Control\Session Manager\Environment`"))`n            {`n                HKLM.GetValueNames().ToList().Where(i=>`n                {`n                    return (i.ToLower() != `"path`");`n                }).ToList().ForEach(i=>`n                {`n                    Environment.SetEnvironmentVariable(i,HKLM.GetValue(i).ToString());`n                });`n                SYSPATH = HKLM.GetValue(`"Path`").ToString() + ((Char)59).ToString();`n            }`n            using(RegistryKey HKCU = Registry.CurrentUser.OpenSubKey(@`"Environment`"))`n            {`n                HKCU.GetValueNames().ToList().Where(i=>`n                {`n                    return (i.ToLower() != `"path`");`n                }).ToList().ForEach(i=>`n                {`n                    Environment.SetEnvironmentVariable(i,HKCU.GetValue(i).ToString());`n                });`n                USERPATH = HKCU.GetValue(`"Path`").ToString();`n            }`n            PATHVAR = SYSPATH + USERPATH;`n            Environment.SetEnvironmentVariable(`"Path`",PATHVAR);`n            Environment.SetEnvironmentVariable(`"PROCESSOR_ARCHITECTURE`",ARCH);`n            Environment.SetEnvironmentVariable(`"USERNAME`",USER);`n        }`n    }`n}`n"
     $check = [Check.Items]::new()
@@ -64,14 +64,9 @@ if([Security.Principal.WindowsPrincipal]::New([Security.Principal.WindowsIdentit
     setx NLTK_DATA $check.NltkDataFolder
     cd $check.NltkFolder
     [Refresh.EnvironmentVariables]::FromRegistry()
-    if($check.NltkDataFolder -eq $ENV:NLTK_DATA)
-    {
-        $check.NLTK_DATA = $true
-    } else {
-        $check.NLTK_DATA = $false
-    }
+
 #   iex ([System.Net.WebClient]::New().DownloadString('https://community.chocolatey.org/install.ps1'))
-    [Refresh.EnvironmentVariables]::FromRegistry()
+#   [Refresh.EnvironmentVariables]::FromRegistry()
 #   choco install python3 --version=3.8.3 --forcex86 -y --params "/InstallDir:C:\Program Files (x86)\Python38-32"
 #   choco install jre8 -y
 #   choco install git -y
@@ -247,13 +242,13 @@ if([Security.Principal.WindowsPrincipal]::New([Security.Principal.WindowsIdentit
 #   cd C:\.temp\nltk\venv\
 #   git clone https://github.com/nstevens1040/nlp.git
 #   cd nlp
-} else {
-    $null = ([System.Diagnostics.Process]@{
-        StartInfo = [System.Diagnostics.ProcessStartinfo]@{
-            FileName  = "$($PSHOME)\PowerShell.exe";
-            Arguments = " -Command Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex (irm 'https://nlp.nanick.org/setup.ps1'); exit";
+#} else {
+#    $null = ([System.Diagnostics.Process]@{
+#        StartInfo = [System.Diagnostics.ProcessStartinfo]@{
+#            FileName  = "$($PSHOME)\PowerShell.exe";
+#            Arguments = " -Command Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex (irm 'https://nlp.nanick.org/setup.ps1'); exit";
 #            Verb      = "RunAs"
-        }
-    }).Start()
-    $null = @(gwmi win32_Process).where({ $_.ProcessID -eq $PID }).Terminate()
-}
+#        }
+#    }).Start()
+#    [System.Environment]::Exit(0)
+#}
