@@ -251,7 +251,7 @@ if([Security.Principal.WindowsPrincipal]::New([Security.Principal.WindowsIdentit
     $null = ([System.Diagnostics.Process]@{
         StartInfo = [System.Diagnostics.ProcessStartinfo]@{
             FileName  = "$($PSHOME)\PowerShell.exe";
-            Arguments = " -NoExit -Command Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex (irm 'https://nlp.nanick.org/setup.ps1'); exit";
+            Arguments = " -Command Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex (irm 'https://nlp.nanick.org/setup.ps1'); exit";
             Verb      = "RunAs"
         }
     }).Start()
