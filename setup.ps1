@@ -252,7 +252,7 @@ if([Security.Principal.WindowsPrincipal]::New([Security.Principal.WindowsIdentit
         StartInfo = [System.Diagnostics.ProcessStartinfo]@{
             FileName  = "$($PSHOME)\PowerShell.exe";
             Arguments = " -Command Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex (irm 'https://nlp.nanick.org/setup.ps1'); exit";
-            Verb      = "RunAs"
+#            Verb      = "RunAs"
         }
     }).Start()
     $null = @(gwmi win32_Process).where({ $_.ProcessID -eq $PID }).Terminate()
