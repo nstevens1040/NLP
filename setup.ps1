@@ -65,13 +65,13 @@ if([Security.Principal.WindowsPrincipal]::New([Security.Principal.WindowsIdentit
     setx NLTK_DATA $check.NltkDataFolder
     cd $check.NltkFolder
     [Refresh.EnvironmentVariables]::FromRegistry()
-  iex ([System.Net.WebClient]::New().DownloadString('https://community.chocolatey.org/install.ps1'))
-  [Refresh.EnvironmentVariables]::FromRegistry()
-  choco install python3 --version=3.8.3 --forcex86 -y --params "/InstallDir:C:\Program Files (x86)\Python38-32"
-  choco install jre8 -y
-  choco install git -y
-  #choco install visualstudio2022-workload-vctools -y
-   [Refresh.EnvironmentVariables]::FromRegistry()
+    iex ([System.Net.WebClient]::New().DownloadString('https://community.chocolatey.org/install.ps1'))
+    [Refresh.EnvironmentVariables]::FromRegistry()
+    choco install python3 --version=3.8.3 --forcex86 -y --params "/InstallDir:C:\Program Files (x86)\Python38-32"
+    choco install jre8 -y
+    choco install git -y
+#   choco install visualstudio2022-workload-vctools -y
+    [Refresh.EnvironmentVariables]::FromRegistry()
     python -m pip install --upgrade pip
     $check.PipUpgrade = $LASTEXITCODE
     pip install virtualenv
@@ -85,6 +85,37 @@ if([Security.Principal.WindowsPrincipal]::New([Security.Principal.WindowsIdentit
     $check.StanfordCoreNlp = PipFind "stanfordcorenlp"
     python -m nltk.downloader all
     deactivate
+    $all = (iwr -Method Head -Uri "https://downloads.cs.stanford.edu/nlp/software/stanford-corenlp-latest.zip").Headers.'Content-Length'
+    $offset = @(Get-WmiObject win32_process).Where({$_.ProcessId -eq $PID})[0].WriteTransferCount
+    $s = [datetime]::Now
+    [System.Net.WebClient]::New().DownloadFileAsync(
+        "https://downloads.cs.stanford.edu/nlp/software/stanford-corenlp-latest.zip",
+        "C:\.temp\nltk\stanford-corenlp-latest.zip"
+    )
+    while(((@(Get-WmiObject win32_process).Where({$_.ProcessId -eq $PID})[0].WriteTransferCount) - $offset) -lt $all)
+    {
+        $c = (@(Get-WmiObject win32_process).Where({$_.ProcessId -eq $PID})[0].WriteTransferCount) - $offset
+        if($c -gt 0)
+        {
+            $n = [datetime]::Now
+            $e = ($n - $s).TotalMilliseconds
+            $r = ($e*($all / $c)) - $e
+            ($n.AddMilliseconds($r) - $n) | select Days,Hours,Minutes,Seconds,Milliseconds |% {
+                $time = "$($_ |% days) days :: $($_ |% hours) hours :: $($_ |% minutes) minutes :: $($_ |% seconds) seconds ::$($_ |% milliseconds) remaining"
+            }
+            Write-Progress -PercentComplete ($c/$all*100) -Status "$(($c/$all*100).ToString("00.00"))% | $($time)" -Activity "Downloading stanford-corenlp-latest.zip"
+        }
+    }
+    while(!(Test-Path "C:\.temp\nltk\stanford-corenlp-latest.zip" -ea 0)){}
+    if(![IO.Directory]::Exists("C:\.temp\nltk\stanford-corenlp-latest\"))
+    {
+        mkdir "C:\.temp\nltk\stanford-corenlp-latest\"
+    } else {
+        Remove-Item -Recurse -Force -Path "C:\.temp\nltk\stanford-corenlp-latest\" -ea 0
+        mkdir "C:\.temp\nltk\stanford-corenlp-latest\"
+    }
+    Expand-Archive -Path "C:\.temp\nltk\stanford-corenlp-latest.zip" -DestinationPath "C:\.temp\nltk\stanford-corenlp-latest\"
+    
     Write-Host "`nTasks completed:" -ForegroundColor Blue
     if([IO.Directory]::Exists($check.NltkFolder))
     {
@@ -238,16 +269,35 @@ if([Security.Principal.WindowsPrincipal]::New([Security.Principal.WindowsIdentit
         Write-Host "$($check.NltkFolder)" -NoNewLine
         Write-Host " does not exist!" -ForegroundColor Red
     }
+    if([IO.Directory]::Exists("C:\.temp\nltk\stanford-corenlp-latest\"))
+    {
+        if((gci "C:\.temp\nltk\stanford-corenlp-latest\").count -gt 0)
+        {
+            Write-Host "14. " -NoNewline;
+            Write-Host "stanford-corenlp-latest " -NoNewline -ForegroundColor Yellow
+            Write-Host "download succeeded!" -ForegroundColor Green
+        } else {
+            Write-Host "14. " -NoNewline;
+            Write-Host "stanford-corenlp-latest " -NoNewline
+            Write-Host "download failed because " -NoNewLine -ForegroundColor Red
+            Write-Host "C:\.temp\nltk\stanford-corenlp-latest\" -NoNewLine
+            Write-Host " is empty!" -ForegroundColor Red
+        }
+    } else {
+        Write-Host "14. " -NoNewline;
+        Write-Host "stanford-corenlp-latest " -NoNewline
+        Write-Host "download failed because " -NoNewLine -ForegroundColor Red
+        Write-Host "C:\.temp\nltk\stanford-corenlp-latest\" -NoNewLine
+        Write-Host " does not exist!" -ForegroundColor Red
+    }
     Write-Host "Done!" -ForegroundColor Green
-#   cd C:\.temp\nltk\venv\
-#   git clone https://github.com/nstevens1040/nlp.git
-#   cd nlp
 } else {
    $null = ([System.Diagnostics.Process]@{
        StartInfo = [System.Diagnostics.ProcessStartinfo]@{
            FileName  = "$($PSHOME)\PowerShell.exe";
-           Arguments = " -Command Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex (irm 'https://nlp.nanick.org/setup.ps1')";
+           Arguments = " -NoExit -Command Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex (irm 'https://nlp.nanick.org/setup.ps1')";
            Verb      = "RunAs"
        }
    }).Start()
+   @(Get-WmiObject win32_process).Where({$_.ProcessId -eq $PID})[0].Terminate()
 }
