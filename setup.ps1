@@ -70,7 +70,7 @@ if([Security.Principal.WindowsPrincipal]::New([Security.Principal.WindowsIdentit
   choco install python3 --version=3.8.3 --forcex86 -y --params "/InstallDir:C:\Program Files (x86)\Python38-32"
   choco install jre8 -y
   choco install git -y
-  choco install visualstudio2022-workload-vctools -y
+  #choco install visualstudio2022-workload-vctools -y
    [Refresh.EnvironmentVariables]::FromRegistry()
     python -m pip install --upgrade pip
     $check.PipUpgrade = $LASTEXITCODE
