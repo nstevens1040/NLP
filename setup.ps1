@@ -85,27 +85,15 @@ if([Security.Principal.WindowsPrincipal]::New([Security.Principal.WindowsIdentit
     $check.StanfordCoreNlp = PipFind "stanfordcorenlp"
     python -m nltk.downloader all
     deactivate
-    $all = (iwr -Method Head -Uri "https://downloads.cs.stanford.edu/nlp/software/stanford-corenlp-latest.zip").Headers.'Content-Length'
-    $offset = @(Get-WmiObject win32_process).Where({$_.ProcessId -eq $PID})[0].WriteTransferCount
-    $s = [datetime]::Now
+#    $all = (iwr -Method Head -Uri "https://downloads.cs.stanford.edu/nlp/software/stanford-corenlp-latest.zip").Headers.'Content-Length'
+#    $offset = @(Get-WmiObject win32_process).Where({$_.ProcessId -eq $PID})[0].WriteTransferCount
+#    $s = [datetime]::Now
+    Write-Host "Downloading " -ForegroundColor Green -NoNewLine
+    Write-Host "stanford-corenlp-latest.zip" -ForegroundColor Yellow
     [System.Net.WebClient]::New().DownloadFileAsync(
         "https://downloads.cs.stanford.edu/nlp/software/stanford-corenlp-latest.zip",
         "C:\.temp\nltk\stanford-corenlp-latest.zip"
     )
-    while(((@(Get-WmiObject win32_process).Where({$_.ProcessId -eq $PID})[0].WriteTransferCount) - $offset) -lt $all)
-    {
-        $c = (@(Get-WmiObject win32_process).Where({$_.ProcessId -eq $PID})[0].WriteTransferCount) - $offset
-        if($c -gt 0)
-        {
-            $n = [datetime]::Now
-            $e = ($n - $s).TotalMilliseconds
-            $r = ($e*($all / $c)) - $e
-            ($n.AddMilliseconds($r) - $n) | select Days,Hours,Minutes,Seconds,Milliseconds |% {
-                $time = "$($_ |% days) days :: $($_ |% hours) hours :: $($_ |% minutes) minutes :: $($_ |% seconds) seconds ::$($_ |% milliseconds) remaining"
-            }
-            Write-Progress -PercentComplete ($c/$all*100) -Status "$(($c/$all*100).ToString("00.00"))% | $($time)" -Activity "Downloading stanford-corenlp-latest.zip"
-        }
-    }
     while(!(Test-Path "C:\.temp\nltk\stanford-corenlp-latest.zip" -ea 0)){}
     if(![IO.Directory]::Exists("C:\.temp\nltk\stanford-corenlp-latest\"))
     {
