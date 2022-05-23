@@ -90,7 +90,7 @@ if([Security.Principal.WindowsPrincipal]::New([Security.Principal.WindowsIdentit
 #    $s = [datetime]::Now
     Write-Host "Downloading " -ForegroundColor Green -NoNewLine
     Write-Host "stanford-corenlp-latest.zip" -ForegroundColor Yellow
-    [System.Net.WebClient]::New().DownloadFileAsync(
+    [System.Net.WebClient]::New().DownloadFile(
         "https://downloads.cs.stanford.edu/nlp/software/stanford-corenlp-latest.zip",
         "C:\.temp\nltk\stanford-corenlp-latest.zip"
     )
