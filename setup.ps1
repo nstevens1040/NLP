@@ -65,7 +65,6 @@ if([Security.Principal.WindowsPrincipal]::New([Security.Principal.WindowsIdentit
     setx NLTK_DATA $check.NltkDataFolder
     cd $check.NltkFolder
     [Refresh.EnvironmentVariables]::FromRegistry()
-    [System.Environment]::Exit(0)
   iex ([System.Net.WebClient]::New().DownloadString('https://community.chocolatey.org/install.ps1'))
   [Refresh.EnvironmentVariables]::FromRegistry()
   choco install python3 --version=3.8.3 --forcex86 -y --params "/InstallDir:C:\Program Files (x86)\Python38-32"
