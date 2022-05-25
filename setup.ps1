@@ -80,7 +80,8 @@ if([Security.Principal.WindowsPrincipal]::New([Security.Principal.WindowsIdentit
         Remove-Item -Recurse -Force -Path "C:\.temp\nltk\stanford-corenlp-latest\" -ea 0
         mkdir "C:\.temp\nltk\stanford-corenlp-latest\"
     }
-    Expand-Archive -Path "C:\.temp\nltk\stanford-corenlp-latest.zip" -DestinationPath "C:\.temp\nltk\stanford-corenlp-latest\"
+    Microsoft.PowerShell.Archive\Expand-Archive -Path "C:\.temp\nltk\stanford-corenlp-latest.zip" -DestinationPath "C:\.temp\nltk\stanford-corenlp-latest\" -Force
+#   Expand-Archive -Path "C:\.temp\nltk\stanford-corenlp-latest.zip" -DestinationPath "C:\.temp\nltk\stanford-corenlp-latest\"
     
     Write-Host "`nTasks completed:" -ForegroundColor Blue
     if([IO.Directory]::Exists($check.NltkFolder))
