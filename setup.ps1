@@ -41,7 +41,7 @@ if([Security.Principal.WindowsPrincipal]::New([Security.Principal.WindowsIdentit
     }
     $check.NltkFolder = "C:\.temp\nltk"
     $check.NltkDataFolder = "$($check.NltkFolder)\nltk_data"
-    $check.StanfordCoreNlpFolder = "$($check.NltkFolder)\stanford-corenlp"
+    $check.StanfordCoreNlpFolder = "$($check.NltkFolder)\stanford-corenlp-latest"
     [Provision.Folder]::ByFolderPath("C:\.temp\nltk\",$true)
     setx NLTK_DATA $check.NltkDataFolder
     cd $check.NltkFolder
@@ -74,16 +74,16 @@ if([Security.Principal.WindowsPrincipal]::New([Security.Principal.WindowsIdentit
         $false
     )
     while(!(Test-Path "C:\.temp\nltk\stanford-corenlp-latest.zip" -ea 0)){}
-    if(![IO.Directory]::Exists("C:\.temp\nltk\stanford-corenlp-latest\"))
+    if(![IO.Directory]::Exists("$($check.StanfordCoreNlpFolder)"))
     {
-        mkdir "C:\.temp\nltk\stanford-corenlp-latest\"
+        mkdir "$($check.StanfordCoreNlpFolder)"
     } else {
-        Remove-Item -Recurse -Force -Path "C:\.temp\nltk\stanford-corenlp-latest\" -ea 0
-        mkdir "C:\.temp\nltk\stanford-corenlp-latest\"
+        Remove-Item -Recurse -Force -Path "$($check.StanfordCoreNlpFolder)" -ea 0
+        mkdir "$($check.StanfordCoreNlpFolder)"
     }
     [System.IO.Compression.ZipFile]::ExtractToDirectory(
         "C:\.temp\nltk\stanford-corenlp-latest.zip",
-        "C:\.temp\nltk\stanford-corenlp-latest\"
+        "$($check.StanfordCoreNlpFolder)"
     )    
     Write-Host "`nTasks completed:" -ForegroundColor Blue
     if([IO.Directory]::Exists($check.NltkFolder))
@@ -238,9 +238,9 @@ if([Security.Principal.WindowsPrincipal]::New([Security.Principal.WindowsIdentit
         Write-Host "$($check.NltkFolder)" -NoNewLine
         Write-Host " does not exist!" -ForegroundColor Red
     }
-    if([IO.Directory]::Exists("C:\.temp\nltk\stanford-corenlp-latest\"))
+    if([IO.Directory]::Exists("$($check.StanfordCoreNlpFolder)"))
     {
-        if((gci "C:\.temp\nltk\stanford-corenlp-latest\").count -gt 0)
+        if((gci "$($check.StanfordCoreNlpFolder)").count -gt 0)
         {
             Write-Host "14. " -NoNewline;
             Write-Host "stanford-corenlp-latest " -NoNewline -ForegroundColor Yellow
@@ -249,14 +249,14 @@ if([Security.Principal.WindowsPrincipal]::New([Security.Principal.WindowsIdentit
             Write-Host "14. " -NoNewline;
             Write-Host "stanford-corenlp-latest " -NoNewline
             Write-Host "download failed because " -NoNewLine -ForegroundColor Red
-            Write-Host "C:\.temp\nltk\stanford-corenlp-latest\" -NoNewLine
+            Write-Host "$($check.StanfordCoreNlpFolder)" -NoNewLine
             Write-Host " is empty!" -ForegroundColor Red
         }
     } else {
         Write-Host "14. " -NoNewline;
         Write-Host "stanford-corenlp-latest " -NoNewline
         Write-Host "download failed because " -NoNewLine -ForegroundColor Red
-        Write-Host "C:\.temp\nltk\stanford-corenlp-latest\" -NoNewLine
+        Write-Host "$($check.StanfordCoreNlpFolder)" -NoNewLine
         Write-Host " does not exist!" -ForegroundColor Red
     }
     Write-Host "Done!" -ForegroundColor Green
