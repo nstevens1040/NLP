@@ -2,6 +2,7 @@ if([Security.Principal.WindowsPrincipal]::New([Security.Principal.WindowsIdentit
 {
     Add-Type -AssemblyName System.Net.Http
     Add-Type -AssemblyName System.Management
+    Add-Type -AssemblyName System.IO.Compression.FileSystem
     $refs = @([System.Net.Http.HttpMethod].Assembly.Location,[System.Management.ManagementScope].Assembly.Location)
     $refs.ForEach({ Add-Type -Path $_ })
     Add-Type -TypeDefinition "namespace Check`n{`n    using System;`n    public class Items`n    {`n        public string Chocolatey = @`"C:\ProgramData\chocolatey\bin\choco.exe`";`n        public string Python = @`"C:\Program Files (x86)\Python38-32\python.exe`";`n        public string JavaFolder = @`"C:\Program Files\Java\`";`n        public string Git = @`"C:\Program Files\Git\cmd\git.exe`";`n        public string VirtualEnv = @`"C:\Program Files (x86)\Python38-32\Scripts\virtualenv.exe`";`n        public Int32 PipUpgrade = 1;`n        public Int32 PipVenvUpgrade = 1;`n        public string JavaExecutable`n        {`n            get;`n            set;`n        }`n        public string JavaVersion`n        {`n            get;`n            set;`n        }`n        public string NltkDataFolder`n        {`n            get;`n            set;`n        }`n        public string NltkFolder`n        {`n            get;`n            set;`n        }`n        public string StanfordCoreNlpFolder`n        {`n            get;`n            set;`n        }`n        public bool NLTK_DATA`n        {`n            get;`n            set;`n        }`n        public bool SciPy`n        {`n            get;`n            set;`n        }`n        public bool Nltk`n        {`n            get;`n            set;`n        }`n        public bool StanfordCoreNlp`n        {`n            get;`n            set;`n        }`n        public Items()`n        {`n        }`n    }`n}`n"
@@ -80,9 +81,10 @@ if([Security.Principal.WindowsPrincipal]::New([Security.Principal.WindowsIdentit
         Remove-Item -Recurse -Force -Path "C:\.temp\nltk\stanford-corenlp-latest\" -ea 0
         mkdir "C:\.temp\nltk\stanford-corenlp-latest\"
     }
-    Microsoft.PowerShell.Archive\Expand-Archive -Path "C:\.temp\nltk\stanford-corenlp-latest.zip" -DestinationPath "C:\.temp\nltk\stanford-corenlp-latest\" -Force
-#   Expand-Archive -Path "C:\.temp\nltk\stanford-corenlp-latest.zip" -DestinationPath "C:\.temp\nltk\stanford-corenlp-latest\"
-    
+    [System.IO.Compression.ZipFile]::ExtractToDirectory(
+        "C:\.temp\nltk\stanford-corenlp-latest.zip",
+        "C:\.temp\nltk\stanford-corenlp-latest\"
+    )    
     Write-Host "`nTasks completed:" -ForegroundColor Blue
     if([IO.Directory]::Exists($check.NltkFolder))
     {
