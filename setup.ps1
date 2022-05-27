@@ -126,9 +126,9 @@ if([Security.Principal.WindowsPrincipal]::New([Security.Principal.WindowsIdentit
     {
         $check.CLASSPATH = @([IO.Directory]::EnumerateDirectories($check.StanfordTaggerFolder))[0]
         setx CLASSPATH $check.CLASSPATH
-        if([IO.FIle]::Exists("$($tagger_bin)\models\english-bidirectional-distsim.tagger"))
+        if([IO.FIle]::Exists("$($check.CLASSPATH)\models\english-bidirectional-distsim.tagger"))
         {
-            $check.STANFORD_MODELS = "$($tagger_bin)\models\english-bidirectional-distsim.tagger"
+            $check.STANFORD_MODELS = "$($check.CLASSPATH)\models\english-bidirectional-distsim.tagger"
             setx STANFORD_MODELS $check.STANFORD_MODELS
         }
     }
@@ -328,6 +328,7 @@ if([Security.Principal.WindowsPrincipal]::New([Security.Principal.WindowsIdentit
         Write-Host "$($check.StanfordTaggerFolder)" -NoNewLine
         Write-Host " does not exist!" -ForegroundColor Red
     }
+    [Refresh.EnvironmentVariables]::FromRegistry()
     if($ENV:CLASSPATH -eq $check.CLASSPATH)
     {
         Write-Host "16. " -NoNewline;
@@ -347,8 +348,8 @@ if([Security.Principal.WindowsPrincipal]::New([Security.Principal.WindowsIdentit
     if($ENV:STANFORD_MODELS -eq $check.STANFORD_MODELS)
     {
         Write-Host "17. " -NoNewline;
-        Write-Host "STANFORD_MODELS environment variable set to " -ForegroundColor Green -NoNewline
-        Write-Host "$($ENV:STANFORD_MODELS)" -ForegroundColor Yellow
+        Write-Host "STANFORD_MODELS environment variable is the filepath to " -ForegroundColor Green -NoNewline
+        Write-Host "$([io.FileInfo]::New("$($ENV:STANFORD_MODELS)").Name)" -ForegroundColor Yellow
     } else {
         if([String]::IsNullOrEmpty($ENV:STANFORD_MODELS))
         {
