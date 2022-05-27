@@ -18,6 +18,361 @@ import platform
 import zipfile
 import urllib
 
+def WriteOutput(message,title,file,oldfile : str = ""):
+    import os
+    import re
+    import math
+    import colorama
+    from colorama import Fore,Back,Style,init
+    init()
+    print(Style.BRIGHT)
+    minlength = 0
+    lines = []
+    lines.append(message)
+    lines.append(file)
+    if oldfile != "":
+        lines.append("Output file: ")
+        lines.append("already exists. Moving existing file to: ")
+        lines.append(oldfile)
+    
+    sorted_lines=sorted(lines,key=len)
+    minlength = blen=len(sorted_lines[-1]) + 8
+    window_width = os.get_terminal_size().columns - 1
+    if window_width < minlength:
+        tb_border_left = []
+        for i in list(range(1, math.floor((window_width / 2) - (len(title) / 2)))):
+            tb_border_left.append("#")
+        
+        left = "".join(tb_border_left)
+        tb_border_right = []
+        for i in list(range(1, math.ceil((window_width / 2) - (len(title) / 2)))):
+            tb_border_right.append("#")
+        
+        right = "".join(tb_border_right)
+        top_bottom = left + title + right
+        print(Fore.WHITE,top_bottom)
+        maxstr = len(top_bottom) - 9
+        regpattern = "([A-Za-z0-9,.!: ]{1," + str(maxstr) + "}\s)"
+        filepattern = "([A-Za-z0-9./_ ]{1," + str(maxstr) + "})"
+        fr = []
+        for i in list(range(0,(len(top_bottom) - 4))):
+            fr.append("#")
+        
+        frame = "# " + "".join(fr) + " #"
+        print(Fore.WHITE,frame)
+        if oldfile != "":
+            print(Fore.WHITE,"# # ",end="")
+            print(Fore.GREEN,"Output file:",end="")
+            if (maxstr - 12) > 0:
+                spra = []
+                for s in list(range(1,(maxstr - 12))):
+                    spra.append(" ")
+
+                spaces = "".join(spra)
+                print(Fore.GREEN,spaces,end="")
+            
+            print(Fore.WHITE,"# #")
+            if len(file) > maxstr:
+                for i in re.findall(filepattern,file):
+                    print(Fore.WHITE,"# # ",end="")
+                    if (maxstr - len(i)) > 0:
+                        spra = []
+                        for s in list(range(0,(maxstr - len(i)))):
+                            spra.append(" ")
+                        
+                        spaces = "".join(spra)
+                        print(Fore.YELLOW,(i + spaces),end="")
+                    else:
+                        print(Fore.YELLOW,i.strip(),end="")
+                    
+                    print(Fore.WHITE,"# #")
+                
+            else:
+                print(Fore.WHITE,"# # ",end="")
+                if (maxstr - len(file)) > 0:
+                    spra = []
+                    for s in list(range(0,(maxstr - len(file)))):
+                        spra.append(" ")
+                        
+                    spaces = "".join(spra)
+                    print(Fore.YELLOW,file + spaces,end="")
+                else:
+                    print(Fore.YELLOW,file.strip(),end="")
+                
+                print(Fore.WHITE,"# #")
+            
+            
+            print(Fore.WHITE,"# # ",end="")
+            print(Fore.GREEN,"already exists. Moving existing file to:",end="")
+            if (maxstr - 40) > 0:
+                spra = []
+                for s in list(range(1,(maxstr - 40))):
+                    spra.append(" ")
+
+                spaces = "".join(spra)
+                print(Fore.GREEN,spaces,end="")
+            
+            print(Fore.WHITE,"# #")
+            if len(oldfile) > maxstr:
+                for i in re.findall(filepattern,oldfile):
+                    print(Fore.WHITE,"# # ",end="")
+                    if (maxstr - len(i)) > 0:
+                        spra = []
+                        for s in list(range(1,(maxstr - len(i)))):
+                            spra.append(" ")
+                        
+                        spaces = "".join(spra)
+                        print(Fore.YELLOW,(i + spaces),end="")
+                    else:
+                        print(Fore.YELLOW,i.strip(),end="")
+                    
+                    print(Fore.WHITE," # #")
+                
+            else:
+                print(Fore.WHITE,"# # ",end="")
+                if (maxstr - len(oldfile)) > 0:
+                    spra = []
+                    for s in list(range(0,(maxstr - len(oldfile)))):
+                        spra.append(" ")
+                        
+                    spaces = "".join(spra)
+                    print(Fore.YELLOW,oldfile + spaces,end="")
+                else:
+                    print(Fore.YELLOW,oldfile.strip(),end="")
+                
+                print(Fore.WHITE,"# #")
+            
+            print(Fore.WHITE,frame)
+            print(Fore.WHITE,frame)
+        if len(message) > maxstr:
+            for i in re.findall(regpattern,message):
+                print(Fore.WHITE,"# # ",end="")
+                if (maxstr - len(i)) > 0:
+                    spra = []
+                    for s in list(range(0,(maxstr - len(i)))):
+                        spra.append(" ")
+                    
+                    spaces = "".join(spra)
+                    print(Fore.GREEN,(i + spaces),end="")
+                else:
+                    print(Fore.GREEN,i,end="")
+                
+                print(Fore.WHITE,"# #")
+            
+        else:
+            print(Fore.WHITE,"# # ",end="")
+            if (maxstr - len(message)) > 0:
+                spra = []
+                for s in list(range(0,(maxstr - len(message)))):
+                    spra.append(" ")
+                    
+                spaces = "".join(spra)
+                print(Fore.GREEN,message + spaces,end="")
+            else:
+                print(Fore.GREEN,message,end="")
+            
+            print(Fore.WHITE,"# #")
+        
+        if len(file) > maxstr:
+            for i in re.findall(filepattern,file):
+                print(Fore.WHITE,"# # ",end="")
+                if (maxstr - len(i)) > 0:
+                    spra = []
+                    for s in list(range(0,(maxstr - len(i)))):
+                        spra.append(" ")
+                    
+                    spaces = "".join(spra)
+                    print(Fore.YELLOW,(i + spaces),end="")
+                else:
+                    print(Fore.YELLOW,i.strip(),end="")
+                
+                print(Fore.WHITE,"# #")
+            
+        else:
+            print(Fore.WHITE,"# # ",end="")
+            if (maxstr - len(file)) > 0:
+                spra = []
+                for s in list(range(0,(maxstr - len(file)))):
+                    spra.append(" ")
+                    
+                spaces = "".join(spra)
+                print(Fore.YELLOW,file + spaces,end="")
+            else:
+                print(Fore.YELLOW,file.strip(),end="")
+            
+            print(Fore.WHITE,"# #")
+        
+        print(Fore.WHITE,frame)
+        print(Fore.WHITE,top_bottom)
+    else:
+        tb_border_left = []
+        for i in list(range(0, math.floor((minlength / 2) - (len(title) / 2)))):
+            tb_border_left.append("#")
+        
+        left = "".join(tb_border_left)
+        tb_border_right = []
+        for i in list(range(0, math.ceil((minlength / 2) - (len(title) / 2)))):
+            tb_border_right.append("#")
+        
+        right = "".join(tb_border_right)
+        top_bottom = left + title + right
+        print(Fore.WHITE,top_bottom)
+        maxstr = len(top_bottom) - 6
+        regpattern = "([A-Za-z0-9,.!: ]{1," + str(maxstr) + "}\s)"
+        filepattern = "([A-Za-z0-9./_ ]{1," + str(maxstr) + "})"
+        fr = []
+        for i in list(range(0,(len(top_bottom) - 4))):
+            fr.append("#")
+        
+        frame = "# " + "".join(fr) + " #"
+        print(Fore.WHITE,frame)
+        if oldfile != "":
+            print(Fore.WHITE,"# # ",end="")
+            print(Fore.GREEN,"Output file:",end="")
+            if (maxstr - 15) > 0:
+                spra = []
+                for s in list(range(1,(maxstr - 15))):
+                    spra.append(" ")
+
+                spaces = "".join(spra)
+                print(Fore.GREEN,spaces,end="")
+            
+            print(Fore.WHITE,"# #")
+            if len(file) > maxstr:
+                for i in re.findall(filepattern,file):
+                    print(Fore.WHITE,"# # ",end="")
+                    if (maxstr - len(i)) > 0:
+                        spra = []
+                        for s in list(range(1,(maxstr - len(i)))):
+                            spra.append(" ")
+                        
+                        spaces = "".join(spra)
+                        print(Fore.YELLOW,(i + spaces),end="")
+                    else:
+                        print(Fore.YELLOW,i.strip(),end="")
+                    
+                    print(Fore.WHITE,"# #")
+                
+            else:
+                print(Fore.WHITE,"# # ",end="")
+                if (maxstr - len(file)) > 0:
+                    spra = []
+                    for s in list(range(3,(maxstr - len(file)))):
+                        spra.append(" ")
+                        
+                    spaces = "".join(spra)
+                    print(Fore.YELLOW,file + spaces,end="")
+                else:
+                    print(Fore.YELLOW,file.strip(),end="")
+                
+                print(Fore.WHITE,"# #")
+            
+            
+            print(Fore.WHITE,"# # ",end="")
+            print(Fore.GREEN,"already exists. Moving existing file to:",end="")
+            if (maxstr - 43) > 0:
+                spra = []
+                for s in list(range(1,(maxstr - 43))):
+                    spra.append(" ")
+
+                spaces = "".join(spra)
+                print(Fore.GREEN,spaces,end="")
+            
+            print(Fore.WHITE,"# #")
+            if len(oldfile) > maxstr:
+                for i in re.findall(filepattern,oldfile):
+                    print(Fore.WHITE,"# # ",end="")
+                    if (maxstr - len(i)) > 0:
+                        spra = []
+                        for s in list(range(1,(maxstr - len(i)))):
+                            spra.append(" ")
+                        
+                        spaces = "".join(spra)
+                        print(Fore.YELLOW,(i + spaces),end="")
+                    else:
+                        print(Fore.YELLOW,i.strip(),end="")
+                    
+                    print(Fore.WHITE," # #")
+                
+            else:
+                print(Fore.WHITE,"# # ",end="")
+                if (maxstr - len(oldfile)) > 0:
+                    spra = []
+                    for s in list(range(3,(maxstr - len(oldfile)))):
+                        spra.append(" ")
+                        
+                    spaces = "".join(spra)
+                    print(Fore.YELLOW,oldfile + spaces,end="")
+                else:
+                    print(Fore.YELLOW,oldfile.strip(),end="")
+                
+                print(Fore.WHITE,"# #")
+            
+            print(Fore.WHITE,frame)
+            print(Fore.WHITE,frame)
+        
+        if len(message) > maxstr:
+            for i in re.findall(regpattern,message):
+                print(Fore.WHITE,"# # ",end="")
+                if (maxstr - len(i)) > 0:
+                    spra = []
+                    for s in list(range(1,(maxstr - len(i)))):
+                        spra.append(" ")
+                    
+                    spaces = "".join(spra)
+                    print(Fore.GREEN,(i + spaces),end="")
+                else:
+                    print(Fore.GREEN,i,end="")
+                
+                print(Fore.WHITE,"# #")
+            
+        else:
+            print(Fore.WHITE,"# # ",end="")
+            if (maxstr - len(message)) > 0:
+                spra = []
+                for s in list(range(2,(maxstr - len(message)))):
+                    spra.append(" ")
+                    
+                spaces = "".join(spra)
+                print(Fore.GREEN,message.strip() + spaces,end="")
+            else:
+                print(Fore.GREEN,message.strip(),end="")
+            
+            print(Fore.WHITE,"# #")
+        
+        if len(file) > maxstr:
+            for i in re.findall(filepattern,file):
+                print(Fore.WHITE,"# # ",end="")
+                if (maxstr - len(i)) > 0:
+                    spra = []
+                    for s in list(range(1,(maxstr - len(i)))):
+                        spra.append(" ")
+                    
+                    spaces = "".join(spra)
+                    print(Fore.YELLOW,(i + spaces),end="")
+                else:
+                    print(Fore.YELLOW,i,end="")
+                
+                print(Fore.WHITE,"# #")
+            
+        else:
+            print(Fore.WHITE,"# # ",end="")
+            if (maxstr - len(file)) > 0:
+                spra = []
+                for s in list(range(3,(maxstr - len(file.strip())))):
+                    spra.append(" ")
+                    
+                spaces = "".join(spra)
+                print(Fore.YELLOW,file.strip() + spaces,end="")
+            else:
+                print(Fore.YELLOW,file.strip(),end="")
+            
+            print(Fore.WHITE,"# #")
+    
+        print(Fore.WHITE,frame)
+        print(Fore.WHITE,top_bottom)
+
+
 def find_files(filename, search_path):
     import os
     result = []
@@ -26,36 +381,8 @@ def find_files(filename, search_path):
             result.append(os.path.join(root, filename))
     return result
 
-windows = False
-if platform.system() == 'Windows':
-    windows = True
-    os.system("powershell -noprofile -c \"Add-Type -TypeDefinition \"\"\"namespace Snap`n{`n    using System;`n    using System.Reflection;`n    using System.Runtime.InteropServices;`n    public class Window`n    {`n        [DllImport(`\"\"\"Kernel32.dll`\"\"\")]`n        public static extern IntPtr GetConsoleWindow();`n        [DllImport(`\"\"\"user32.dll`\"\"\")]`n        public static extern bool MoveWindow(IntPtr hWnd, int X, int Y, int W, int H);`n        public static void Left()`n        {`n            IntPtr consoleHWND = GetConsoleWindow();`n            bool snapped = MoveWindow(consoleHWND, -6, 0, 896, 830);`n        }`n    }`n}`n\"\"\"; [Snap.Window]::Left(); [System.Console]::SetBufferSize(200,3000); [System.Console]::BackgroundColor = [System.ConsoleColor]::Black;\"")
-else:
-    os.system("stty cols 200")
-
-ZIP = os.path.realpath(os.curdir) + "\\stanford-tagger-4.2.0.zip"
-FOLDER = os.path.realpath(os.curdir) + "\\stanford-tagger-4.2.0\\"
-if not os.path.isdir(FOLDER):
-    os.mkdir(FOLDER)
-    if not os.path.isfile(ZIP):
-        urllib.request.urlretrieve('https://downloads.cs.stanford.edu/nlp/software/stanford-tagger-4.2.0.zip',ZIP)
-    
-    with zipfile.ZipFile(ZIP,'r') as z:
-        z.extractall(FOLDER)
-
-java_path = find_files("java.exe","C:\\Program Files\\Java\\")[0]
-# CORENLPZIP="https://downloads.cs.stanford.edu/nlp/software/stanford-corenlp-latest.zip"
-# download https://downloads.cs.stanford.edu/nlp/software/stanford-tagger-4.2.0.zip
-FOLDER = FOLDER + "\\stanford-postagger-full-2020-11-17\\"
-# java_path = "C:\\Program Files\\Java\\jre1.8.0_321\\bin\\java.exe"
-# java_path = "java.exe"
-# os.environ["JAVAHOME"] = "java.exe"
-os.environ["JAVAHOME"] = java_path
-# os.environ["JAVAHOME"] = "C:\\Program Files\\Java\\jre1.8.0_321\\bin\\java.exe"
-os.environ["CLASSPATH"] = FOLDER
-os.environ["STANFORD_MODELS"] = FOLDER + "\\models\\english-bidirectional-distsim.tagger"
-jar=FOLDER + "\\stanford-postagger-4.2.0.jar"
-model=FOLDER + "\\models\\english-bidirectional-distsim.tagger"
+jar = os.environ["CLASSPATH"] + "\\stanford-postagger-4.2.0.jar"
+model = os.environ["CLASSPATH"] + "\\models\\english-bidirectional-distsim.tagger"
 
 st = StanfordPOSTagger("english-bidirectional-distsim.tagger")
 st.java_options = ""
@@ -103,33 +430,7 @@ def openafile():
     master.attributes("-topmost", True)
     tk.mainloop()
 
-def get_savefile_messagelength(MESSAGE,FILE):
-    lines = []
-    lines.append(MESSAGE)
-    lines.append(FILE)
-    sorted_lines=sorted(lines,key=len)
-    blen=len(sorted_lines[-1]) + 9
-    return blen
-
-def get_fileexists_messagelength(FILE):
-    FOLDER=os.path.dirname(FILE)
-    FILENAME=os.path.basename(FILE)
-    OLDFILE=FOLDER + "/OLD/" + FILENAME
-    FILEITER=0
-    while os.path.isfile(OLDFILE):
-        OLDFILE=FOLDER + "/OLD/" + str(FILEITER) + FILENAME
-        FILEITER+=1
-    lines = []
-    lines.append("Output file:")
-    lines.append("    " + FILE)
-    lines.append("already exists. Moving existing file to:")
-    lines.append("    " + OLDFILE)
-    sorted_lines=sorted(lines,key=len)
-    blen=len(sorted_lines[-1]) + 9
-    return blen
-
-def handle_existing_file(FILE,LENGTH):
-    PRINTRA = []
+def handle_existing_file(FILE):
     FOLDER=os.path.dirname(FILE)
     FILENAME=os.path.basename(FILE)
     OLDFILE=FOLDER + "/OLD/" + FILENAME
@@ -139,62 +440,10 @@ def handle_existing_file(FILE,LENGTH):
     while os.path.isfile(OLDFILE):
         OLDFILE=FOLDER + "/OLD/" + str(FILEITER) + FILENAME
         FILEITER+=1
-    lines = []
-    lines.append("Output file:")
-    lines.append("    " + FILE)
-    lines.append("already exists. Moving existing file to:")
-    lines.append("    " + OLDFILE)
-    blen=LENGTH
-    border = ""
-    for i in range(0,(blen + 2)):
-        border=border + "#"
-    PRINTRA.append((Fore.WHITE,"# " + border + " #"))
-    for i in lines:
-        SPACECOUNT=blen - len("# # " + i + " # #") + 4
-        SPACES = ""
-        for a in range(1,SPACECOUNT):
-            SPACES=SPACES + " "
-        PRINTRA.append((Fore.WHITE,"# # ",""))
-        if i.startswith(" "):
-            PRINTRA.append((Fore.GREEN,i,""))
-        else:
-            PRINTRA.append((Fore.YELLOW,i,""))
-        PRINTRA.append((Fore.WHITE,SPACES,""))
-        PRINTRA.append((Fore.WHITE," # #"))
-    PRINTRA.append((Fore.WHITE,"# " + border + " #"))
     shutil.move(FILE, OLDFILE)
-    return PRINTRA
-
-def save_file_message(MESSAGE,FILE,LENGTH):
-    PRINTRA = []
-    lines = []
-    lines.append(MESSAGE)
-    lines.append(FILE)
-    blen = LENGTH
-    border = ""
-    for i in range(0,(blen + 2)):
-        border=border + "#"    
-    PRINTRA.append((Fore.WHITE,"# " + border + " #"))
-    for i in lines:
-        SPACECOUNT=blen - len("# " + i + " #")
-        SPACES = ""
-        for a in range(1,SPACECOUNT):
-            SPACES=SPACES + " "
-        PRINTRA.append((Fore.WHITE,"# # ",""))
-        if i.startswith(" "):
-            PRINTRA.append((Fore.GREEN,i,""))
-        else:
-            PRINTRA.append((Fore.YELLOW,i,""))
-        PRINTRA.append((Fore.WHITE,SPACES,""))
-        PRINTRA.append((Fore.WHITE," # #"))
-    PRINTRA.append((Fore.WHITE,"# " + border + " #"))
-    return PRINTRA
+    return OLDFILE
 
 def clean_transcript_from_file(save_file: bool = False, lemmatize: bool = False):
-    PRINTRA=[]
-    MSGLEN = []
-    LEMSTR="All lowercase transcript, clean from CRLFs and punctuation, was lemmatized and saved to:"
-    NLEMSTR="All lowercase transcript, clean from CRLFs and punctuation, was saved to:"
     import os
     START_TXT = open(transcript_file).read()
     NOCRLF = re.sub(r"[\r|\n|\r\n]+", ' ',START_TXT)
@@ -212,82 +461,33 @@ def clean_transcript_from_file(save_file: bool = False, lemmatize: bool = False)
         FILENAME=os.path.basename(transcript_file)
         if lemmatize:
             NEWFILE=FOLDER + "/cleaned_and_lemmatized_" + FILENAME
-            MSGLEN.append(get_savefile_messagelength(LEMSTR,"    " + NEWFILE))
             if os.path.isfile(NEWFILE):
-                MSGLEN.append(get_fileexists_messagelength(NEWFILE))
-            if len(MSGLEN) < 2:
-                THISLEN = MSGLEN[0]
-                MSG=save_file_message(LEMSTR,"    " + NEWFILE,THISLEN)
-                for i in MSG:
-                    PRINTRA.append(i)
+                OLDFILE = handle_existing_file(NEWFILE)
+                with open(NEWFILE,'w') as OUTTXT:
+                    OUTTXT.write(CLEANED)
+                WriteOutput("All lowercase transcript, clean from CRLFs and punctuation, was lemmatized and saved to: "," CLEANING TRANSCRIPT ",NEWFILE,OLDFILE)
             else:
-                MSGLEN.sort()
-                THISLEN = MSGLEN[-1]
-                MSG=handle_existing_file(NEWFILE,THISLEN)
-                for i in MSG:
-                    PRINTRA.append(i)
-                MSG = save_file_message(LEMSTR,"    " + NEWFILE,THISLEN)
-                for i in MSG:
-                    PRINTRA.append(i)
+                with open(NEWFILE,'w') as OUTTXT:
+                    OUTTXT.write(CLEANED)
+                WriteOutput("All lowercase transcript, clean from CRLFs and punctuation, was lemmatized and saved to: "," CLEANING TRANSCRIPT ",NEWFILE)
         else:
             NEWFILE=FOLDER + "/cleaned_" + FILENAME
-            MSGLEN.append(get_savefile_messagelength(NLEMSTR,"    " + NEWFILE))
             if os.path.isfile(NEWFILE):
-                MSGLEN.append(get_fileexists_messagelength(NEWFILE))
-            if len(MSGLEN) < 2:
-                THISLEN = MSGLEN[0]
-                MSG=save_file_message(NLEMSTR,"    " + NEWFILE,THISLEN)
-                for i in MSG:
-                    PRINTRA.append(i)
+                OLDFILE = handle_existing_file(NEWFILE)
+                with open(NEWFILE,'w') as OUTTXT:
+                    OUTTXT.write(CLEANED)
+                WriteOutput("All lowercase transcript, clean from CRLFs and punctuation, was saved to: "," CLEANING TRANSCRIPT ",NEWFILE,OLDFILE)
             else:
-                MSGLEN.sort()
-                THISLEN = MSGLEN[-1]
-                MSG=handle_existing_file(NEWFILE,THISLEN)
-                for i in MSG:
-                    PRINTRA.append(i)
-                MSG = save_file_message(NLEMSTR,"    " + NEWFILE,THISLEN)
-                for i in MSG:
-                    PRINTRA.append(i)
-    LENGTHS=[]
-    for i in PRINTRA:
-        LENGTHS.append(len(i[1]))
-    LENGTHS.sort()
-    blen = LENGTHS[-1]
-    border = ""
-    hb=math.floor((blen - 22) / 2)
-    for i in range(0,hb):
-        border=border + "#"
-    NEWRA=[]
-    if float(LENGTHS[-1]) % float(2.0) > 0:
-        NEWRA.append((Fore.WHITE,border + "# CLEANING TRANSCRIPT #" + border))
-    else:
-        NEWRA.append((Fore.WHITE,border + " CLEANING TRANSCRIPT #" + border))
-    for i in PRINTRA:
-        NEWRA.append(i)
-    if float(LENGTHS[-1]) % float(2.0) > 0:
-        NEWRA.append((Fore.WHITE,border + "# CLEANING TRANSCRIPT #" + border))
-    else:
-        NEWRA.append((Fore.WHITE,border + " CLEANING TRANSCRIPT #" + border))
-    for i in NEWRA:
-        COLOR=i[0]
-        TEXT=i[1]
-        if len(i) > 2:
-            print(COLOR,TEXT,end="")
-        else:
-            print(COLOR,TEXT)
+                with open(NEWFILE,'w') as OUTTXT:
+                    OUTTXT.write(CLEANED)
+                WriteOutput("All lowercase transcript, clean from CRLFs and punctuation, was saved to: "," CLEANING TRANSCRIPT ",NEWFILE)
     print("")
     print(Fore.GREEN,"Transcript cleaning complete!")
     print(Fore.YELLOW,"Tagging and tokenizing ...")
     print(Fore.WHITE,"")
-    with open(NEWFILE,'w') as OUTTXT:
-        OUTTXT.write(CLEANED)
     return nltk.word_tokenize(CLEANED)
 
 def tag_and_tokenize(save_csv: bool = False,lemmatize: bool = False):
-    MSGLEN = []
-    PRINTRA = []
-    LEMSTR="Lemmatized transcript tokens and corresponding POS tags were saved to:"
-    NLEMSTR="Transcript tokens and corresponding POS tags were saved to:"
     TOKENIZED=clean_transcript_from_file(True,lemmatize)
     POS_TAGGED=st.tag(TOKENIZED)
     if save_csv:
@@ -295,70 +495,22 @@ def tag_and_tokenize(save_csv: bool = False,lemmatize: bool = False):
         FILENAME=Path(transcript_file).stem
         if lemmatize:
             CSVFILE=FOLDER + "/tagged_tokenized_and_lemmatized_" + FILENAME + ".csv"
-            MSGLEN.append(get_savefile_messagelength(LEMSTR,"    " + CSVFILE))
             if os.path.isfile(CSVFILE):
-                MSGLEN.append(get_fileexists_messagelength(CSVFILE))
-            if len(MSGLEN) < 2:
-                THISLEN = MSGLEN[0]
-                MSG=save_file_message(LEMSTR,"    " + CSVFILE,THISLEN)
-                for i in MSG:
-                    PRINTRA.append(i)
+                OLDCSV = handle_existing_file(CSVFILE)
+                export_tuple_csv(POS_TAGGED,CSVFILE)
+                WriteOutput("Lemmatized transcript tokens and corresponding POS tags were saved to: "," TAG AND TOKENIZE ",CSVFILE,OLDCSV)
             else:
-                MSGLEN.sort()
-                THISLEN = MSGLEN[-1]
-                MSG=handle_existing_file(CSVFILE,THISLEN)
-                for i in MSG:
-                    PRINTRA.append(i)
-                MSG = save_file_message(LEMSTR,"    " + CSVFILE,THISLEN)
-                for i in MSG:
-                    PRINTRA.append(i)
+                export_tuple_csv(POS_TAGGED,CSVFILE)
+                WriteOutput("Lemmatized transcript tokens and corresponding POS tags were saved to: "," TAG AND TOKENIZE ",CSVFILE)
         else:
             CSVFILE=FOLDER + "/tagged_and_tokenized_" + FILENAME + ".csv"
-            MSGLEN.append(get_savefile_messagelength(NLEMSTR,"    " + CSVFILE))
             if os.path.isfile(CSVFILE):
-                MSGLEN.append(get_fileexists_messagelength(CSVFILE))
-            if len(MSGLEN) < 2:
-                THISLEN = MSGLEN[0]
-                MSG=save_file_message(NLEMSTR,"    " + CSVFILE,THISLEN)
-                for i in MSG:
-                    PRINTRA.append(i)
+                OLDCSV=handle_existing_file(CSVFILE)
+                export_tuple_csv(POS_TAGGED,CSVFILE)
+                WriteOutput("Transcript tokens and corresponding POS tags were saved to: "," TAG AND TOKENIZE ",CSVFILE,OLDCSV)
             else:
-                MSGLEN.sort()
-                THISLEN = MSGLEN[-1]
-                MSG=handle_existing_file(CSVFILE,THISLEN)
-                for i in MSG:
-                    PRINTRA.append(i)
-                MSG = save_file_message(NLEMSTR,"    " + CSVFILE,THISLEN)
-                for i in MSG:
-                    PRINTRA.append(i)
-    LENGTHS=[]
-    for i in PRINTRA:
-        LENGTHS.append(len(i[1]))
-    LENGTHS.sort()
-    blen = LENGTHS[-1]
-    border = ""
-    hb=math.floor((blen - 18) / 2)
-    for i in range(0,hb):
-        border=border + "#"
-    NEWRA=[]
-    if float(LENGTHS[-1]) % float(2.0) > 0:
-        NEWRA.append((Fore.WHITE,border + " TAG AND TOKENIZE #" + border))
-    else:
-        NEWRA.append((Fore.WHITE,border + " TAG AND TOKENIZE " + border))
-    for i in PRINTRA:
-        NEWRA.append(i)
-    if float(LENGTHS[-1]) % float(2.0) > 0:
-        NEWRA.append((Fore.WHITE,border + " TAG AND TOKENIZE #" + border))
-    else:
-        NEWRA.append((Fore.WHITE,border + " TAG AND TOKENIZE " + border))    
-    for i in NEWRA:
-        COLOR=i[0]
-        TEXT=i[1]
-        if len(i) > 2:
-            print(COLOR,TEXT,end="")
-        else:
-            print(COLOR,TEXT)
-    export_tuple_csv(POS_TAGGED,CSVFILE)
+                export_tuple_csv(POS_TAGGED,CSVFILE)
+                WriteOutput("Transcript tokens and corresponding POS tags were saved to: "," TAG AND TOKENIZE ",CSVFILE)
     print("")
     print(Fore.GREEN,"Tagging and tokenizing complete!")
     print(Fore.WHITE,"")
@@ -371,8 +523,7 @@ if results.transcript_file == None:
 else:
     transcript_file = results.transcript_file.replace("\\","/")
 if os.path.isfile(transcript_file):
-    SFML=get_savefile_messagelength("Opening transcript file:","    " + transcript_file)
-    save_file_message("Opening transcript file:","    " + transcript_file,SFML)
+    WriteOutput("Opening transcript file: "," TRANSCRIPT ",transcript_file)
     # FIRST ITERATION: NO LEMMATIZING
     POS_TAGGED_WORDS=tag_and_tokenize(True)
     # SECOND ITERATION: WITH LEMMATIZING
