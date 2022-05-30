@@ -80,6 +80,17 @@ if([Security.Principal.WindowsPrincipal]::New([Security.Principal.WindowsIdentit
     # $check.StnafordCoreNlp = PipFind "stanza"
     python -m nltk.downloader all
     deactivate
+    [System.Net.WebClient]::New().DownloadFile(
+        "https://globalcdn.nuget.org/packages/newtonsoft.json.13.0.1.nupkg",
+        "$($check.NltkFolder)\newtonsoft.json.13.0.1.nupkg"
+    )
+    while(!(Test-Path "$($check.NltkFolder)\newtonsoft.json.13.0.1.nupkg" -ea 0)){}
+    Move-Item "$($check.NltkFolder)\newtonsoft.json.13.0.1.nupkg" "$($check.NltkFolder)\newtonsoft.json.13.0.1.zip"
+    [Provision.Folder]::ByFolderPath("$($check.NltkFolder)\newtonsoft.json.13.0.1")
+    [System.IO.Compression.ZipFile]::ExtractToDirectory(
+        "$($check.NltkFolder)\newtonsoft.json.13.0.1.zip",
+        "$($check.NltkFolder)\newtonsoft.json.13.0.1"
+    )
     # begin stanford-corenlp-latest
     Write-Host "Downloading " -ForegroundColor Green -NoNewline
     write-host "stanford-corenlp-latest.zip" -ForegroundColor Yellow -NoNewLine
