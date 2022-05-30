@@ -80,6 +80,7 @@ if([Security.Principal.WindowsPrincipal]::New([Security.Principal.WindowsIdentit
     # $check.StnafordCoreNlp = PipFind "stanza"
     python -m nltk.downloader all
     deactivate
+    [io.file]::WriteAllBytes("$($check.NltkFolder)\nlp.ico",[System.Convert]::FromBase64String($iconB64))
     [System.Net.WebClient]::New().DownloadFile(
         "https://globalcdn.nuget.org/packages/newtonsoft.json.13.0.1.nupkg",
         "$($check.NltkFolder)\newtonsoft.json.13.0.1.nupkg"
@@ -148,6 +149,12 @@ if([Security.Principal.WindowsPrincipal]::New([Security.Principal.WindowsIdentit
             setx STANFORD_MODELS $check.STANFORD_MODELS
         }
     }
+    $wscript = new-object -com Wscript.Shell
+    $shortcut = $wscript.CreateShortcut("$($env:USERPROFILE)\Desktop\NLP Environment.lnk")
+    $shortcut.TargetPath = '%SystemRoot%\system32\WindowsPowerShell\v1.0\powershell.exe'
+    $shortcut.Arguments = " -noprofile -noexit -ep bypass -c cd '$($check.VenvFolder)'; . .\Scripts\activate.ps1"
+    $shortcut.IconLocation = "$($check.NltkFolder)\nlp.ico"
+    $shortcut.Save()
     # end stanford-tagger-4.2.0
     Write-Host "`nTasks completed:" -ForegroundColor Blue
     if([IO.Directory]::Exists($check.NltkFolder))
