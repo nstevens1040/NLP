@@ -211,6 +211,127 @@
             ul {
                 margin-bottom: 10px;
             }
+            .sysreqtop {
+                width: 50%;
+                /* margin: 0px auto 0px auto;  */
+                border-bottom: none;
+                border-top:1px solid rgb(36, 36, 36);
+                border-left:1px solid rgb(36, 36, 36);
+                border-right:1px solid rgb(36, 36, 36);
+                border-collapse: inherit; 
+                border-spacing: 0; 
+                border-top-left-radius: 0.5em; 
+                border-top-right-radius: 0.5em; 
+                /* border-bottom-right-radius: 0.5em; 
+                border-bottom-left-radius: 0.5em; */
+            }
+            .sysreqmid {
+                width: 50%;
+                /* margin: 0px auto 0px auto;  */
+                border: none;
+                border-collapse: inherit; 
+                border-spacing: 0; 
+                /* border-top-left-radius: 0.5em; 
+                border-top-right-radius: 0.5em;  */
+                /* border-bottom-right-radius: 0.5em; 
+                border-bottom-left-radius: 0.5em; */
+            }
+            .sysreqmid2 {
+                width: 50%;
+                /* margin: 0px auto 0px auto;  */
+                border: none;
+                border-collapse: inherit; 
+                border-spacing: 0;
+                border-left: 1px solid rgb(36, 36, 36);
+                border-right: 1px solid rgb(36, 36, 36);
+                /* border-top-left-radius: 0.5em; 
+                border-top-right-radius: 0.5em;  */
+                /* border-bottom-right-radius: 0.5em; 
+                border-bottom-left-radius: 0.5em; */
+            }
+            .sysreqbottom {
+                width: 50%;
+                /* margin: 0px auto 0px auto;  */
+                border-bottom: 1px solid rgb(36, 36, 36);
+                border-top: none;
+                border-left:1px solid rgb(36, 36, 36);
+                border-right:1px solid rgb(36, 36, 36);
+    
+                border-collapse: inherit; 
+                border-spacing: 0; 
+                /* border-top-left-radius: 0.5em; 
+                border-top-right-radius: 0.5em;  */
+                border-bottom-right-radius: 0.5em; 
+                border-bottom-left-radius: 0.5em;
+            }
+            .sysreqtl {
+                width: 110px;
+                border-bottom: 1px solid rgb(36,36,36); 
+                border-right: 1px solid rgb(36,36,36); 
+                border-left: none; 
+                border-top: none;
+            }
+            .sysreqtrs {
+                border-bottom: 1px solid rgb(36,36,36); 
+                border-right: none; 
+                border-top: none; 
+                border-left: none;
+            }
+            .sysreqml {
+                width: 100px;
+                white-space: nowrap;
+                border-bottom:1px solid rgb(36,36,36); 
+                border-right: 1px solid rgb(36,36,36); 
+                border-left: none; 
+                border-top: none;
+            }
+            .sysreqmlbottom {
+                width: 100px;
+                white-space: nowrap;
+                border-bottom: none;
+                border-right: 1px solid rgb(36,36,36); 
+                border-left: none; 
+                border-top: none;
+            }
+            .sysreqmllight { 
+                border-bottom:1px solid rgb(36,36,36); 
+                border-right: 1px solid rgb(36,36,36); 
+                border-left: none; 
+                border-top: none;
+            }
+            .sysreqbll {
+                width: 110px;
+                border-bottom: none; 
+                border-right: 1px solid rgb(36,36,36); 
+                border-left: none; 
+                border-top: none;
+            }
+            .sysreqbrs {
+                border-bottom: none;
+                border-right: none;
+                border-top: none;
+                border-left: none;
+            }
+    
+            .more {
+                font-weight: bold; 
+                font-family: "Helvetica Neue";
+                font-size: 20px;
+                font-stretch: expanded;
+            }
+            .sysreqrow {
+                border-bottom:1px solid rgb(36,36,36); 
+                border-right: 1px solid rgb(36,36,36); 
+                border-left: 1px solid rgb(36,36,36); 
+                border-top: none;
+                display: none;
+            }
+            .sysreqrow2 {
+                border-bottom: none;
+                border-right: none;
+                border-left: none;
+                border-top: 1px solid rgb(36,36,36); 
+            }
         </style>
         <style type="text/css">
             .code1 {
@@ -695,6 +816,42 @@
             }
         </style>
         <script type="application/javascript">
+            function toggleMore(x){
+                var state = x.getAttribute("data");
+                var id_ = x.id;
+                switch(state){
+                    case "off":
+                        x.setAttribute("data","on");
+                        x.innerHTML = "less";
+                        ['sysreqbottom','sysreqtop','sysreqmid','sysreqmid2'].forEach(i=>{
+                            [...document.body.getElementsByClassName(i)].forEach(a=>{
+                                a.style.width = "100%";
+                            });
+                        });
+                        if(id_ == "one"){
+                            document.getElementById("two").style.display = "table-cell";
+                        } else {
+                            document.getElementById("four").className = "sysreqmid2";
+                            document.getElementById("three").style.display = "table";
+                        }
+                        break;
+                    case "on":
+                        x.setAttribute("data","off");
+                        x.innerHTML = "more";
+                        ['sysreqbottom','sysreqtop','sysreqmid','sysreqmid2'].forEach(i=>{
+                            [...document.body.getElementsByClassName(i)].forEach(a=>{
+                                a.style.width = "50%";
+                            });
+                        });
+                        if(id_ == "one"){
+                            document.getElementById("two").style.display = "none";
+                        } else {
+                            document.getElementById("three").style.display = "none";
+                            document.getElementById("four").className = "sysreqbottom";
+                        }
+                        break;
+                }
+            }
             function LatestGit() {
                 fetch("https://api.github.com/repos/git-for-windows/git/releases/latest").then((res,rej)=>{
                     if (!res) {
@@ -747,7 +904,7 @@
             <section>
                 <h1 style="text-align: center;">NLP Environment Setup Procedure</h1>
                 <div style="height: 30px;"></div>
-                <p>This guide will show you how to install the software required to use NLTK and StanfordCoreNLP in Microsoft Windows.</p>
+                <p>This guide will show you how to install the prerequisite software required to use <a href="https://nltk.org/" target="_blank">NLTK</a> and <a href="https://stanfordnlp.github.io/CoreNLP/" target="_blank">StanfordCoreNLP</a> in Microsoft Windows.</p>
                 <ul class="toc unlist">
                     <li>
                         <a href="#minimum-hardware">Minimum Hardware Requirements</a>
@@ -774,10 +931,33 @@
                         </span>
                     </a>
                 </h3>
-                <ul style="list-style-type: circle; padding-left: 16px;">
-                    <li><p>While using the <a target="_blank" href="https://nlp.stanford.edu/software/tagger.shtml"> Stanford POS tagger</a>, I found that if my computer was not equipped with at least <strong>6GB</strong> RAM, then I can expect to encounter <strong> java.lang.OutOfMemoryError.</strong></p></li>
-                    <li><p>Installing all of the prerequisite software requires at least <strong>6.32 GB</strong> of free space.</p></li>
-                </ul>
+                <div style="margin: 24px 0px 24px 0px; width: 100%;">
+                    <table class="sysreqtop">
+                        <colgroup><col/><col/></colgroup>
+                        <tr>
+                            <td class="sysreqtl"><strong>Memory</strong></td>
+                            <td class="sysreqml">6 GB</td>
+                            <td valign="top" class="sysreqtrs"><a id="one" href="#" data="off" onclick="toggleMore(this);">more</a></td>
+                        </tr>
+                    </table>
+                    <table class="sysreqmid">
+                        <tr>
+                            <td id="two" valign="top" class="sysreqrow"><p>While using the <a target="_blank" href="https://nlp.stanford.edu/software/tagger.shtml"> Stanford POS tagger</a>, I found that if my computer was not equipped with at least <strong>6GB</strong> RAM, then I can expect to encounter <strong>java.lang.OutOfMemoryError.</strong></p></td>
+                        </tr>
+                    </table>
+                    <table id="four" class="sysreqbottom">
+                        <tr>
+                            <td class="sysreqbll"><strong>Storage</strong></td>
+                            <td class="sysreqmlbottom">6.32 GB</td>
+                            <td valign="top" class="sysreqbrs"><a href="#" data="off" onclick="toggleMore(this);">more</a></td>
+                        </tr>
+                    </table>
+                    <table id="three" class="sysreqbottom" style="display: none;">
+                        <tr>
+                            <td valign="top" class="sysreqrow2"><p>Installing all of the prerequisite software requires at least <strong>6.32 GB</strong> of free space.</p></td>
+                        </tr>
+                    </table>
+                </div>
             </section>
             <div style="height: 10px;"></div>
             <section>
