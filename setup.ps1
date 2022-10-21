@@ -72,7 +72,8 @@ if([Security.Principal.WindowsPrincipal]::New([Security.Principal.WindowsIdentit
     . "$($check.VenvFolder)\Scripts\activate.ps1"
     python -m pip install --upgrade pip
     $check.PipVenvUpgrade = $LASTEXITCODE
-    pip install scipy nltk stanfordcorenlp
+    pip install scipy==1.9.1
+    pip install nltk stanfordcorenlp
     # pip install scipy nltk stanza
     $check.SciPy = PipFind "scipy"
     $check.Nltk = PipFind "nltk"
