@@ -50,7 +50,8 @@ if([Security.Principal.WindowsPrincipal]::New([Security.Principal.WindowsIdentit
     [Refresh.EnvironmentVariables]::FromRegistry()
     iex ([System.Net.WebClient]::New().DownloadString('https://community.chocolatey.org/install.ps1'))
     [Refresh.EnvironmentVariables]::FromRegistry()
-    choco install python3 --version=3.8.3 --forcex86 -y --params "/InstallDir:C:\Program Files (x86)\Python38-32"
+#    choco install python3 --version=3.8.3 --forcex86 -y --params "/InstallDir:C:\Program Files (x86)\Python38-32"
+    choco install python3 -y --params "/InstallDir:C:\Program Files\Python311"
     choco install jre8 -y --force
     if([IO.Directory]::Exists($check.JavaFolder))
     {
@@ -72,8 +73,8 @@ if([Security.Principal.WindowsPrincipal]::New([Security.Principal.WindowsIdentit
     . "$($check.VenvFolder)\Scripts\activate.ps1"
     python -m pip install --upgrade pip
     $check.PipVenvUpgrade = $LASTEXITCODE
-    pip install scipy==1.9.1
-    pip install nltk stanfordcorenlp
+#    pip install scipy==1.9.1
+    pip install scipy nltk stanfordcorenlp
     # pip install scipy nltk stanza
     $check.SciPy = PipFind "scipy"
     $check.Nltk = PipFind "nltk"
