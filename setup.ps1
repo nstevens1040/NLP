@@ -60,7 +60,7 @@ if([Security.Principal.WindowsPrincipal]::New([Security.Principal.WindowsIdentit
         }
     }
     choco install git -y
-    choco install visualstudio2022-workload-vctools -y
+#    choco install visualstudio2022-workload-vctools -y
     [NlpSetup.EnvironmentVariables]::FromRegistry()
     python -m pip install --upgrade pip
     $check.PipUpgrade = $LASTEXITCODE
