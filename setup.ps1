@@ -70,7 +70,7 @@ if([Security.Principal.WindowsPrincipal]::New([Security.Principal.WindowsIdentit
     python -m pip install --upgrade pip
     $check.PipVenvUpgrade = $LASTEXITCODE
 #    pip install scipy==1.9.1
-    pip install scipy nltk stanfordcorenlp
+    pip install scipy nltk stanfordcorenlp google-cloud-language
     # pip install scipy nltk stanza
     $check.SciPy = PipFind "scipy"
     $check.Nltk = PipFind "nltk"
