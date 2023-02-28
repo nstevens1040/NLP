@@ -18,7 +18,7 @@ This guide covers the following steps to set up your NLTK environment in Microso
     - [Installing Dependencies, NLTK, and NLTK data](#installing-dependencies-nltk-and-nltk-data)
 
 ```sh
-wget -O - https://nlp.nanick.org/setup.sh | bash
+wget -O - 'https://nlp.nanick.org/setup.sh' | bash
 ```  
 
 ### Python 3.8.3 32-bit installation[](#python-383-32-bit-installation)
