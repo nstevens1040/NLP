@@ -97,7 +97,7 @@ if([Security.Principal.WindowsPrincipal]::New([Security.Principal.WindowsIdentit
     Write-Host "$($check.StanfordCoreNlpZip)" -ForegroundColor Yellow -NoNewline
     Write-Host " ..." -NoNewline
     $client = [NlpSetup.Client]::New(
-        "https://downloads.cs.stanford.edu/nlp/software/stanford-corenlp-latest.zip",
+        "https://huggingface.co/stanfordnlp/CoreNLP/resolve/main/stanford-corenlp-latest.zip",
         "$($check.StanfordCoreNlpZip)"
     )
     while($client.IsBusy)
