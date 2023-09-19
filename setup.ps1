@@ -47,7 +47,7 @@ if([Security.Principal.WindowsPrincipal]::New([Security.Principal.WindowsIdentit
     iex ([System.Net.WebClient]::New().DownloadString('https://community.chocolatey.org/install.ps1'))
     [NlpSetup.EnvironmentVariables]::FromRegistry()
 #    choco install python3 --version=3.8.3 --forcex86 -y --params "/InstallDir:C:\Program Files (x86)\Python38-32"
-    choco install python3 -y --params "/InstallDir:C:\Program Files\Python311"
+    choco install python311 -y --params "/InstallDir:C:\Program Files\Python311"
     choco install jre8 -y --force
     if([IO.Directory]::Exists($check.JavaFolder))
     {
