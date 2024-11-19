@@ -71,7 +71,7 @@ export LIBRARY_PATH="$HOME/.temp/bin/libtensorflow/lib"
 g++ -std=c++17 -shared coref_kernels.cc -o coref_kernels.so -fPIC ${TF_CFLAGS[@]} -Wl,--no-as-needed ${TF_LFLAGS[@]}  -O2
 
 mkdir patch && mkdir backup
-wget "https://nlp-137cf635-6c92-49b5-b943-f5c8c75e686f.s3.us-east-2.amazonaws.com/e2e-coref-patch.tar.gz"
+wget "https://storage.googleapis.com/nlp-137cf635-6c92-49b5-b943-f5c8c75e686f/e2e-coref-patch.tar.gz"
 tar -xf e2e-coref-patch.tar.gz -C ./patch
 
 mv coref_model.py ./backup/coref_model.py.bak

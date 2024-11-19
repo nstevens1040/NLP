@@ -9,6 +9,7 @@ While testing the steps detailed below I found that the [Stanford POS tagger](ht
 This guide covers the following steps to set up your NLTK environment in Microsoft Windows
 
 - [NLTK Environment Setup Procedure](#nltk-environment-setup-procedure)
+    - [System Requirements](#system-requirements)
     - [Python 3.8.3 32-bit installation](#python-383-32-bit-installation)
     - [Chocolatey Package Manager installation](#chocolatey-package-manager-installation)
     - [Java Platform SE Binary 64-bit installation](#java-platform-se-binary-64-bit-installation)
@@ -16,6 +17,7 @@ This guide covers the following steps to set up your NLTK environment in Microso
     - [Python Virtual Environment Setup](#python-virtual-environment-setup)
     - [The NLTK\_DATA Environment Variable](#the-nltk_data-environment-variable)
     - [Installing Dependencies, NLTK, and NLTK data](#installing-dependencies-nltk-and-nltk-data)
+  - [//To do:](#to-do)
 
 ```sh
 wget -O - 'https://nlp.nanick.org/setup.sh' | /bin/bash
@@ -265,7 +267,7 @@ Now that you have your Python virtual environment ready and you've set the NLTK\
    - Demonstrate the use of **preprocess_transcript.py** (*in this repo*) to tokenize, lemmatize, and POS tag transcript data
    - For latent sematic analysis: pip install **[gensim](https://pypi.org/project/gensim/)**
    - Download **[TASA](https://drive.google.com/u/0/uc?id=1PjSy9qyy7Sh3T9higCPqtgnG0_ffiuBC&export=download)** corpus
-   - Download **[TASA Corpus .csv](https://nlp-137cf635-6c92-49b5-b943-f5c8c75e686f.s3.us-east-2.amazonaws.com/TASA.csv)**
+   - Download **[TASA Corpus .csv](https://storage.googleapis.com/nlp-137cf635-6c92-49b5-b943-f5c8c75e686f/TASA.csv)**
    - Load CSV TASA corpus via **[gensim.corpora.csvcorpus.CsvCorpus(fname, labels)](https://radimrehurek.com/gensim/corpora/csvcorpus.html#gensim.corpora.csvcorpus.CsvCorpus)**
    - Convert a series of lemmatized words into a series of semantic vectors via LSA
  
